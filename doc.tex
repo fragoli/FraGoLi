@@ -98,6 +98,194 @@
 		This document provides an overview of the \LaTeX\ package \texttt{fragoli} (Frankfurt Goethe Linguistic). The package is primarily designed for use in the field of semantics, offering a streamlined syntax to facilitate the rapid derivation of semantic formulae. Its notation style is loosely based on the supplementary materials accompanying the introductory course in linguistic semantics by Prof. Dr. \textit{T. E. Zimmermann}.
 	\end{abstract}
 	\tableofcontents
+	\section{Background}
+	This package brings together and refines a collection of \LaTeX\ commands and concepts developed over the years within the Department of Linguistics at the Johann Wolfgang Goethe-Universit\"{a}t Frankfurt am Main. In the process of preparing research papers, assignments, and examinations, numerous custom \LaTeX\ headers and commands were shared within the department—some mutually compatible, others not. This package consolidates these resources into a cohesive system. Special thanks are due to \textit{T. E. Zimmermann}, \textit{Cécile Meier}, \textit{Daniel Gutzmann}, and \textit{Jan Köpping}, whose files form the foundation of this package. Also thanks to \textit{Manuel Lipstein} for his feedback. 
+	
+	The primary goal of this package is to provide a minimal and user-friendly syntax for constructing large and complex semantic derivations, following the specific notational style used at Goethe University Frankfurt. It includes a comprehensive set of commands for text formatting and various types of bracketing, ensuring a consistent style—particularly when distinguishing between meta-language and object-language within a single derivation or formula.
+	
+	The semantics-specific commands in this package are organized into three categories: direct interpretation, represented using standard bracketing \sdi{expression}; indirect interpretation, which is further divided into translation \sit{expression} and denotation \sid{expression}. These commands offer extensive customization options and include predefined macros for commonly used constants, lambda expressions, and logical notation in formal semantics and type theory.
+	
+	Additionally, the package includes specialized commands and environments that extend beyond standard semantic notation. One such feature is the \textit{cps} environment, which implements a rainbow bracketing system inspired by modern programming editors and IDEs. This system assigns matching colors to parentheses at the same depth, with each level of nesting receiving a distinct color. This visual aid significantly enhances the readability of complex derivations and formulae, making them easier to process and debug. However, due to the intricate way \LaTeX\ handles command execution order, this feature currently does not integrate well with commands that generate parentheses as part of their output. While future updates may address this limitation, at present, only manually written parentheses within the \textit{cps} environment are affected by the coloring scheme. 
+	As an example see: \verb=\begin{cps}(level1(level2(level3)(level3)))\end{cps}= which results in:  \begin{cps}(level1(level2(level3)(level3)))\end{cps}.
+	This feature is automtically enabled in some other env. like the \textit{semcalc} framework.
+	
+	The core component of this package is the \textit{fgls} environment, which provides abbreviated versions of all commands and is designed for constructing larger semantic formulae and derivations. Given the extensive set of custom commands—ranging from one to four letters—potential conflicts with other packages may arise, so careful usage within other environments is advised.
+	\newpage
+	For example, the minimal syntax facilitated by this environment is illustrated below:
+	
+	\begin{verbatim}
+	\begin{fgls}
+	\e{sees} = \ly\lx\n{\mx\ sees \my\ in \ss}
+	\end{fgls}
+	\end{verbatim} which renders as: 
+	\\\begin{fgls}
+		\e{sees} = \ly\lx\n{\mx\ sees \my\ in \ss}
+	\end{fgls}.
+	\\\ \\
+	The advantage of this syntax lies in its ability to maintain consistent formatting of variables across various levels of nesting. Previously, manually handling the font styles of variables introduced the risk of in\-con\-sis\-ten\-cies—such as losing the correct formatting (e.g., boldface for object-language variables) when copying \LaTeX\ code into new formulae. This issue is eliminated by using commands like \verb=\mx=, which consistently produces an italic, non-bold x for meta-language variables. Additionally, the use of\ \verb=\n{exp...}= ensures structural integrity, as failing to close the expression correctly now results in a compiler error, preventing unintended formatting issues.
+	
+	All of this is designed to make writing large semantic formulae faster and more error pronone and ro provide beautiful and consistent output.
+	
+	\section{Examples}
+	To construct a complex semantic derivation, use the \textit{semderivation} environment and introduce each derivation step with the \verb=\ds= command. Within this environment, both the \textit{cps} and \textit{fgls} environments are enabled, allowing for consistent formatting and structured derivations. The \textit{semderivation} environment internally initializes an \textit{itemize} environment, requiring each derivation step to be formatted as an item, which is automatically handled when using the \verb=\ds= command. The first step of any derivation should always use the \verb=\dS= command to omit the initial equal sign for proper formatting.
+	
+	A local situation can be set within the environment using \\\verb=\begin{semderivation}[situation]derivation...\end{semderivation}=, overriding all default situations in commands that include one. Additionally, a custom reference name can be assigned using \\\verb=\begin{semderivation}[situation][refName]derivation...\end{semderivation}=. This reference name allows for automatic referencing of each derivation step, making it possible to cite specific steps within the text. By default, references are numbered sequentially starting from 0. However, a fixed reference name can be specified for consistency across citations.
+	
+	To reference a specific derivation step, use:
+	
+	\verb=\ref{sem:deri:refName:ds:dsCount}=
+	
+	Here, \texttt{refName} refers either to the automatically assigned sequential derivation number or a user-defined reference name, while \texttt{dsCount} denotes the index of the derivation step, beginning at 0.
+	
+	Example:
+	\begin{lstlisting}[style=B]
+			\begin{semderivation}[\szero][exampleone]
+				\dS{\e{Peter loves Maria}}
+				\ds{\e{loves Maria}(\e{Peter})}
+				\ds{\e{loves Maria}(Peter)}
+				\ds{\e{loves}(\e{Maria})(Peter)}
+				\ds{\e{loves}(Maria)(Peter)}
+				\ds{\ly\lx\n{\mx\ loves \my\ in \cs}(Maria)(Peter)}
+				\ds{\lx\n{\mx\ loves Maria in \cs}(Peter)}
+				\ds{\n{Peter loves Maria in \cs}}
+			\end{semderivation}
+	\end{lstlisting} 
+	results in the following derivation: \begin{semderivation}[\szero][exampleone]
+		\dS{\e{Peter loves Maria}}
+		\ds{\e{loves Maria}(\e{Peter})}
+		\ds{\e{loves Maria}(Peter)}
+		\ds{\e{loves}(\e{Maria})(Peter)}
+		\ds{\e{loves}(Maria)(Peter)}
+		\ds{\ly\lx\n{\mx\ loves \my\ in \cs}(Maria)(Peter)}
+		\ds{\lx\n{\mx\ loves Maria in \cs}(Peter)}
+		\ds{\n{Peter loves Maria in \cs}}
+	\end{semderivation}
+	Note that the default situation has been changed from \sstar to \szero. To ensure consistency within a derivation, it is recommended to specify the desired situation as an environment parameter and reference it within the derivation using the \verb=\cs= command, which represents the current situation. To reference a specific derivation step, use:
+	\verb=\ref{sem:deri:exampleone:ds:3}=
+	which will produce: Step \ref{sem:deri:exampleone:ds:3}.
+	\\\ \\
+	A complete semantic derivation may include not only derivation steps but also trees, rules, and lexical entries. In such cases, use the \textit{semcalc} environment, which is specifically designed for educational purposes. Each \textit{semcalc} environment should follow a standardized structure, though not all components are mandatory:
+	\begin{lstlisting}[style=B]
+			\begin{semcalc}
+				\begin{semtree}
+					tree
+				\end{semtree}
+				\begin{semrule}
+					rules...
+				\end{semrule}
+				\begin{semlex}
+					lexicon...
+				\end{semlex}
+				\begin{semderi}
+					derivation...
+				\end{semderi}
+			\end{semcalc}
+	\end{lstlisting}
+	All three sub-environments function exclusively within the \textit{semcalc} or \textit{fgls} environments. A detailed explanation of each sub-environment is provided in the following sections.
+	\\\ \\Example for a full semantic calculation for: \sde[\stwo]{Peter sleeps}
+	\begin{lstlisting}[style=B]
+			\begin{semcalc}[\stwo]
+				\begin{semtreesem}
+					\begin{forest}
+					[{\e{Peter sleeps}\\S:\typet},name=0
+					[{\e{Peter}\\NN:\typee},name=00]
+					[{\e{sleeps}\\V:\typeet},name=01]
+					]
+					\end{forest}
+				\end{semtreesem}
+				\begin{semlang}
+					\rlang{Peter, sleeps}[NN][VP]
+				\end{semlang}
+				\begin{semrule}
+					\rsrdesbjpred
+					\rentrysub{\j{Compositional Determination of the Extension of Subject-Predications}\\If \j{S} is a sentence with a predicate \j{P} and a proper name \j{NN} as its subject, then for all \j{s\ \ci\ LR} the above holds.}
+				\end{semrule}
+				\begin{semlex}
+					\sldenn{Peter}
+					\sldex{sleeps}
+				\end{semlex}
+				\begin{semderi}
+					\dS{\e{Peter sleeps}}
+					\ds[\rr{1}]{\e{sleeps}(\e{Peter})}
+					\ds[\rl{1}]{\e{sleeps}(Peter)}
+					\ds[\rl{2}]{\lfx{sleeps}(Peter)}
+					\ds[\lc]{\n{Peter sleeps in \cs}}
+				\end{semderi}
+			\end{semcalc}
+	\end{lstlisting}
+	\newpage
+	The code above will resutl in the following derivation structure:
+	\begin{semcalc}[\stwo]
+		\begin{semtreesem}
+			\begin{forest}
+				[{\e{Peter sleeps}\\S:\typet},name=0
+				[{\e{Peter}\\NN:\typee},name=00]
+				[{\e{sleeps}\\V:\typeet},name=01]
+				]
+			\end{forest}
+		\end{semtreesem}
+		\begin{semlang}
+			\rlang{Peter, sleeps}[NN][VP]
+		\end{semlang}
+		\begin{semrule}
+			\rsrdesbjpred
+			\rentrysub{\j{Compositional Determination of the Extension of Subject-Predications}\\If \j{S} is a sentence with a predicate \j{P} and a proper name \j{NN} as its subject, then for all \j{s\ \ci\ LR} the above holds.}
+		\end{semrule}
+		\begin{semlex}
+			\sldenn{Peter}
+			\sldex{sleeps}
+		\end{semlex}
+		\begin{semderi}
+			\dS{\e{Peter sleeps}}
+			\ds[\rr{1}]{\e{sleeps}(\e{Peter})}
+			\ds[\rl{1}]{\e{sleeps}(Peter)}
+			\ds[\rl{2}]{\lfx{sleeps}(Peter)}
+			\ds[\lc]{\n{Peter sleeps in \cs}}
+		\end{semderi}
+	\end{semcalc}
+	As shown on the right, each step references the corresponding rule or lexical entry to indicate to the reader which resource was used to reach the next step. These resources can also be referenced outside of the \textit{semderivation} environment using the command \verb=\ref{sem:deri:refName:resNumber}=, where \texttt{refName} refers to the derivation reference name (as explained earlier), and \texttt{resNumber} is the index of the desired resource, starting from 0. There are four types of resource codes: \texttt{r}, \texttt{rs}, \texttt{l}, and \texttt{la}, which stand for resource, resource-syntax, lexicon, and language, respectively. For further details, see Command \ref{command:resourceCounter}.
+	\\
+	An additional example of a more complex derivation involving indirect interpretation would look like this:
+	\begin{lstlisting}[style=B]
+			\begin{semderivation}
+				\dS{\e[g,\!\cs]{\r[S]{\r[DP]{jeden Esel}\r[S]{\lx\r[S]{Hans \r[VP]{\tx f\"{u}tterte}}}}}}
+				\ds[\fa]{\e{jeden Esel}(\e[g,\!\cs]{\lx\r[S]{Hans \r[VP]{\tx f\"{u}tterte}}})}
+				\ds[\abs]{\e{jeden Esel}(\lz\e[g{\asmoD{z}[x]},\!\cs]{Hans \r[VP]{\tx f\"{u}tterte}})}
+				\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r[VP]{\tx f\"{u}tterte}}(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
+				\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{f\"{u}tterte}}(\e[g{\asmoD{z}[x]},\cs]{\tx})(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
+				\ds[SemVar]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{f\"{u}tterte}}(\mz)(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
+				\ds[\lex]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{f\"{u}tterte}}(\mz)(Hans)})}
+				\ds[\lex]{\e{jeden Esel}(\lz\r{\ly\lx\n{\mx\ f\"{u}tterte \my\ in \cs}(\mz)(Hans)})}
+				\ds[\lc]{\e{jeden Esel}(\lz\r{\lx\n{\mx\ f\"{u}tterte \mz\ in \cs}(Hans)})}
+				\ds[\lc]{\e{jeden Esel}(\lz\n{Hans f\"{u}tterte \mz\ in \cs})}
+				\ds[\lex]{\lX\n{\sa\e{Esel} $\subseteq$ \sa\mX}(\lz\n{Hans f\"{u}tterte \mz\ in \cs})}
+				\ds[\lc]{\n{\sa\e{Esel} $\subseteq$ \sA{\lz\n{Hans f\"{u}tterte \mz\ in \cs}}}}
+				\ds[\lex]{\n{\sA{\lx\n{\mx\ ist ein Esel in \cs}} $\subseteq$ \sA{\lz\n{Hans f\"{u}tterte \mz\ in \cs}}}}
+				\ds[Def. \cd]{\n{\s{\mx\ ist ein Esel in \cs} $\subseteq$ \s{Hans f\"{u}tterte \mx\ in \cs}}}
+				\ds[\nc]{\n{\cset{Esel} $\subseteq$ \s{Hans f\"{u}tterte \mx\ in \cs}}}
+				\ds{1 gdw. alle Individuen, die Esel sind in \cs\ auch Individuen sind, die von Hans in \cs\ gef\"{u}ttert werden, sonst 0.}
+			\end{semderivation}
+	\end{lstlisting}
+	which would result in a derivation that looks like this (derivation for \textit{Hans fed every donkey} with quantifier raising):
+	\begin{semderivation}
+		\dS{\e[g,\!\cs]{\r[S]{\r[DP]{jeden Esel}\r[S]{\lx\r[S]{Hans \r[VP]{\tx fütterte}}}}}}
+		\ds[\fa]{\e{jeden Esel}(\e[g,\!\cs]{\lx\r[S]{Hans \r[VP]{\tx fütterte}}})}
+		\ds[\abs]{\e{jeden Esel}(\lz\e[g{\asmoD{z}[x]},\!\cs]{Hans \r[VP]{\tx fütterte}})}
+		\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r[VP]{\tx fütterte}}(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
+		\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{fütterte}}(\e[g{\asmoD{z}[x]},\cs]{\tx})(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
+		\ds[SemVar]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{fütterte}}(\mz)(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
+		\ds[\lex]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{fütterte}}(\mz)(Hans)})}
+		\ds[\lex]{\e{jeden Esel}(\lz\r{\ly\lx\n{\mx\ fütterte \my\ in \cs}(\mz)(Hans)})}
+		\ds[\lc]{\e{jeden Esel}(\lz\r{\lx\n{\mx\ fütterte \mz\ in \cs}(Hans)})}
+		\ds[\lc]{\e{jeden Esel}(\lz\n{Hans fütterte \mz\ in \cs})}
+		\ds[\lex]{\lX\n{\sa\e{Esel} $\subseteq$ \sa\mX}(\lz\n{Hans fütterte \mz\ in \cs})}
+		\ds[\lc]{\n{\sa\e{Esel} $\subseteq$ \sA{\lz\n{Hans fütterte \mz\ in \cs}}}}
+		\ds[\lex]{\n{\sA{\lx\n{\mx\ ist ein Esel in \cs}} $\subseteq$ \sA{\lz\n{Hans fütterte \mz\ in \cs}}}}
+		\ds[Def. \cd]{\n{\s{\mx\ ist ein Esel in \cs} $\subseteq$ \s{Hans fütterte \mx\ in \cs}}}
+		\ds[\nc]{\n{\cset{Esel} $\subseteq$ \s{Hans fütterte \mx\ in \cs}}}
+		\ds{1 gdw. alle Individuen, die Esel sind in \cs\ auch Individuen sind, die von Hans in \cs\ gefüttert werden, sonst 0.}
+	\end{semderivation}
+	Note that the comments on the right should signal the reader which rule or lexical entry or notational convention has been used to get to the next step.
 	\section{Usage}
 	To use the \texttt{\her{fragoli}} package place the \her{fragoli.sty} file in the same folder as your document and include:\\
 	\begin{lstlisting}[style=A]
@@ -180,193 +368,6 @@
 	\usepackage[situation=SITUATION]{fragoli}
 	\end{lstlisting}
 	This option will effect every predefined situation (EXCEPT for all the predefined rules). By default the situation displayed will be \sstar. Note that every predefined situation can be customized individually again. This will effect for example every command that contains a situation and also every shortcut in the fgls env., also every predefined lexical entry and all other occurences of situations.
-	\section{Background}
-	This package brings together and refines a collection of \LaTeX\ commands and concepts developed over the years within the Department of Linguistics at Goethe University Frankfurt. In the process of preparing research papers, assignments, and examinations, numerous custom \LaTeX\ headers and commands were shared within the department—some mutually compatible, others not. This package consolidates these resources into a cohesive system. Special thanks are due to \textit{T. E. Zimmermann}, \textit{Cécile Meier}, \textit{Daniel Gutzmann}, and \textit{Jan Köpping}, whose files form the foundation of this package.
-	
-	The primary goal of this package is to provide a minimal and user-friendly syntax for constructing large and complex semantic derivations, following the specific notational style used at Goethe University Frankfurt. It includes a comprehensive set of commands for text formatting and various types of bracketing, ensuring a consistent style—particularly when distinguishing between meta-language and object-language within a single derivation or formula.
-	
-	The semantics-specific commands in this package are organized into three categories: direct interpretation, represented using standard bracketing \sdi{expression}; indirect interpretation, which is further divided into translation \sit{expression} and denotation \sid{expression}. These commands offer extensive customization options and include predefined macros for commonly used constants, lambda expressions, and logical notation in formal semantics and type theory.
-	
-	Additionally, the package includes specialized commands and environments that extend beyond standard semantic notation. One such feature is the \textit{cps} environment, which implements a rainbow bracketing system inspired by modern programming editors and IDEs. This system assigns matching colors to parentheses at the same depth, with each level of nesting receiving a distinct color. This visual aid significantly enhances the readability of complex derivations and formulae, making them easier to process and debug. However, due to the intricate way \LaTeX\ handles command execution order, this feature currently does not integrate well with commands that generate parentheses as part of their output. While future updates may address this limitation, at present, only manually written parentheses within the \textit{cps} environment are affected by the coloring scheme. 
-	As an example see: \verb=\begin{cps}(level1(level2(level3)(level3)))\end{cps}= which results in:  \begin{cps}(level1(level2(level3)(level3)))\end{cps}.
-	This feature is automtically enabled in some other env. like the \textit{semcalc} framework.
-	
-	The core component of this package is the \textit{fgls} environment, which provides abbreviated versions of all commands and is designed for constructing larger semantic formulae and derivations. Given the extensive set of custom commands—ranging from one to four letters—potential conflicts with other packages may arise, so careful usage within other environments is advised.
-	
-	For example, the minimal syntax facilitated by this environment is illustrated below:
-	
-	\begin{verbatim}
-	\begin{fgls}
-	\e{sees} = \ly\lx\n{\mx\ sees \my\ in \ss}
-	\end{fgls}
-	\end{verbatim} which renders as: 
-	\\\begin{fgls}
-		\e{sees} = \ly\lx\n{\mx\ sees \my\ in \ss}
-	\end{fgls}.
-	\\
-	The advantage of this syntax lies in its ability to maintain consistent formatting of variables across various levels of nesting. Previously, manually handling the font styles of variables introduced the risk of inconsistencies—such as losing the correct formatting (e.g., boldface for object-language variables) when copying \LaTeX\ code into new formulae. This issue is eliminated by using commands like \verb=\mx=, which consistently produces an italic, non-bold x for meta-language variables. Additionally, the use of\ \verb=\n{exp...}= ensures structural integrity, as failing to close the expression correctly now results in a compiler error, preventing unintended formatting issues.
-	
-	All of this is designed to make writing large semantic formulae faster and more error pronone and ro provide beautiful and consistent output.
-	
-	\section{Examples}
-	To construct a complex semantic derivation, use the \textit{semderivation} environment and introduce each derivation step with the \verb=\ds= command. Within this environment, both the \textit{cps} and \textit{fgls} environments are enabled, allowing for consistent formatting and structured derivations. The \textit{semderivation} environment internally initializes an \textit{itemize} environment, requiring each derivation step to be formatted as an item, which is automatically handled when using the \verb=\ds= command. The first step of any derivation should always use the \verb=\dS= command to omit the initial equal sign for proper formatting.
-	
-	A local situation can be set within the environment using \\\verb=\begin{semderivation}[situation]derivation...\end{semderivation}=, overriding all default situations in commands that include one. Additionally, a custom reference name can be assigned using \\\verb=\begin{semderivation}[situation][refName]derivation...\end{semderivation}=. This reference name allows for automatic referencing of each derivation step, making it possible to cite specific steps within the text. By default, references are numbered sequentially starting from 0. However, a fixed reference name can be specified for consistency across citations.
-	
-	To reference a specific derivation step, use:
-	
-	\verb=\ref{sem:deri:refName:ds:dsCount}=
-	
-	Here, \texttt{refName} refers either to the automatically assigned sequential derivation number or a user-defined reference name, while \texttt{dsCount} denotes the index of the derivation step, beginning at 0.
-	
-	Example:
-	\begin{lstlisting}[style=B]
-			\begin{semderivation}[\szero][exampleone]
-				\dS{\e{Peter loves Maria}}
-				\ds{\e{loves Maria}(\e{Peter})}
-				\ds{\e{loves Maria}(Peter)}
-				\ds{\e{loves}(\e{Maria})(Peter)}
-				\ds{\e{loves}(Maria)(Peter)}
-				\ds{\ly\lx\n{\mx\ loves \my\ in \cs}(Maria)(Peter)}
-				\ds{\lx\n{\mx\ loves Maria in \cs}(Peter)}
-				\ds{\n{Peter loves Maria in \cs}}
-			\end{semderivation}
-	\end{lstlisting} 
-	results in the following derivation: \begin{semderivation}[\szero][exampleone]
-		\dS{\e{Peter loves Maria}}
-		\ds{\e{loves Maria}(\e{Peter})}
-		\ds{\e{loves Maria}(Peter)}
-		\ds{\e{loves}(\e{Maria})(Peter)}
-		\ds{\e{loves}(Maria)(Peter)}
-		\ds{\ly\lx\n{\mx\ loves \my\ in \cs}(Maria)(Peter)}
-		\ds{\lx\n{\mx\ loves Maria in \cs}(Peter)}
-		\ds{\n{Peter loves Maria in \cs}}
-	\end{semderivation}
-	Note that the default situation has been changed from \sstar to \szero. To ensure consistency within a derivation, it is recommended to specify the desired situation as an environment parameter and reference it within the derivation using the \verb=\cs= command, which represents the current situation. To reference a specific derivation step, use:
-	\verb=\ref{sem:deri:exampleone:ds:3}=
-	which will produce: Step \ref{sem:deri:exampleone:ds:3}.
-	\\\ \\
-	A complete semantic derivation may include not only derivation steps but also trees, rules, and lexical entries. In such cases, use the \textit{semcalc} environment, which is specifically designed for educational purposes. Each \textit{semcalc} environment should follow a standardized structure, though not all components are mandatory:
-	\begin{lstlisting}[style=B]
-			\begin{semcalc}
-				\begin{semtree}
-					tree
-				\end{semtree}
-				\begin{semrule}
-					rules...
-				\end{semrule}
-				\begin{semlex}
-					lexicon...
-				\end{semlex}
-				\begin{semderi}
-					derivation...
-				\end{semderi}
-			\end{semcalc}
-	\end{lstlisting}
-	All three sub-environments function exclusively within the \textit{semcalc} or \textit{fgls} environments. A detailed explanation of each sub-environment is provided in the following sections.
-	\\\ \\Example for a full semantic calculation for: \sde[\stwo]{Peter sleeps}
-	\begin{lstlisting}[style=B]
-			\begin{semcalc}[\stwo]
-				\begin{semtreesem}
-					\begin{forest}
-					[{\e{Peter sleeps}\\S:\typet},name=0
-					[{\e{Peter}\\NN:\typee},name=00]
-					[{\e{sleeps}\\V:\typeet},name=01]
-					]
-					\end{forest}
-				\end{semtreesem}
-				\begin{semlang}
-					\rlang{Peter, sleeps}[NN][VP]
-				\end{semlang}
-				\begin{semrule}
-					\srdesbjpred
-					\rentrysub{\j{Compositional Determination of the Extension of Subject-Predications}\\If \j{S} is a sentence with a predicate \j{P} and a proper name \j{NN} as its subject, then for all \j{s\ \ci\ LR} the above holds.}
-				\end{semrule}
-				\begin{semlex}
-					\sldenn{Peter}
-					\sldex{sleeps}
-				\end{semlex}
-				\begin{semderi}
-					\dS{\e{Peter sleeps}}
-					\ds[\rr{1}]{\e{sleeps}(\e{Peter})}
-					\ds[\rl{1}]{\e{sleeps}(Peter)}
-					\ds[\rl{2}]{\lfx{sleeps}(Peter)}
-					\ds[\lc]{\n{Peter sleeps in \cs}}
-				\end{semderi}
-			\end{semcalc}
-	\end{lstlisting}
-	The code above will resutl in the following derivation structure:
-	\begin{semcalc}[\stwo]
-		\begin{semtreesem}
-			\begin{forest}
-				[{\e{Peter sleeps}\\S:\typet},name=0
-				[{\e{Peter}\\NN:\typee},name=00]
-				[{\e{sleeps}\\V:\typeet},name=01]
-				]
-			\end{forest}
-		\end{semtreesem}
-		\begin{semlang}
-			\rlang{Peter, sleeps}[NN][VP]
-		\end{semlang}
-		\begin{semrule}
-			\rsrdesbjpred
-			\rentrysub{\j{Compositional Determination of the Extension of Subject-Predications}\\If \j{S} is a sentence with a predicate \j{P} and a proper name \j{NN} as its subject, then for all \j{s\ \ci\ LR} the above holds.}
-		\end{semrule}
-		\begin{semlex}
-			\sldenn{Peter}
-			\sldex{sleeps}
-		\end{semlex}
-		\begin{semderi}
-			\dS{\e{Peter sleeps}}
-			\ds[\rr{1}]{\e{sleeps}(\e{Peter})}
-			\ds[\rl{1}]{\e{sleeps}(Peter)}
-			\ds[\rl{2}]{\lfx{sleeps}(Peter)}
-			\ds[\lc]{\n{Peter sleeps in \cs}}
-		\end{semderi}
-	\end{semcalc}
-	As shown on the right, each step references the corresponding rule or lexical entry to indicate to the reader which resource was used to reach the next step. These resources can also be referenced outside of the \textit{semderivation} environment using the command \verb=\ref{sem:deri:refName:resNumber}=, where \texttt{refName} refers to the derivation reference name (as explained earlier), and \texttt{resNumber} is the index of the desired resource, starting from 0. There are four types of resource codes: \texttt{r}, \texttt{rs}, \texttt{l}, and \texttt{la}, which stand for resource, resource-syntax, lexicon, and language, respectively. For further details, see Command \ref{command:resourceCounter}.
-	\\
-	An additional example of a more complex derivation involving indirect interpretation would look like this:
-	\begin{lstlisting}[style=B]
-			\begin{semderivation}
-				\dS{\e[g,\!\cs]{\r[S]{\r[DP]{jeden Esel}\r[S]{\lx\r[S]{Hans \r[VP]{\tx f\"{u}tterte}}}}}}
-				\ds[\fa]{\e{jeden Esel}(\e[g,\!\cs]{\lx\r[S]{Hans \r[VP]{\tx f\"{u}tterte}}})}
-				\ds[\abs]{\e{jeden Esel}(\lz\e[g{\asmoD{z}[x]},\!\cs]{Hans \r[VP]{\tx f\"{u}tterte}})}
-				\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r[VP]{\tx f\"{u}tterte}}(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
-				\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{f\"{u}tterte}}(\e[g{\asmoD{z}[x]},\cs]{\tx})(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
-				\ds[SemVar]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{f\"{u}tterte}}(\mz)(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
-				\ds[\lex]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{f\"{u}tterte}}(\mz)(Hans)})}
-				\ds[\lex]{\e{jeden Esel}(\lz\r{\ly\lx\n{\mx\ f\"{u}tterte \my\ in \cs}(\mz)(Hans)})}
-				\ds[\lc]{\e{jeden Esel}(\lz\r{\lx\n{\mx\ f\"{u}tterte \mz\ in \cs}(Hans)})}
-				\ds[\lc]{\e{jeden Esel}(\lz\n{Hans f\"{u}tterte \mz\ in \cs})}
-				\ds[\lex]{\lX\n{\sa\e{Esel} $\subseteq$ \sa\mX}(\lz\n{Hans f\"{u}tterte \mz\ in \cs})}
-				\ds[\lc]{\n{\sa\e{Esel} $\subseteq$ \sA{\lz\n{Hans f\"{u}tterte \mz\ in \cs}}}}
-				\ds[\lex]{\n{\sA{\lx\n{\mx\ ist ein Esel in \cs}} $\subseteq$ \sA{\lz\n{Hans f\"{u}tterte \mz\ in \cs}}}}
-				\ds[Def. \cd]{\n{\s{\mx\ ist ein Esel in \cs} $\subseteq$ \s{Hans f\"{u}tterte \mx\ in \cs}}}
-				\ds[\nc]{\n{\cset{Esel} $\subseteq$ \s{Hans f\"{u}tterte \mx\ in \cs}}}
-				\ds{1 gdw. alle Individuen, die Esel sind in \cs\ auch Individuen sind, die von Hans in \cs\ gef\"{u}ttert werden, sonst 0.}
-			\end{semderivation}
-	\end{lstlisting}
-	which would result in a derivation that looks like this (derivation for \textit{Hans fed every donkey} with quantifier raising):
-	\begin{semderivation}
-		\dS{\e[g,\!\cs]{\r[S]{\r[DP]{jeden Esel}\r[S]{\lx\r[S]{Hans \r[VP]{\tx fütterte}}}}}}
-		\ds[\fa]{\e{jeden Esel}(\e[g,\!\cs]{\lx\r[S]{Hans \r[VP]{\tx fütterte}}})}
-		\ds[\abs]{\e{jeden Esel}(\lz\e[g{\asmoD{z}[x]},\!\cs]{Hans \r[VP]{\tx fütterte}})}
-		\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r[VP]{\tx fütterte}}(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
-		\ds[\fa]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{fütterte}}(\e[g{\asmoD{z}[x]},\cs]{\tx})(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
-		\ds[SemVar]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{fütterte}}(\mz)(\e[g{\asmoD{z}[x]},\!\cs]{Hans})})}
-		\ds[\lex]{\e{jeden Esel}(\lz\r{\e[g{\asmoD{z}[x]},\!\cs]{\r{fütterte}}(\mz)(Hans)})}
-		\ds[\lex]{\e{jeden Esel}(\lz\r{\ly\lx\n{\mx\ fütterte \my\ in \cs}(\mz)(Hans)})}
-		\ds[\lc]{\e{jeden Esel}(\lz\r{\lx\n{\mx\ fütterte \mz\ in \cs}(Hans)})}
-		\ds[\lc]{\e{jeden Esel}(\lz\n{Hans fütterte \mz\ in \cs})}
-		\ds[\lex]{\lX\n{\sa\e{Esel} $\subseteq$ \sa\mX}(\lz\n{Hans fütterte \mz\ in \cs})}
-		\ds[\lc]{\n{\sa\e{Esel} $\subseteq$ \sA{\lz\n{Hans fütterte \mz\ in \cs}}}}
-		\ds[\lex]{\n{\sA{\lx\n{\mx\ ist ein Esel in \cs}} $\subseteq$ \sA{\lz\n{Hans fütterte \mz\ in \cs}}}}
-		\ds[Def. \cd]{\n{\s{\mx\ ist ein Esel in \cs} $\subseteq$ \s{Hans fütterte \mx\ in \cs}}}
-		\ds[\nc]{\n{\cset{Esel} $\subseteq$ \s{Hans fütterte \mx\ in \cs}}}
-		\ds{1 gdw. alle Individuen, die Esel sind in \cs\ auch Individuen sind, die von Hans in \cs\ gefüttert werden, sonst 0.}
-	\end{semderivation}
-	Note that the comments on the right should signal the reader which rule or lexical entry or notational convention has been used to get to the next step.
 	\section{Commands}
 	Most commands in this package have two versions, one normal and one bold version. For the bold version just write the last letter in uppercase.
 	\subsection{Text}
@@ -915,6 +916,7 @@
 				\item[] Example: \sarg{5} }
 		\end{itemizeexamplecommand}
 	\end{exe}
+	\newpage
 	\begin{exe}
 		\ex \begin{itemizeexamplecommand}
 			\item[] \begin{lstlisting}[style=B]
@@ -967,9 +969,22 @@
 			{\scriptsize\item[] Arguments:\begin{itemizeexamplecommand}
 					\item[] \texttt{expression}: the expression to interpret.
 				\end{itemizeexamplecommand}
-				\item[] Description: Creatin double square bracketing for an expression without a situation argument.
+				\item[] Description: Creatin double square bracketing for an object language expression without a situation argument.
 				\item[] Bold Option: Yes
 				\item[] Example: \sdi{sleeps} }
+		\end{itemizeexamplecommand}
+	\end{exe}
+	\begin{exe}
+		\ex \begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\sdim{expression}
+			\end{lstlisting}
+			{\scriptsize\item[] Arguments:\begin{itemizeexamplecommand}
+					\item[] \texttt{expression}: the expression to interpret.
+				\end{itemizeexamplecommand}
+				\item[] Description: Creatin double square bracketing for a meta language expression without a situation argument.
+				\item[] Bold Option: Yes
+				\item[] Example: \sdim{sleeps} }
 		\end{itemizeexamplecommand}
 	\end{exe}
 	\begin{exe}
@@ -981,9 +996,23 @@
 					\item[] \texttt{situation(def=\sstar)}: the situation argument.
 					\item[] \texttt{expression}: the expression to interpret.
 				\end{itemizeexamplecommand}
-				\item[] Description: Creatin double square bracketing for an expression with a situation argument.
+				\item[] Description: Creatin double square bracketing for an object language expression with a situation argument.
 				\item[] Bold Option: Yes
 				\item[] Example: \sde{sleeps} }
+		\end{itemizeexamplecommand}
+	\end{exe}
+	\begin{exe}
+		\ex \begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\sdem[situation]{expression}
+			\end{lstlisting}
+			{\scriptsize\item[] Arguments:\begin{itemizeexamplecommand}
+					\item[] \texttt{situation(def=\sstar)}: the situation argument.
+					\item[] \texttt{expression}: the expression to interpret.
+				\end{itemizeexamplecommand}
+				\item[] Description: Creatin double square bracketing for a meta language expression with a situation argument.
+				\item[] Bold Option: Yes
+				\item[] Example: \sdem{sleeps}}
 		\end{itemizeexamplecommand}
 	\end{exe}
 	\subsubsection{Indirect Interpretation}
@@ -1092,7 +1121,7 @@
 					\item[] \texttt{replacement}: the new variable to replace the original
 					\item[] \texttt{original(def=x)}: the variable to be replaced
 				\end{itemizeexamplecommand}
-				\item[] Description: Creates a replacement.
+				\item[] Description: Creates an assignment function with a replacement.
 				\item[] Bold Option: Yes
 				\item[] Example: \asmod{r}}
 		\end{itemizeexamplecommand}
@@ -1292,7 +1321,39 @@
 		\end{minipage}
 	\end{center}
 	\section{Environments}
-	This section will list all new environments. Most environments feature a set of new commands that will only be available inside the declared environment. If an environment is restricted, its only available inside another environment.
+	This section provides an overview of all newly introduced environments. Most environments include a set of specialized commands that are only accessible within the respective environment. Some environments are restricted, meaning they can only be used within a specific parent environment.
+	\subsection{exams}
+	The \textit{question} and \textit{answer} environments are designed to be used together. The intended purpose is to create a single \LaTeX\ file for homework assignments or exams that contains both the questions and their solutions—useful for tutorial sessions or sample solutions. By simply adjusting the package argument, one can toggle between displaying only the questions or including the solutions as well.
+	\begin{exe}
+		\ex \begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\begin{question}
+				content...
+			\end{question}
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Arguments: None
+				\item[] Description: Creates an environment that represents a question. If the \textit{showanswer} package argument is set to \textit{true}, the content within this environment will be displayed in light gray; otherwise, it will appear in black. \color{dunkelgrau}example text\color{black}\ 
+				\item[] New Commands: No
+				\item[] Restricted: No
+				\item[] Example: \verb=\begin{question}How does the knights move?\end{question}=}
+		\end{itemizeexamplecommand}
+	\end{exe}
+	\begin{exe}
+	\ex \begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\begin{awnser}
+				content...
+			\end{awnser}
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Arguments: None
+				\item[] Description: Creates an environment that represents an answer. If the \textit{showanswer} package argument is set to \textit{true}, the content within this environment will be displayed; otherwise, it will be hidden.
+				\item[] New Commands: No
+				\item[] Restricted: No
+				\item[] Example: \verb=\begin{awnser}It generally moves like an L and sometimes in blitz games it can be very unpredictable.\end{awnser}=}
+		\end{itemizeexamplecommand}
+	\end{exe}
 	\subsection{cps}
 	The colored parentheses environment is designed to improve readability in semantic derivations. Most modern integrated development environments feature a similiar feature/plugin - called rainbow brackets. Parentheses on the same nesting level will receive the same color. Currently only \zit{()} are supported. After five levels of nesting the colors will repeat. Currently the feature is limited to parentheses directly written in the environment, those inserted by commands will not be affected (work in progress).
 	\begin{exe}
@@ -1429,6 +1490,7 @@
 				\end{fgls}
 			\end{minipage}
 		\end{center}
+		\newpage
 		\item Logic \begin{center}
 			\begin{minipage}[h][8.6cm][t]{15em}
 				\begin{lstlisting}[style=B]
@@ -2001,6 +2063,7 @@
 					\item[] Example: \sit{Dog}}
 			\end{itemizeexamplecommand}
 		\end{exe}
+	 \newpage
 		\begin{exe}
 			\ex \begin{itemizeexamplecommand}
 				\item[]
@@ -2754,6 +2817,7 @@
 			}
 		\end{itemizeexamplecommand}
 	\end{exe}
+	\newpage
 	\begin{exe}
 		\ex \begin{itemizeexamplecommand}
 			\item[]
@@ -3020,29 +3084,34 @@
 	A little set of common semantic nominals is pre-defined like \verb=\sldenman=. Those will fully translate if language is set to \textit{german}. All pre-defined nominals can have sidenotes, custom lambda heads, situations, types and labels. The command syntax would be 
 	\verb=\sldenman[sidenote][var][situation][type][label]=.
 	\begin{center}
-		\begin{minipage}[h][3.3cm][t]{15em}
+		\begin{minipage}[h][3.5cm][t]{15em}
 			\begin{lstlisting}[style=B]
 			\sldenman
 			\sldenwoman
 			\sldenchild
 			\sldendog
+			\sldencat
 			\sldenanimal
 			\sldenhouse
+			\sldendonkey
 			\end{lstlisting}
 		\end{minipage}
-		\begin{minipage}[h][3.3cm][t]{15em}
+		\begin{minipage}[h][3.5cm][t]{15em}
 			\begin{fgls}
 				\ \\
 				Mann\\
 				Woman\\
 				Child\\
 				Dog\\
+				Cat\\
 				Animal\\
-				House
+				House\\
+				Donkey
 			\end{fgls}
 		\end{minipage}
 	\end{center}
-	\ \\Direct Interpretation Lexicon Intension
+	\newpage
+	Direct Interpretation Lexicon Intension
 	\begin{exe}
 		\ex \begin{itemizeexamplecommand}
 			\item[]
@@ -3513,7 +3582,7 @@
 		\end{itemizeexamplecommand}
 	\end{exe}
 	\subsubsection{Constants}
-	This section will list all pre-defined commands acting as constants for common derivational steps in the \textit{semderi} environment. They should be used as sidenote. If the language gets changed via the package options, those constants will be translated.
+	This section lists all predefined commands that serve as constants for common derivation steps within the \textit{semderi} environment. These commands are intended to be used as sidenotes. If the language is changed via the package options, the constants will be automatically translated.
 	\begin{center}
 		\begin{minipage}[h][3.8cm][t]{15em}
 			\begin{lstlisting}[style=B]
