@@ -20,7 +20,6 @@ The primary goal of this package is to provide a minimal and user-friendly synta
 ## Authors
 
 ex. Paul Eduard Koenig 
-ex. [@DomPizzie](https://twitter.com/dompizzie)
 
 ## Version History
 
