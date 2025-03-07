@@ -17,13 +17,6 @@ The primary goal of this package is to provide a minimal and user-friendly synta
 
 * Download an place in sample folder as main tex file and add \include{fragoli} to the header
 
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
-
 ## Authors
 
 ex. Paul Eduard Koenig 
