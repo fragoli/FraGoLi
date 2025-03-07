@@ -1,4 +1,7 @@
+![Goethe-University Frankfurt Logo](https://upload.wikimedia.org/wikipedia/commons/1/1e/Logo-Goethe-University-Frankfurt-am-Main.svg)
+
 # FraGoLi v. 1.0.0 \y 2025
+> Collection of LaTeX commands used by the department of semantics - Goethe-University Frankfurt
 
 The package is mainly designed for the semantics department and focuses on providing a minimal syntax for fast formula derivation. 
 Formula-Style is losely based on the accompanying material to an introductory course to linguistic semantics by T. E. Zimmermann.
