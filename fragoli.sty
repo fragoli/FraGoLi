@@ -127,6 +127,8 @@
 \newcommand{\@fragolivarlexwoman}{Woman}
 \newcommand{\@fragolivarlexman}{Man}
 \newcommand{\@fragolivarlexdog}{Dog}
+\newcommand{\@fragolivarlexcat}{Cat}
+\newcommand{\@fragolivarlexdonkey}{Donkey}
 \newcommand{\@fragolivarlexanimal}{Animal}
 \newcommand{\@fragolivarlexchild}{Child}
 \newcommand{\@fragolivarlexhouse}{House}
@@ -167,6 +169,8 @@
 	\renewcommand{\@fragolivarlexwoman}{Frau}
 	\renewcommand{\@fragolivarlexman}{Mann}
 	\renewcommand{\@fragolivarlexdog}{Hund}
+	\renewcommand{\@fragolivarlexcat}{Katze}
+	\renewcommand{\@fragolivarlexdonkey}{Esel}
 	\renewcommand{\@fragolivarlexhouse}{Haus}
 	\renewcommand{\@fragolivarlexanimal}{Tier}
 	\renewcommand{\@fragolivarlexchild}{Kind}
@@ -186,10 +190,10 @@
 \newcommand{\@fragolitpnl}{\ensuremath{\langle}}
 \newcommand{\@fragolitpnr}{\ensuremath{\rangle}}
 \let\type\@fglsundefined
-\newcommand{\type}[1]{\@fragolitpnl\!\ensuremath{#1}\!\@fragolitpnr}
+\DeclareDocumentCommand{\type}{m}{\@fragolitpnl\!\ensuremath{#1}\!\@fragolitpnr}
 \def\@fragoliconsttsclassic{classic}
 \ifx\FGL@typestyle\@fragoliconsttsclassic
-\renewcommand{\type}[1]{(\ensuremath{#1})}
+\DeclareDocumentCommand{\type}{m}{(\ensuremath{#1})}
 \fi
 
 		
@@ -201,35 +205,21 @@
 % ------------------------------
 % traces
 % ------------------------------
-\let\trace\@fglsundefined
-\let\tracE\@fglsundefined
-\let\tracex\@fglsundefined
-\let\tracEx\@fglsundefined
-\let\traceX\@fglsundefined
-\let\tracEX\@fglsundefined
-\let\tracey\@fglsundefined
-\let\tracEy\@fglsundefined
-\let\traceY\@fglsundefined
-\let\tracEY\@fglsundefined
-\let\tracez\@fglsundefined
-\let\tracEz\@fglsundefined
-\let\traceZ\@fglsundefined
-\let\tracEZ\@fglsundefined
 
-\NewDocumentCommand{\trace}{m O{\textit{t}}}{\text{\textit{#2}\textsubscript{{\normalfont \textit{#1}}}} }
-\NewDocumentCommand{\tracE}{m O{\textit{t}}}{\text{\textbf{#2}\textsubscript{\textit{#1}}}}
-\NewDocumentCommand{\tracex}{O{\textit{t}}}{\trace{\textit{x}}[#1]}
-\NewDocumentCommand{\tracEx}{O{\textit{t}}}{\tracE{\textit{x}}[#1]}
-\NewDocumentCommand{\traceX}{O{\textit{t}}}{\trace{\textit{X}}[#1]}
-\NewDocumentCommand{\tracEX}{O{\textit{t}}}{\tracE{\textit{X}}[#1]}
-\NewDocumentCommand{\tracey}{O{\textit{t}}}{\trace{\textit{y}}[#1]}
-\NewDocumentCommand{\tracEy}{O{\textit{t}}}{\tracE{\textit{y}}[#1]}
-\NewDocumentCommand{\traceY}{O{\textit{t}}}{\trace{\textit{Y}}[#1]}
-\NewDocumentCommand{\tracEY}{O{\textit{t}}}{\tracE{\textit{Y}}[#1]}
-\NewDocumentCommand{\tracez}{O{\textit{t}}}{\trace{\textit{z}}[#1]}
-\NewDocumentCommand{\tracEz}{O{\textit{t}}}{\tracE{\textit{z}}[#1]}
-\NewDocumentCommand{\traceZ}{O{\textit{t}}}{\trace{\textit{Z}}[#1]}
-\NewDocumentCommand{\tracEZ}{O{\textit{t}}}{\tracE{\textit{Z}}[#1]}
+\DeclareDocumentCommand{\trace}{m O{\textit{t}}}{\text{\textit{#2}\textsubscript{{\normalfont \textit{#1}}}} }
+\DeclareDocumentCommand{\tracE}{m O{\textit{t}}}{\text{\textbf{#2}\textsubscript{\textit{#1}}}}
+\DeclareDocumentCommand{\tracex}{O{\textit{t}}}{\trace{\textit{x}}[#1]}
+\DeclareDocumentCommand{\tracEx}{O{\textit{t}}}{\tracE{\textit{x}}[#1]}
+\DeclareDocumentCommand{\traceX}{O{\textit{t}}}{\trace{\textit{X}}[#1]}
+\DeclareDocumentCommand{\tracEX}{O{\textit{t}}}{\tracE{\textit{X}}[#1]}
+\DeclareDocumentCommand{\tracey}{O{\textit{t}}}{\trace{\textit{y}}[#1]}
+\DeclareDocumentCommand{\tracEy}{O{\textit{t}}}{\tracE{\textit{y}}[#1]}
+\DeclareDocumentCommand{\traceY}{O{\textit{t}}}{\trace{\textit{Y}}[#1]}
+\DeclareDocumentCommand{\tracEY}{O{\textit{t}}}{\tracE{\textit{Y}}[#1]}
+\DeclareDocumentCommand{\tracez}{O{\textit{t}}}{\trace{\textit{z}}[#1]}
+\DeclareDocumentCommand{\tracEz}{O{\textit{t}}}{\tracE{\textit{z}}[#1]}
+\DeclareDocumentCommand{\traceZ}{O{\textit{t}}}{\trace{\textit{Z}}[#1]}
+\DeclareDocumentCommand{\tracEZ}{O{\textit{t}}}{\tracE{\textit{Z}}[#1]}
 
 
 
@@ -237,11 +227,12 @@
 % ------------------------------
 % situations
 % ------------------------------
+\DeclareDocumentCommand{\sarg}{m}{\text{\ensuremath{s_{\!#1}}}}
+\DeclareDocumentCommand{\sarG}{m}{\text{\ensuremath{\bm{s_{\!#1}}}}}
+\DeclareDocumentCommand{\saRg}{m}{\text{\ensuremath{s^{\!#1}}}}
+\DeclareDocumentCommand{\saRG}{m}{\text{\ensuremath{\bm{s^{\!#1}}}}}
 
-\let\sarg\@fglsundefined
-\let\sarG\@fglsundefined
-\let\saRg\@fglsundefined
-\let\saRG\@fglsundefined
+
 \let\sblank\@fglsundefined
 \let\sblanK\@fglsundefined
 \let\sstar\@fglsundefined
@@ -268,10 +259,6 @@
 \let\sninE\@fglsundefined
 \let\sten\@fglsundefined
 \let\steN\@fglsundefined
-\newcommand{\sarg}[1]{\text{\ensuremath{s_{\!#1}}}}
-\newcommand{\sarG}[1]{\text{\ensuremath{\bm{s_{\!#1}}}}}
-\newcommand{\saRg}[1]{\text{\ensuremath{s^{\!#1}}}}
-\newcommand{\saRG}[1]{\text{\ensuremath{\bm{s^{\!#1}}}}}
 \newcommand{\sblank}{\text{\textit{s}}}
 \newcommand{\sblanK}{\text{\textit{\textbf{s}}}}
 \newcommand{\sstar}{\saRg{\ast}}
@@ -471,59 +458,36 @@
 % ------------------------------
 % Text
 % ------------------------------
-\let\oO\@fglsundefined
-\let\oo\@fglsundefined
-\newcommand{\oO}[1]{\setlength{\ULdepth}{-2.5ex}\uuline{#1}}
-\newcommand{\oo}[2][-2ex]{\setlength{\ULdepth}{#1}\uuline{#2}}
+\DeclareDocumentCommand{\oO}{m}{\setlength{\ULdepth}{-2.5ex}\uuline{#1}}
+\DeclareDocumentCommand{\oo}{m O{-2ex}}{\setlength{\ULdepth}{#2}\uuline{#1}}
 
-\let\obl\@fglsundefined
-\let\obli\@fglsundefined
-\let\obla\@fglsundefined
-\let\oblA\@fglsundefined
-\let\oblia\@fglsundefined
-\let\mel\@fglsundefined
-\let\meli\@fglsundefined
-\let\mela\@fglsundefined
-\let\melA\@fglsundefined
-\let\melia\@fglsundefined
-\let\meliA\@fglsundefined
-\newcommand{\obl}[1]{\textbf{#1}}
-\newcommand{\obli}[1]{\textit{\textbf{#1}}}
-\NewDocumentCommand{\obla}{m O{} O{} O{} O{} O{} O{} O{} O{}}{(\textbf{#1})\ifempty{#2}\else(\textbf{#2})\fi\ifempty{#3}\else(\textbf{#3})\fi\ifempty{#4}\else(\textbf{#4})\fi\ifempty{#5}\else(\textbf{#5})\fi\ifempty{#6}\else(\textbf{#6})\fi\ifempty{#7}\else(\textbf{#7})\fi\ifempty{#8}\else(\textbf{#8})\fi\ifempty{#9}\else(\textbf{#9})\fi}
-\NewDocumentCommand{\oblA}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\textbf{#1}\obl{)}\ifempty{#2}\else\obl{(}\textbf{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\textbf{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\textbf{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\textbf{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\textbf{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\textbf{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\textbf{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\textbf{#9}\obl{)}\fi}
-\NewDocumentCommand{\oblia}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\obli{#1}\obl{)}\ifempty{#2}\else\obl{(}\obli{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\obli{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\obli{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\obli{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\obli{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\obli{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\obli{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\obli{#9}\obl{)}\fi}
-\newcommand{\mel}[1]{\text{#1}}
-\newcommand{\meli}[1]{\text{\textit{#1}}}
-\NewDocumentCommand{\mela}{m O{} O{} O{} O{} O{} O{} O{} O{}}{(\mel{#1})\ifempty{#2}\else(\mel{#2})\fi\ifempty{#3}\else(\mel{#3})\fi\ifempty{#4}\else(\mel{#4})\fi\ifempty{#5}\else(\mel{#5})\fi\ifempty{#6}\else(\mel{#6})\fi\ifempty{#7}\else(\mel{#7})\fi\ifempty{#8}\else(\mel{#8})\fi\ifempty{#9}\else(\mel{#9})\fi}
-\NewDocumentCommand{\melA}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\mel{#1}\obl{)}\ifempty{#2}\else\obl{(}\mel{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\mel{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\mel{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\mel{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\mel{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\mel{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\mel{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\mel{#9}\obl{)}\fi}
-\NewDocumentCommand{\melia}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\meli{#1}\obl{)}\ifempty{#2}\else\obl{(}\meli{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\meli{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\meli{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\meli{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\meli{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\meli{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\meli{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\meli{#9}\obl{)}\fi}
-\NewDocumentCommand{\meliA}{m O{} O{} O{} O{} O{} O{} O{} O{}}{(\meli{#1})\ifempty{#2}\else(\meli{#2})\fi\ifempty{#3}\else(\meli{#3})\fi\ifempty{#4}\else(\meli{#4})\fi\ifempty{#5}\else(\meli{#5})\fi\ifempty{#6}\else(\meli{#6})\fi\ifempty{#7}\else(\meli{#7})\fi\ifempty{#8}\else(\meli{#8})\fi\ifempty{#9}\else(\meli{#9})\fi}
+\DeclareDocumentCommand{\obl}{m}{\textbf{#1}}
+\DeclareDocumentCommand{\obli}{m}{\textit{\textbf{#1}}}
+\DeclareDocumentCommand{\obla}{m O{} O{} O{} O{} O{} O{} O{} O{}}{(\textbf{#1})\ifempty{#2}\else(\textbf{#2})\fi\ifempty{#3}\else(\textbf{#3})\fi\ifempty{#4}\else(\textbf{#4})\fi\ifempty{#5}\else(\textbf{#5})\fi\ifempty{#6}\else(\textbf{#6})\fi\ifempty{#7}\else(\textbf{#7})\fi\ifempty{#8}\else(\textbf{#8})\fi\ifempty{#9}\else(\textbf{#9})\fi}
+\DeclareDocumentCommand{\oblA}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\textbf{#1}\obl{)}\ifempty{#2}\else\obl{(}\textbf{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\textbf{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\textbf{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\textbf{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\textbf{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\textbf{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\textbf{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\textbf{#9}\obl{)}\fi}
+\DeclareDocumentCommand{\oblia}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\obli{#1}\obl{)}\ifempty{#2}\else\obl{(}\obli{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\obli{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\obli{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\obli{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\obli{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\obli{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\obli{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\obli{#9}\obl{)}\fi}
+\DeclareDocumentCommand{\mel}{m}{\text{#1}}
+\DeclareDocumentCommand{\meli}{m}{\text{\textit{#1}}}
+\DeclareDocumentCommand{\mela}{m O{} O{} O{} O{} O{} O{} O{} O{}}{(\mel{#1})\ifempty{#2}\else(\mel{#2})\fi\ifempty{#3}\else(\mel{#3})\fi\ifempty{#4}\else(\mel{#4})\fi\ifempty{#5}\else(\mel{#5})\fi\ifempty{#6}\else(\mel{#6})\fi\ifempty{#7}\else(\mel{#7})\fi\ifempty{#8}\else(\mel{#8})\fi\ifempty{#9}\else(\mel{#9})\fi}
+\DeclareDocumentCommand{\melA}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\mel{#1}\obl{)}\ifempty{#2}\else\obl{(}\mel{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\mel{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\mel{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\mel{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\mel{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\mel{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\mel{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\mel{#9}\obl{)}\fi}
+\DeclareDocumentCommand{\melia}{m O{} O{} O{} O{} O{} O{} O{} O{}}{\obl{(}\meli{#1}\obl{)}\ifempty{#2}\else\obl{(}\meli{#2}\obl{)}\fi\ifempty{#3}\else\obl{(}\meli{#3}\obl{)}\fi\ifempty{#4}\else\obl{(}\meli{#4}\obl{)}\fi\ifempty{#5}\else\obl{(}\meli{#5}\obl{)}\fi\ifempty{#6}\else\obl{(}\meli{#6}\obl{)}\fi\ifempty{#7}\else\obl{(}\meli{#7}\obl{)}\fi\ifempty{#8}\else\obl{(}\meli{#8}\obl{)}\fi\ifempty{#9}\else\obl{(}\meli{#9}\obl{)}\fi}
+\DeclareDocumentCommand{\meliA}{m O{} O{} O{} O{} O{} O{} O{} O{}}{(\meli{#1})\ifempty{#2}\else(\meli{#2})\fi\ifempty{#3}\else(\meli{#3})\fi\ifempty{#4}\else(\meli{#4})\fi\ifempty{#5}\else(\meli{#5})\fi\ifempty{#6}\else(\meli{#6})\fi\ifempty{#7}\else(\meli{#7})\fi\ifempty{#8}\else(\meli{#8})\fi\ifempty{#9}\else(\meli{#9})\fi}
 
 % ------------------------------
 % Encapsulation
 % ------------------------------
 
-\let\zit\@fglsundefined
-\let\her\@fglsundefined
-\newcommand{\zit}[1]{``#1''}				
-\newcommand{\her}[1]{`#1'}						
+\DeclareDocumentCommand{\zit}{m}{``#1''}				
+\DeclareDocumentCommand{\her}{m}{`#1'}						
 
 %% Brackets
-\let\set\@fglsundefined
-\let\cset\@fglsundefined
-\let\seT\@fglsundefined
-\let\bool\@fglsundefined
-\let\booL\@fglsundefined
-\let\lambby\@fglsundefined
-\let\lambbY\@fglsundefined
-\newcommand{\set}[2][x]{\{\ensuremath{#1} : #2\}}
-\newcommand{\seT}[2][x]{\obl{\{}\ensuremath{#1} \obl{:} #2\obl{\}}}
-\NewDocumentCommand{\cset}{m O{} O{\sstar}}{\ensuremath{#1_\text{#3}^\text{#2}}}
-\newcommand{\bool}[1]{\ensuremath{\vdash}#1\ensuremath{\dashv}}
-\newcommand{\booL}[1]{\ensuremath{\bm{\vdash}}#1\ensuremath{\bm{\dashv}}}
-
-\NewDocumentCommand{\lambby}{O{} O{} m}{\ensuremath{[_{#1}}\ifempty{#1}\else\ \fi#3\ensuremath{]_{#2}}}
-\NewDocumentCommand{\lambbY}{O{} O{} m}{\textbf{[}\ensuremath{_{#1}}\ifempty{#1}\else\ \fi#3\textbf{]}\ensuremath{_{#2}}}
+\DeclareDocumentCommand{\set}{O{x} m}{\{\ensuremath{#1} : #2\}}
+\DeclareDocumentCommand{\seT}{O{x} m}{\obl{\{}\ensuremath{#1} \obl{:} #2\obl{\}}}
+\DeclareDocumentCommand{\cset}{m O{} O{\sstar}}{\ensuremath{#1_\text{#3}^\text{#2}}}
+\DeclareDocumentCommand{\bool}{m}{\ensuremath{\vdash}#1\ensuremath{\dashv}}
+\DeclareDocumentCommand{\booL}{m}{\ensuremath{\bm{\vdash}}#1\ensuremath{\bm{\dashv}}}
+\DeclareDocumentCommand{\lambby}{O{} O{} m}{\ensuremath{[_{#1}}\ifempty{#1}\else\ \fi#3\ensuremath{]_{#2}}}
+\DeclareDocumentCommand{\lambbY}{O{} O{} m}{\textbf{[}\ensuremath{_{#1}}\ifempty{#1}\else\ \fi#3\textbf{]}\ensuremath{_{#2}}}
 
 % ------------------------------
 % Logic (nc = no notational convention)
@@ -531,353 +495,194 @@
 
 \let\sneg\@fglsundefined
 \let\sneG\@fglsundefined
-\let\simp\@fglsundefined
-\let\simP\@fglsundefined
-\let\simpnC\@fglsundefined
-\let\soR\@fglsundefined
-\let\sor\@fglsundefined
-\let\sanD\@fglsundefined
-\let\sand\@fglsundefined
-\let\sandnc\@fglsundefined
-\let\sandnC\@fglsundefined
-\let\sornc\@fglsundefined
-\let\sornC\@fglsundefined
 \newcommand{\sneg}{\ensuremath{\neg}}
 \newcommand{\sneG}{\ensuremath{\bm{\neg}}}
-\NewDocumentCommand{\simp}{m m}{#1 \ensuremath{\rightarrow} #2}
-\NewDocumentCommand{\simP}{m m}{#1 \ensuremath{\bm{\rightarrow}} #2}
-\NewDocumentCommand{\simpnc}{m m}{\ensuremath{\rightarrow}(#1)(#2)}
-\NewDocumentCommand{\simpnC}{m m}{\ensuremath{\bm{\rightarrow}}\obl{(}#1\obl{)}\obl{(}#2\obl{)}}
-\NewDocumentCommand{\soR}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\lor}} #2\ifempty{#3}\else\ \ensuremath{\bm{\lor}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\lor}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\lor}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\lor}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\lor}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\lor}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\lor}} #9\fi
-}
-\NewDocumentCommand{\sor}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\lor} #2\ifempty{#3}\else\ \ensuremath{\lor} #3\fi\ifempty{#4}\else\ \ensuremath{\lor} #4\fi\ifempty{#5}\else\ \ensuremath{\lor} #5\fi\ifempty{#6}\else\ \ensuremath{\lor} #6\fi\ifempty{#7}\else\ \ensuremath{\lor} #7\fi\ifempty{#8}\else\ \ensuremath{\lor} #8\fi\ifempty{#9}\else\ \ensuremath{\lor} #9\fi}
-\NewDocumentCommand{\sanD}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\land}} #2\ifempty{#3}\else\ \ensuremath{\bm{\land}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\land}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\land}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\land}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\land}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\land}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\land}} #9\fi}
-\NewDocumentCommand{\sand}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\land} #2\ifempty{#3}\else\ \ensuremath{\land} #3\fi\ifempty{#4}\else\ \ensuremath{\land} #4\fi\ifempty{#5}\else\ \ensuremath{\land} #5\fi\ifempty{#6}\else\ \ensuremath{\land} #6\fi\ifempty{#7}\else\ \ensuremath{\land} #7\fi\ifempty{#8}\else\ \ensuremath{\land}#8\fi\ifempty{#9}\else\ \ensuremath{\land} #9\fi}
-\NewDocumentCommand{\sandnc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\land}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
-\NewDocumentCommand{\sandnC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\land}}\oblA{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
-\NewDocumentCommand{\sornc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\lor}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
 
-\NewDocumentCommand{\sornC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\lor}}\obla{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+\DeclareDocumentCommand{\simp}{m m}{#1 \ensuremath{\rightarrow} #2}
+\DeclareDocumentCommand{\simP}{m m}{#1 \ensuremath{\bm{\rightarrow}} #2}
+\DeclareDocumentCommand{\simpnc}{m m}{\ensuremath{\rightarrow}(#1)(#2)}
+\DeclareDocumentCommand{\simpnC}{m m}{\ensuremath{\bm{\rightarrow}}\obl{(}#1\obl{)}\obl{(}#2\obl{)}}
+\DeclareDocumentCommand{\soR}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\lor}} #2\ifempty{#3}\else\ \ensuremath{\bm{\lor}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\lor}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\lor}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\lor}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\lor}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\lor}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\lor}} #9\fi}
+\DeclareDocumentCommand{\sor}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\lor} #2\ifempty{#3}\else\ \ensuremath{\lor} #3\fi\ifempty{#4}\else\ \ensuremath{\lor} #4\fi\ifempty{#5}\else\ \ensuremath{\lor} #5\fi\ifempty{#6}\else\ \ensuremath{\lor} #6\fi\ifempty{#7}\else\ \ensuremath{\lor} #7\fi\ifempty{#8}\else\ \ensuremath{\lor} #8\fi\ifempty{#9}\else\ \ensuremath{\lor} #9\fi}
+\DeclareDocumentCommand{\sanD}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\land}} #2\ifempty{#3}\else\ \ensuremath{\bm{\land}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\land}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\land}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\land}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\land}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\land}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\land}} #9\fi}
+\DeclareDocumentCommand{\sand}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\land} #2\ifempty{#3}\else\ \ensuremath{\land} #3\fi\ifempty{#4}\else\ \ensuremath{\land} #4\fi\ifempty{#5}\else\ \ensuremath{\land} #5\fi\ifempty{#6}\else\ \ensuremath{\land} #6\fi\ifempty{#7}\else\ \ensuremath{\land} #7\fi\ifempty{#8}\else\ \ensuremath{\land}#8\fi\ifempty{#9}\else\ \ensuremath{\land} #9\fi}
+\DeclareDocumentCommand{\sandnc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\land}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+\DeclareDocumentCommand{\sandnC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\land}}\oblA{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+\DeclareDocumentCommand{\sornc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\lor}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+\DeclareDocumentCommand{\sornC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\lor}}\obla{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
 
 % ------------------------------
 % Lambda
 % ------------------------------
 
 % General Lambda Functions
+
 %% Extension
-\let\lambfx\@fglsundefined
-\let\lambfX\@fglsundefined
-\let\lambfyx\@fglsundefined
-\let\lambfyX\@fglsundefined
-\let\lambfzyx\@fglsundefined
-\let\lambfzyX\@fglsundefined
-\NewDocumentCommand{\lambfx}{m O{x} O{}}{\lambh{#2}[#3]\bool{#1}}
-\NewDocumentCommand{\lambfX}{m O{x} O{}}{\lambH{#2}[#3]\booL{#1}}
-\NewDocumentCommand{\lambfyx}{m O{y} O{x} O{} O{}}{\lambh{#2}[#4]\lambh{#3}[#5]\bool{#1}}
-\NewDocumentCommand{\lambfyX}{m O{y} O{x} O{} O{}}{\lambH{#2}[#4]\lambH{#3}[#5]\booL{#1}}
-\NewDocumentCommand{\lambfzyx}{m O{z} O{y} O{x} O{} O{} O{}}{\lambh{#2}[#5]\lambh{#3}[#6]\lambh{#4}[#7]\bool{#1}}
-\NewDocumentCommand{\lambfzyX}{m O{z} O{y} O{x} O{} O{} O{}}{\lambH{#2}[#5]\lambH{#3}[#6]\lambH{#4}[#7]\booL{#1}}
+\DeclareDocumentCommand{\lambfx}{m O{x} O{}}{\lambh{#2}[#3]\bool{#1}}
+\DeclareDocumentCommand{\lambfX}{m O{x} O{}}{\lambH{#2}[#3]\booL{#1}}
+\DeclareDocumentCommand{\lambfyx}{m O{y} O{x} O{} O{}}{\lambh{#2}[#4]\lambh{#3}[#5]\bool{#1}}
+\DeclareDocumentCommand{\lambfyX}{m O{y} O{x} O{} O{}}{\lambH{#2}[#4]\lambH{#3}[#5]\booL{#1}}
+\DeclareDocumentCommand{\lambfzyx}{m O{z} O{y} O{x} O{} O{} O{}}{\lambh{#2}[#5]\lambh{#3}[#6]\lambh{#4}[#7]\bool{#1}}
+\DeclareDocumentCommand{\lambfzyX}{m O{z} O{y} O{x} O{} O{} O{}}{\lambH{#2}[#5]\lambH{#3}[#6]\lambH{#4}[#7]\booL{#1}}
+
 %% Intension
-\let\lambfsx\@fglsundefined
-\let\lambfsX\@fglsundefined
-\let\lambfsyx\@fglsundefined
-\let\lambfsyX\@fglsundefined
-\let\lambfszyx\@fglsundefined
-\let\lambfszyX\@fglsundefined
-\NewDocumentCommand{\lambfsx}{m O{x} O{s} O{} O{}}{\lambh{#3}[#5]\lambh{#2}[#4]\bool{#1}}
-\NewDocumentCommand{\lambfsX}{m O{x} O{s} O{} O{}}{\lambH{#3}[#4]\lambH{#2}[#4]\booL{#1}}
-\NewDocumentCommand{\lambfsyx}{m O{y} O{x} O{s} O{} O{} O{}}{\lambh{#4}[#7]\lambh{#2}[#5]\lambh{#3}[#6]\bool{#1}}
-\NewDocumentCommand{\lambfsyX}{m O{y} O{x} O{s} O{} O{} O{}}{\lambH{#4}[#7]\lambh{#2}[#5]\lambH{#3}[#6]\booL{#1}}
-\NewDocumentCommand{\lambfszyx}{m O{z} O{y} O{x} O{s} O{} O{} O{} O{}}{\lambh{#5}[#9]\lambh{#2}[#6]\lambh{#3}[#7]\lambh{#4}[#8]\bool{#1}}
-\NewDocumentCommand{\lambfszyX}{m O{z} O{y} O{x} O{s} O{} O{} O{} O{}}{\lambH{#5}[#9]\lambh{#2}[#6]\lambH{#3}[#7]\lambH{#4}[#8]\booL{#1}}
+\DeclareDocumentCommand{\lambfsx}{m O{x} O{s} O{} O{}}{\lambh{#3}[#5]\lambh{#2}[#4]\bool{#1}}
+\DeclareDocumentCommand{\lambfsX}{m O{x} O{s} O{} O{}}{\lambH{#3}[#4]\lambH{#2}[#4]\booL{#1}}
+\DeclareDocumentCommand{\lambfsyx}{m O{y} O{x} O{s} O{} O{} O{}}{\lambh{#4}[#7]\lambh{#2}[#5]\lambh{#3}[#6]\bool{#1}}
+\DeclareDocumentCommand{\lambfsyX}{m O{y} O{x} O{s} O{} O{} O{}}{\lambH{#4}[#7]\lambh{#2}[#5]\lambH{#3}[#6]\booL{#1}}
+\DeclareDocumentCommand{\lambfszyx}{m O{z} O{y} O{x} O{s} O{} O{} O{} O{}}{\lambh{#5}[#9]\lambh{#2}[#6]\lambh{#3}[#7]\lambh{#4}[#8]\bool{#1}}
+\DeclareDocumentCommand{\lambfszyX}{m O{z} O{y} O{x} O{s} O{} O{} O{} O{}}{\lambH{#5}[#9]\lambh{#2}[#6]\lambH{#3}[#7]\lambH{#4}[#8]\booL{#1}}
 
 %% Lambda Heads
-\let\lambh\@fglsundefined
-\let\lambH\@fglsundefined
-\let\lambhe\@fglsundefined
-\let\lambhE\@fglsundefined
-\let\lambha\@fglsundefined
-\let\lambhA\@fglsundefined
-\let\lambhen\@fglsundefined
-\let\lambheN\@fglsundefined
-\let\lambhan\@fglsundefined
-\let\lambhaN\@fglsundefined
-\NewDocumentCommand{\lambh}{m O{}}{\ensuremath{\lambda\textit{#1}}\ifempty{#2}\else\textsubscript{#2}\fi\ifempty{#2}\else\!\fi.}
-\NewDocumentCommand{\lambH}{m O{}}{\ensuremath{\bm{\lambda #1}}\ifempty{#2}\else\!\textsubscript{#2}\fi\ifempty{#2}\else\!\fi\obl{.}}
-\NewDocumentCommand{\lambhe}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\exists}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambhE}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\bm{\exists}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambha}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\forall}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambhA}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\bm{\forall}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambhen}{ O{x} O{\@typee}}{\ensuremath{\neg}\obl{(}\ensuremath{\exists}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambheN}{ O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\obl{(}\ensuremath{\bm{\exists}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambhan}{ O{x} O{\@typee}}{\ensuremath{\neg}\obl{(}\ensuremath{\forall}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\NewDocumentCommand{\lambhaN}{ O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\obl{(}\ensuremath{\bm{\forall}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambh}{m O{}}{\ensuremath{\lambda\textit{#1}}\ifempty{#2}\else\textsubscript{#2}\fi\ifempty{#2}\else\!\fi.}
+\DeclareDocumentCommand{\lambH}{m O{}}{\ensuremath{\bm{\lambda #1}}\ifempty{#2}\else\!\textsubscript{#2}\fi\ifempty{#2}\else\!\fi\obl{.}}
+\DeclareDocumentCommand{\lambhe}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\exists}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambhE}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\bm{\exists}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambha}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\forall}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambhA}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\bm{\forall}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambhen}{ O{x} O{\@typee}}{\ensuremath{\neg}\obl{(}\ensuremath{\exists}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambheN}{ O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\obl{(}\ensuremath{\bm{\exists}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambhan}{ O{x} O{\@typee}}{\ensuremath{\neg}\obl{(}\ensuremath{\forall}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+\DeclareDocumentCommand{\lambhaN}{ O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\obl{(}\ensuremath{\bm{\forall}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
 
 %% Lambda Heads Basics
-\let\lmda\@fglsundefined
-\let\lmDa\@fglsundefined
-\let\lmdA\@fglsundefined
-\let\lmDA\@fglsundefined
-\let\lmdb\@fglsundefined
-\let\lmDb\@fglsundefined
-\let\lmdB\@fglsundefined
-\let\lmDB\@fglsundefined
-\let\lmdc\@fglsundefined
-\let\lmDc\@fglsundefined
-\let\lmdC\@fglsundefined
-\let\lmDC\@fglsundefined
-\let\lmdd\@fglsundefined
-\let\lmDd\@fglsundefined
-\let\lmdD\@fglsundefined
-\let\lmDD\@fglsundefined
-\let\lmde\@fglsundefined
-\let\lmDe\@fglsundefined
-\let\lmdE\@fglsundefined
-\let\lmDE\@fglsundefined
-\let\lmdf\@fglsundefined
-\let\lmDf\@fglsundefined
-\let\lmdF\@fglsundefined
-\let\lmDF\@fglsundefined
-\let\lmdg\@fglsundefined
-\let\lmDg\@fglsundefined
-\let\lmdG\@fglsundefined
-\let\lmDG\@fglsundefined
-\let\lmdh\@fglsundefined
-\let\lmDh\@fglsundefined
-\let\lmdH\@fglsundefined
-\let\lmDH\@fglsundefined
-\let\lmdi\@fglsundefined
-\let\lmDi\@fglsundefined
-\let\lmdI\@fglsundefined
-\let\lmDI\@fglsundefined
-\let\lmdj\@fglsundefined
-\let\lmDj\@fglsundefined
-\let\lmdJ\@fglsundefined
-\let\lmDJ\@fglsundefined
-\let\lmdk\@fglsundefined
-\let\lmDk\@fglsundefined
-\let\lmdK\@fglsundefined
-\let\lmDK\@fglsundefined
-\let\lmdl\@fglsundefined
-\let\lmDl\@fglsundefined
-\let\lmdL\@fglsundefined
-\let\lmDL\@fglsundefined
-\let\lmdm\@fglsundefined
-\let\lmDm\@fglsundefined
-\let\lmdM\@fglsundefined
-\let\lmDM\@fglsundefined
-\let\lmdn\@fglsundefined
-\let\lmDn\@fglsundefined
-\let\lmdN\@fglsundefined
-\let\lmDN\@fglsundefined
-\let\lmdo\@fglsundefined
-\let\lmDo\@fglsundefined
-\let\lmdO\@fglsundefined
-\let\lmDO\@fglsundefined
-\let\lmdp\@fglsundefined
-\let\lmDp\@fglsundefined
-\let\lmdP\@fglsundefined
-\let\lmDP\@fglsundefined
-\let\lmdq\@fglsundefined
-\let\lmDq\@fglsundefined
-\let\lmdQ\@fglsundefined
-\let\lmDQ\@fglsundefined
-\let\lmdr\@fglsundefined
-\let\lmDr\@fglsundefined
-\let\lmdR\@fglsundefined
-\let\lmDR\@fglsundefined
-\let\lmds\@fglsundefined
-\let\lmDs\@fglsundefined
-\let\lmdS\@fglsundefined
-\let\lmDS\@fglsundefined
-\let\lmdt\@fglsundefined
-\let\lmDt\@fglsundefined
-\let\lmdT\@fglsundefined
-\let\lmDT\@fglsundefined
-\let\lmdu\@fglsundefined
-\let\lmDu\@fglsundefined
-\let\lmdU\@fglsundefined
-\let\lmDU\@fglsundefined
-\let\lmdv\@fglsundefined
-\let\lmDv\@fglsundefined
-\let\lmdV\@fglsundefined
-\let\lmDV\@fglsundefined
-\let\lmdw\@fglsundefined
-\let\lmDw\@fglsundefined
-\let\lmdW\@fglsundefined
-\let\lmDW\@fglsundefined
-\let\lmdx\@fglsundefined
-\let\lmDx\@fglsundefined
-\let\lmdX\@fglsundefined
-\let\lmDX\@fglsundefined
-\let\lmdy\@fglsundefined
-\let\lmDy\@fglsundefined
-\let\lmdY\@fglsundefined
-\let\lmDY\@fglsundefined
-\let\lmdz\@fglsundefined
-\let\lmDz\@fglsundefined
-\let\lmdZ\@fglsundefined
-\let\lmDZ\@fglsundefined
-\newcommand{\lmda}[1][]{\lambh{a}[#1]}
-\newcommand{\lmDa}[1][]{\lambH{a}[#1]}
-\newcommand{\lmdA}[1][]{\lambh{A}[#1]}
-\newcommand{\lmDA}[1][]{\lambH{A}[#1]}
-\newcommand{\lmdb}[1][]{\lambh{b}[#1]}
-\newcommand{\lmDb}[1][]{\lambH{b}[#1]}
-\newcommand{\lmdB}[1][]{\lambh{B}[#1]}
-\newcommand{\lmDB}[1][]{\lambH{B}[#1]}
-\newcommand{\lmdc}[1][]{\lambh{c}[#1]}
-\newcommand{\lmDc}[1][]{\lambH{c}[#1]}
-\newcommand{\lmdC}[1][]{\lambh{C}[#1]}
-\newcommand{\lmDC}[1][]{\lambH{C}[#1]}
-\newcommand{\lmdd}[1][]{\lambh{d}[#1]}
-\newcommand{\lmDd}[1][]{\lambH{d}[#1]}
-\newcommand{\lmdD}[1][]{\lambh{D}[#1]}
-\newcommand{\lmDD}[1][]{\lambH{D}[#1]}
-\newcommand{\lmde}[1][]{\lambh{e}[#1]}
-\newcommand{\lmDe}[1][]{\lambH{e}[#1]}
-\newcommand{\lmdE}[1][]{\lambh{E}[#1]}
-\newcommand{\lmDE}[1][]{\lambH{E}[#1]}
-\newcommand{\lmdf}[1][]{\lambh{f}[#1]}
-\newcommand{\lmDf}[1][]{\lambH{f}[#1]}
-\newcommand{\lmdF}[1][]{\lambh{F}[#1]}
-\newcommand{\lmDF}[1][]{\lambH{F}[#1]}
-\newcommand{\lmdg}[1][]{\lambh{g}[#1]}
-\newcommand{\lmDg}[1][]{\lambH{g}[#1]}
-\newcommand{\lmdG}[1][]{\lambh{G}[#1]}
-\newcommand{\lmDG}[1][]{\lambH{G}[#1]}
-\newcommand{\lmdh}[1][]{\lambh{h}[#1]}
-\newcommand{\lmDh}[1][]{\lambH{h}[#1]}
-\newcommand{\lmdH}[1][]{\lambh{H}[#1]}
-\newcommand{\lmDH}[1][]{\lambH{H}[#1]}
-\newcommand{\lmdi}[1][]{\lambh{i}[#1]}
-\newcommand{\lmDi}[1][]{\lambH{i}[#1]}
-\newcommand{\lmdI}[1][]{\lambh{I}[#1]}
-\newcommand{\lmDI}[1][]{\lambH{I}[#1]}
-\newcommand{\lmdj}[1][]{\lambh{j}[#1]}
-\newcommand{\lmDj}[1][]{\lambH{j}[#1]}
-\newcommand{\lmdJ}[1][]{\lambh{J}[#1]}
-\newcommand{\lmDJ}[1][]{\lambH{J}[#1]}
-\newcommand{\lmdk}[1][]{\lambh{k}[#1]}
-\newcommand{\lmDk}[1][]{\lambH{k}[#1]}
-\newcommand{\lmdK}[1][]{\lambh{K}[#1]}
-\newcommand{\lmDK}[1][]{\lambH{K}[#1]}
-\newcommand{\lmdl}[1][]{\lambh{l}[#1]}
-\newcommand{\lmDl}[1][]{\lambH{l}[#1]}
-\newcommand{\lmdL}[1][]{\lambh{L}[#1]}
-\newcommand{\lmDL}[1][]{\lambH{L}[#1]}
-\newcommand{\lmdm}[1][]{\lambh{m}[#1]}
-\newcommand{\lmDm}[1][]{\lambH{m}[#1]}
-\newcommand{\lmdM}[1][]{\lambh{M}[#1]}
-\newcommand{\lmDM}[1][]{\lambH{M}[#1]}
-\newcommand{\lmdn}[1][]{\lambh{n}[#1]}
-\newcommand{\lmDn}[1][]{\lambH{n}[#1]}
-\newcommand{\lmdN}[1][]{\lambh{N}[#1]}
-\newcommand{\lmDN}[1][]{\lambH{N}[#1]}
-\newcommand{\lmdo}[1][]{\lambh{o}[#1]}
-\newcommand{\lmDo}[1][]{\lambH{o}[#1]}
-\newcommand{\lmdO}[1][]{\lambh{O}[#1]}
-\newcommand{\lmDO}[1][]{\lambH{O}[#1]}
-\newcommand{\lmdp}[1][]{\lambh{p}[#1]}
-\newcommand{\lmDp}[1][]{\lambH{p}[#1]}
-\newcommand{\lmdP}[1][]{\lambh{P}[#1]}
-\newcommand{\lmDP}[1][]{\lambH{P}[#1]}
-\newcommand{\lmdq}[1][]{\lambh{q}[#1]}
-\newcommand{\lmDq}[1][]{\lambH{q}[#1]}
-\newcommand{\lmdQ}[1][]{\lambh{Q}[#1]}
-\newcommand{\lmDQ}[1][]{\lambH{Q}[#1]}
-\newcommand{\lmdr}[1][]{\lambh{r}[#1]}
-\newcommand{\lmDr}[1][]{\lambH{r}[#1]}
-\newcommand{\lmdR}[1][]{\lambh{R}[#1]}
-\newcommand{\lmDR}[1][]{\lambH{R}[#1]}
-\newcommand{\lmds}[1][]{\lambh{s}[#1]}
-\newcommand{\lmDs}[1][]{\lambH{s}[#1]}
-\newcommand{\lmdS}[1][]{\lambh{S}[#1]}
-\newcommand{\lmDS}[1][]{\lambH{S}[#1]}
-\newcommand{\lmdt}[1][]{\lambh{t}[#1]}
-\newcommand{\lmDt}[1][]{\lambH{t}[#1]}
-\newcommand{\lmdT}[1][]{\lambh{T}[#1]}
-\newcommand{\lmDT}[1][]{\lambH{T}[#1]}
-\newcommand{\lmdu}[1][]{\lambh{u}[#1]}
-\newcommand{\lmDu}[1][]{\lambH{u}[#1]}
-\newcommand{\lmdU}[1][]{\lambh{U}[#1]}
-\newcommand{\lmDU}[1][]{\lambH{U}[#1]}
-\newcommand{\lmdv}[1][]{\lambh{v}[#1]}
-\newcommand{\lmDv}[1][]{\lambH{v}[#1]}
-\newcommand{\lmdV}[1][]{\lambh{V}[#1]}
-\newcommand{\lmDV}[1][]{\lambH{V}[#1]}
-\newcommand{\lmdw}[1][]{\lambh{w}[#1]}
-\newcommand{\lmDw}[1][]{\lambH{w}[#1]}
-\newcommand{\lmdW}[1][]{\lambh{W}[#1]}
-\newcommand{\lmDW}[1][]{\lambH{W}[#1]}
-\newcommand{\lmdx}[1][]{\lambh{x}[#1]}
-\newcommand{\lmDx}[1][]{\lambH{x}[#1]}
-\newcommand{\lmdX}[1][]{\lambh{X}[#1]}
-\newcommand{\lmDX}[1][]{\lambH{X}[#1]}
-\newcommand{\lmdy}[1][]{\lambh{y}[#1]}
-\newcommand{\lmDy}[1][]{\lambH{y}[#1]}
-\newcommand{\lmdY}[1][]{\lambh{Y}[#1]}
-\newcommand{\lmDY}[1][]{\lambH{Y}[#1]}
-\newcommand{\lmdz}[1][]{\lambh{z}[#1]}
-\newcommand{\lmDz}[1][]{\lambH{z}[#1]}
-\newcommand{\lmdZ}[1][]{\lambh{Z}[#1]}
-\newcommand{\lmDZ}[1][]{\lambH{Z}[#1]}
+\DeclareDocumentCommand{\lmda}{O{}}{\lambh{a}[#1]}
+\DeclareDocumentCommand{\lmDa}{O{}}{\lambH{a}[#1]}
+\DeclareDocumentCommand{\lmdA}{O{}}{\lambh{A}[#1]}
+\DeclareDocumentCommand{\lmDA}{O{}}{\lambH{A}[#1]}
+\DeclareDocumentCommand{\lmdb}{O{}}{\lambh{b}[#1]}
+\DeclareDocumentCommand{\lmDb}{O{}}{\lambH{b}[#1]}
+\DeclareDocumentCommand{\lmdB}{O{}}{\lambh{B}[#1]}
+\DeclareDocumentCommand{\lmDB}{O{}}{\lambH{B}[#1]}
+\DeclareDocumentCommand{\lmdc}{O{}}{\lambh{c}[#1]}
+\DeclareDocumentCommand{\lmDc}{O{}}{\lambH{c}[#1]}
+\DeclareDocumentCommand{\lmdC}{O{}}{\lambh{C}[#1]}
+\DeclareDocumentCommand{\lmDC}{O{}}{\lambH{C}[#1]}
+\DeclareDocumentCommand{\lmdd}{O{}}{\lambh{d}[#1]}
+\DeclareDocumentCommand{\lmDd}{O{}}{\lambH{d}[#1]}
+\DeclareDocumentCommand{\lmdD}{O{}}{\lambh{D}[#1]}
+\DeclareDocumentCommand{\lmDD}{O{}}{\lambH{D}[#1]}
+\DeclareDocumentCommand{\lmde}{O{}}{\lambh{e}[#1]}
+\DeclareDocumentCommand{\lmDe}{O{}}{\lambH{e}[#1]}
+\DeclareDocumentCommand{\lmdE}{O{}}{\lambh{E}[#1]}
+\DeclareDocumentCommand{\lmDE}{O{}}{\lambH{E}[#1]}
+\DeclareDocumentCommand{\lmdf}{O{}}{\lambh{f}[#1]}
+\DeclareDocumentCommand{\lmDf}{O{}}{\lambH{f}[#1]}
+\DeclareDocumentCommand{\lmdF}{O{}}{\lambh{F}[#1]}
+\DeclareDocumentCommand{\lmDF}{O{}}{\lambH{F}[#1]}
+\DeclareDocumentCommand{\lmdg}{O{}}{\lambh{g}[#1]}
+\DeclareDocumentCommand{\lmDg}{O{}}{\lambH{g}[#1]}
+\DeclareDocumentCommand{\lmdG}{O{}}{\lambh{G}[#1]}
+\DeclareDocumentCommand{\lmDG}{O{}}{\lambH{G}[#1]}
+\DeclareDocumentCommand{\lmdh}{O{}}{\lambh{h}[#1]}
+\DeclareDocumentCommand{\lmDh}{O{}}{\lambH{h}[#1]}
+\DeclareDocumentCommand{\lmdH}{O{}}{\lambh{H}[#1]}
+\DeclareDocumentCommand{\lmDH}{O{}}{\lambH{H}[#1]}
+\DeclareDocumentCommand{\lmdi}{O{}}{\lambh{i}[#1]}
+\DeclareDocumentCommand{\lmDi}{O{}}{\lambH{i}[#1]}
+\DeclareDocumentCommand{\lmdI}{O{}}{\lambh{I}[#1]}
+\DeclareDocumentCommand{\lmDI}{O{}}{\lambH{I}[#1]}
+\DeclareDocumentCommand{\lmdj}{O{}}{\lambh{j}[#1]}
+\DeclareDocumentCommand{\lmDj}{O{}}{\lambH{j}[#1]}
+\DeclareDocumentCommand{\lmdJ}{O{}}{\lambh{J}[#1]}
+\DeclareDocumentCommand{\lmDJ}{O{}}{\lambH{J}[#1]}
+\DeclareDocumentCommand{\lmdk}{O{}}{\lambh{k}[#1]}
+\DeclareDocumentCommand{\lmDk}{O{}}{\lambH{k}[#1]}
+\DeclareDocumentCommand{\lmdK}{O{}}{\lambh{K}[#1]}
+\DeclareDocumentCommand{\lmDK}{O{}}{\lambH{K}[#1]}
+\DeclareDocumentCommand{\lmdl}{O{}}{\lambh{l}[#1]}
+\DeclareDocumentCommand{\lmDl}{O{}}{\lambH{l}[#1]}
+\DeclareDocumentCommand{\lmdL}{O{}}{\lambh{L}[#1]}
+\DeclareDocumentCommand{\lmDL}{O{}}{\lambH{L}[#1]}
+\DeclareDocumentCommand{\lmdm}{O{}}{\lambh{m}[#1]}
+\DeclareDocumentCommand{\lmDm}{O{}}{\lambH{m}[#1]}
+\DeclareDocumentCommand{\lmdM}{O{}}{\lambh{M}[#1]}
+\DeclareDocumentCommand{\lmDM}{O{}}{\lambH{M}[#1]}
+\DeclareDocumentCommand{\lmdn}{O{}}{\lambh{n}[#1]}
+\DeclareDocumentCommand{\lmDn}{O{}}{\lambH{n}[#1]}
+\DeclareDocumentCommand{\lmdN}{O{}}{\lambh{N}[#1]}
+\DeclareDocumentCommand{\lmDN}{O{}}{\lambH{N}[#1]}
+\DeclareDocumentCommand{\lmdo}{O{}}{\lambh{o}[#1]}
+\DeclareDocumentCommand{\lmDo}{O{}}{\lambH{o}[#1]}
+\DeclareDocumentCommand{\lmdO}{O{}}{\lambh{O}[#1]}
+\DeclareDocumentCommand{\lmDO}{O{}}{\lambH{O}[#1]}
+\DeclareDocumentCommand{\lmdp}{O{}}{\lambh{p}[#1]}
+\DeclareDocumentCommand{\lmDp}{O{}}{\lambH{p}[#1]}
+\DeclareDocumentCommand{\lmdP}{O{}}{\lambh{P}[#1]}
+\DeclareDocumentCommand{\lmDP}{O{}}{\lambH{P}[#1]}
+\DeclareDocumentCommand{\lmdq}{O{}}{\lambh{q}[#1]}
+\DeclareDocumentCommand{\lmDq}{O{}}{\lambH{q}[#1]}
+\DeclareDocumentCommand{\lmdQ}{O{}}{\lambh{Q}[#1]}
+\DeclareDocumentCommand{\lmDQ}{O{}}{\lambH{Q}[#1]}
+\DeclareDocumentCommand{\lmdr}{O{}}{\lambh{r}[#1]}
+\DeclareDocumentCommand{\lmDr}{O{}}{\lambH{r}[#1]}
+\DeclareDocumentCommand{\lmdR}{O{}}{\lambh{R}[#1]}
+\DeclareDocumentCommand{\lmDR}{O{}}{\lambH{R}[#1]}
+\DeclareDocumentCommand{\lmds}{O{}}{\lambh{s}[#1]}
+\DeclareDocumentCommand{\lmDs}{O{}}{\lambH{s}[#1]}
+\DeclareDocumentCommand{\lmdS}{O{}}{\lambh{S}[#1]}
+\DeclareDocumentCommand{\lmDS}{O{}}{\lambH{S}[#1]}
+\DeclareDocumentCommand{\lmdt}{O{}}{\lambh{t}[#1]}
+\DeclareDocumentCommand{\lmDt}{O{}}{\lambH{t}[#1]}
+\DeclareDocumentCommand{\lmdT}{O{}}{\lambh{T}[#1]}
+\DeclareDocumentCommand{\lmDT}{O{}}{\lambH{T}[#1]}
+\DeclareDocumentCommand{\lmdu}{O{}}{\lambh{u}[#1]}
+\DeclareDocumentCommand{\lmDu}{O{}}{\lambH{u}[#1]}
+\DeclareDocumentCommand{\lmdU}{O{}}{\lambh{U}[#1]}
+\DeclareDocumentCommand{\lmDU}{O{}}{\lambH{U}[#1]}
+\DeclareDocumentCommand{\lmdv}{O{}}{\lambh{v}[#1]}
+\DeclareDocumentCommand{\lmDv}{O{}}{\lambH{v}[#1]}
+\DeclareDocumentCommand{\lmdV}{O{}}{\lambh{V}[#1]}
+\DeclareDocumentCommand{\lmDV}{O{}}{\lambH{V}[#1]}
+\DeclareDocumentCommand{\lmdw}{O{}}{\lambh{w}[#1]}
+\DeclareDocumentCommand{\lmDw}{O{}}{\lambH{w}[#1]}
+\DeclareDocumentCommand{\lmdW}{O{}}{\lambh{W}[#1]}
+\DeclareDocumentCommand{\lmDW}{O{}}{\lambH{W}[#1]}
+\DeclareDocumentCommand{\lmdx}{O{}}{\lambh{x}[#1]}
+\DeclareDocumentCommand{\lmDx}{O{}}{\lambH{x}[#1]}
+\DeclareDocumentCommand{\lmdX}{O{}}{\lambh{X}[#1]}
+\DeclareDocumentCommand{\lmDX}{O{}}{\lambH{X}[#1]}
+\DeclareDocumentCommand{\lmdy}{O{}}{\lambh{y}[#1]}
+\DeclareDocumentCommand{\lmDy}{O{}}{\lambH{y}[#1]}
+\DeclareDocumentCommand{\lmdY}{O{}}{\lambh{Y}[#1]}
+\DeclareDocumentCommand{\lmDY}{O{}}{\lambH{Y}[#1]}
+\DeclareDocumentCommand{\lmdz}{O{}}{\lambh{z}[#1]}
+\DeclareDocumentCommand{\lmDz}{O{}}{\lambH{z}[#1]}
+\DeclareDocumentCommand{\lmdZ}{O{}}{\lambh{Z}[#1]}
+\DeclareDocumentCommand{\lmDZ}{O{}}{\lambH{Z}[#1]}
 
 % ------------------------------
 % Semantics
 % ------------------------------
-\let\sarrow\@fglsundefined
-\NewDocumentCommand{\sarrow}{m}{\ensuremath{\downarrow}#1}
-\NewDocumentCommand{\sarroW}{m}{\ensuremath{\downarrow}\lambby{#1}}
-
-
+\DeclareDocumentCommand{\sarrow}{m}{\ensuremath{\downarrow}#1}
+\DeclareDocumentCommand{\sarroW}{m}{\ensuremath{\downarrow}\lambby{#1}}
 
 %%% Indirekt
-\let\sic\@fglsundefined
-\let\siC\@fglsundefined
-\let\sicN\@fglsundefined
-\let\sicn\@fglsundefined
-\let\siCN\@fglsundefined
-\let\siCn\@fglsundefined
-\newcommand{\sic}[2][\bm{i}]{\text{\obl{#2}\textsubscript{\ensuremath{#1}}}}
-\newcommand{\siC}[2][\bm{i}]{\text{\obl{#2}\obl{(}\ensuremath{#1}\obl{)}}}
-\newcommand{\sicN}[2][\bm{i}]{\ensuremath{\bm{\neg}}\text{\obl{#2}\textsubscript{\ensuremath{#1}}}}
-\newcommand{\sicn}[2][\bm{i}]{\ensuremath{\neg}\text{\obl{#2}\textsubscript{\ensuremath{#1}}}}
-\newcommand{\siCN}[2][\bm{i}]{\ensuremath{\bm{\neg}}\text{\obl{#2}\obl{(}\ensuremath{#1}\obl{)}}}
-\newcommand{\siCn}[2][\bm{i}]{\ensuremath{\neg}\text{\obl{#2}\obl{(}\ensuremath{#1}\obl{)}}}
+\DeclareDocumentCommand{\sic}{O{\bm{i}} m}{\text{\obl{#2}\textsubscript{\ensuremath{#1}}}}
+\DeclareDocumentCommand{\siC}{O{\bm{i}} m}{\text{\obl{#2}\obl{(}\ensuremath{#1}\obl{)}}}
+\DeclareDocumentCommand{\sicN}{O{\bm{i}} m}{\ensuremath{\bm{\neg}}\text{\obl{#2}\textsubscript{\ensuremath{#1}}}}
+\DeclareDocumentCommand{\sicn}{O{\bm{i}} m}{\ensuremath{\neg}\text{\obl{#2}\textsubscript{\ensuremath{#1}}}}
+\DeclareDocumentCommand{\siCN}{O{\bm{i}} m}{\ensuremath{\bm{\neg}}\text{\obl{#2}\obl{(}\ensuremath{#1}\obl{)}}}
+\DeclareDocumentCommand{\siCn}{O{\bm{i}} m}{\ensuremath{\neg}\text{\obl{#2}\obl{(}\ensuremath{#1}\obl{)}}}
 
-\let\sit\@fglsundefined
-\let\siT\@fglsundefined
-\newcommand{\sit}[1]{\ensuremath{|}\obl{#1}\ensuremath{|}}
-\newcommand{\siT}[1]{\ensuremath{\bm{|}}\obl{#1}\ensuremath{\bm{|}}}
+\DeclareDocumentCommand{\sit}{m}{\ensuremath{|}\obl{#1}\ensuremath{|}}
+\DeclareDocumentCommand{\siT}{m}{\ensuremath{\bm{|}}\obl{#1}\ensuremath{\bm{|}}}
 
-\let\sitnobf\@fglsundefined
-\let\sitnobF\@fglsundefined
-\let\sitnobfi\@fglsundefined
-\let\sitnobfI\@fglsundefined
-\newcommand{\sitnobf}[1]{\ensuremath{|}#1\ensuremath{|}}
-\newcommand{\sitnobF}[1]{\ensuremath{\bm{|}}#1\ensuremath{\bm{|}}}
-\newcommand{\sitnobfi}[1]{\ensuremath{|}\textit{#1}\ensuremath{|}}
-\newcommand{\sitnobfI}[1]{\ensuremath{\bm{|}}\textit{#1}\ensuremath{\bm{|}}}
+\DeclareDocumentCommand{\sitnobf}{m}{\ensuremath{|}#1\ensuremath{|}}
+\DeclareDocumentCommand{\sitnobF}{m}{\ensuremath{\bm{|}}#1\ensuremath{\bm{|}}}
+\DeclareDocumentCommand{\sitnobfi}{m}{\ensuremath{|}\textit{#1}\ensuremath{|}}
+\DeclareDocumentCommand{\sitnobfI}{m}{\ensuremath{\bm{|}}\textit{#1}\ensuremath{\bm{|}}}
 
-\let\sid\@fglsundefined
-\let\siD\@fglsundefined
-\let\sidg\@fglsundefined
-\let\sidG\@fglsundefined
-\newcommand{\sid}[2][]{\ensuremath{\parallel}\obl{#2}\ensuremath{\parallel}\textsuperscript{\!\ensuremath{#1}}}
-\newcommand{\siD}[2][]{\ensuremath{\bm{\parallel}}\obl{#2}\ensuremath{\bm{\parallel}}\textsuperscript{\!\ensuremath{#1}}}
-\newcommand{\sidg}[2][]{\ensuremath{\parallel}\obl{#2}\ensuremath{\parallel}\textsuperscript{\!\ensuremath{g\!#1}}}
-\newcommand{\sidG}[2][]{\ensuremath{\bm{\parallel}}\obl{#2}\ensuremath{\bm{\parallel}}\textsuperscript{\!\ensuremath{g\!#1}}}
+\DeclareDocumentCommand{\sid}{O{} m}{\ensuremath{\parallel}\obl{#2}\ensuremath{\parallel}\textsuperscript{\!\ensuremath{#1}}}
+\DeclareDocumentCommand{\siD}{O{} m}{\ensuremath{\bm{\parallel}}\obl{#2}\ensuremath{\bm{\parallel}}\textsuperscript{\!\ensuremath{#1}}}
+\DeclareDocumentCommand{\sidg}{O{} m}{\ensuremath{\parallel}\obl{#2}\ensuremath{\parallel}\textsuperscript{\!\ensuremath{g\!#1}}}
+\DeclareDocumentCommand{\sidG}{O{} m}{\ensuremath{\bm{\parallel}}\obl{#2}\ensuremath{\bm{\parallel}}\textsuperscript{\!\ensuremath{g\!#1}}}
 
-\let\asmod\@fglsundefined
-\let\asmoD\@fglsundefined
-\NewDocumentCommand{\asmod}{m O{x}}{\ensuremath{\lbrack\nicefrac{#2}{\!#1}\rbrack}}
-\NewDocumentCommand{\asmoD}{m O{x}}{\ensuremath{\lbrack\nicefrac{\obli{#2}}{\!#1}\rbrack}}
+\DeclareDocumentCommand{\asmod}{m O{x}}{\ensuremath{\lbrack\nicefrac{#2}{\!#1}\rbrack}}
+\DeclareDocumentCommand{\asmoD}{m O{x}}{\ensuremath{\lbrack\nicefrac{\obli{#2}}{\!#1}\rbrack}}
 
-\let\asf\@fglsundefined
-\let\asF\@fglsundefined
-\NewDocumentCommand{\asf}{m O{} O{x} O{} O{y} O{} O{z} O{g}}{\ensuremath{#8}\ifempty{#2}\else\asmod{#2}[#3]\fi\ifempty{#4}\else\asmod{#4}[#5]\fi\ifempty{#6}\else\asmod{#6}[#7]\fi\mel{(}#1\mel{)}}
-\NewDocumentCommand{\asF}{m O{} O{x} O{} O{y} O{} O{z} O{g}}{\ensuremath{#8}\ifempty{#2}\else\asmoD{#2}[#3]\fi\ifempty{#4}\else\asmoD{#4}[#5]\fi\ifempty{#6}\else\asmoD{#6}[#7]\fi\obl{(}#1\obl{)}}
+\DeclareDocumentCommand{\asf}{m O{} O{x} O{} O{y} O{} O{z} O{g}}{\ensuremath{#8}\ifempty{#2}\else\asmod{#2}[#3]\fi\ifempty{#4}\else\asmod{#4}[#5]\fi\ifempty{#6}\else\asmod{#6}[#7]\fi\mel{(}#1\mel{)}}
+\DeclareDocumentCommand{\asF}{m O{} O{x} O{} O{y} O{} O{z} O{g}}{\ensuremath{#8}\ifempty{#2}\else\asmoD{#2}[#3]\fi\ifempty{#4}\else\asmoD{#4}[#5]\fi\ifempty{#6}\else\asmoD{#6}[#7]\fi\obl{(}#1\obl{)}}
 
 \let\@fglAssRep\@fglsundefined
 \let\@fglAssReP\@fglsundefined
@@ -888,91 +693,54 @@
 \newcommand{\@fglSidModCheck}[2]{\ifempty{#1}\else\!\@fglAssRep{#1}{#2}\fi}
 \newcommand{\@fglSidModChecK}[2]{\ifempty{#1}\else\!\@fglAssReP{#1}{#2}\fi}
 
-\let\sidmod\@fglsundefined
-\let\sidmoD\@fglsundefined
-\let\sidmOd\@fglsundefined
-\let\sidmOD\@fglsundefined
-\NewDocumentCommand{\sidmod}{m m O{x} O{} O{y} O{} O{z} O{g}}{\sid[#8\!\@fglAssRep{#3}{#2}\@fglSidModCheck{#5}{#4}\@fglSidModCheck{#7}{#6}]{#1}}
-\NewDocumentCommand{\sidmoD}{m m O{x} O{} O{y} O{} O{z} O{g}}{\sid[#8\!\@fglAssReP{#3}{#2}\@fglSidModChecK{#5}{#4}\@fglSidModChecK{#7}{#6}]{#1}}
-\NewDocumentCommand{\sidmOd}{m m O{x} O{} O{y} O{} O{z} O{g}}{\siD[#8\!\@fglAssRep{#3}{#2}\@fglSidModCheck{#5}{#4}\@fglSidModCheck{#7}{#6}]{#1}}
-\NewDocumentCommand{\sidmOD}{m m O{x} O{} O{y} O{} O{z} O{g}}{\siD[#8\!\@fglAssReP{#3}{#2}\@fglSidModChecK{#5}{#4}\@fglSidModChecK{#7}{#6}]{#1}}
+\DeclareDocumentCommand{\sidmod}{m m O{x} O{} O{y} O{} O{z} O{g}}{\sid[#8\!\@fglAssRep{#3}{#2}\@fglSidModCheck{#5}{#4}\@fglSidModCheck{#7}{#6}]{#1}}
+\DeclareDocumentCommand{\sidmoD}{m m O{x} O{} O{y} O{} O{z} O{g}}{\sid[#8\!\@fglAssReP{#3}{#2}\@fglSidModChecK{#5}{#4}\@fglSidModChecK{#7}{#6}]{#1}}
+\DeclareDocumentCommand{\sidmOd}{m m O{x} O{} O{y} O{} O{z} O{g}}{\siD[#8\!\@fglAssRep{#3}{#2}\@fglSidModCheck{#5}{#4}\@fglSidModCheck{#7}{#6}]{#1}}
+\DeclareDocumentCommand{\sidmOD}{m m O{x} O{} O{y} O{} O{z} O{g}}{\siD[#8\!\@fglAssReP{#3}{#2}\@fglSidModChecK{#5}{#4}\@fglSidModChecK{#7}{#6}]{#1}}
 
-\let\sidr\@fglsundefined
-\let\sidR\@fglsundefined
-\let\siDr\@fglsundefined
-\let\siDR\@fglsundefined
-\let\sidrr\@fglsundefined
-\let\sidRR\@fglsundefined
-\let\siDrr\@fglsundefined
-\let\siDRR\@fglsundefined
-\let\sidrrr\@fglsundefined
-\let\sidRRR\@fglsundefined
-\let\siDrrr\@fglsundefined
-\let\siDRRR\@fglsundefined
-\NewDocumentCommand{\sidr}{m m O{x} O{g}}{\sid[#4\!\@fglAssRep{#3}{#2}]{#1}}
-\NewDocumentCommand{\sidR}{m m O{x} O{g}}{\sid[#4\!\@fglAssReP{#3}{#2}]{#1}}
-\NewDocumentCommand{\siDr}{m m O{x} O{g}}{\siD[#4\!\@fglAssRep{#3}{#2}]{#1}}
-\NewDocumentCommand{\siDR}{m m O{x} O{g}}{\siD[#4\!\@fglAssReP{#3}{#2}]{#1}}
-\NewDocumentCommand{\sidrr}{m m m O{x} O{y} O{g}}{\sid[#6\!\@fglAssRep{#4}{#2}\!\@fglAssRep{#5}{#3}]{#1}}
-\NewDocumentCommand{\sidRR}{m m m O{x} O{y} O{g}}{\sid[#6\!\@fglAssReP{#4}{#2}\!\@fglAssReP{#5}{#3}]{#1}}
-\NewDocumentCommand{\siDrr}{m m m O{x} O{y} O{g}}{\siD[#6\!\@fglAssRep{#4}{#2}\!\@fglAssRep{#5}{#3}]{#1}}
-\NewDocumentCommand{\siDRR}{m m m O{x} O{y} O{g}}{\siD[#6\!\@fglAssReP{#4}{#2}\!\@fglAssReP{#5}{#3}]{#1}}
-\NewDocumentCommand{\sidrrr}{m m m m O{x} O{y} O{z} O{g}}{\sid[#8\!\@fglAssRep{#5}{#2}\!\@fglAssRep{#6}{#3}\!\@fglAssRep{#7}{#4}]{#1}}
-\NewDocumentCommand{\sidRRR}{m m m m O{x} O{y} O{z} O{g}}{\sid[#8\!\@fglAssReP{#5}{#2}\!\@fglAssReP{#6}{#3}\!\@fglAssReP{#7}{#4}]{#1}}
-\NewDocumentCommand{\siDrrr}{m m m m O{x} O{y} O{z} O{g}}{\siD[#8\!\@fglAssRep{#5}{#2}\!\@fglAssRep{#6}{#3}\!\@fglAssRep{#7}{#4}]{#1}}
-\NewDocumentCommand{\siDRRR}{m m m m O{x} O{y} O{z} O{g}}{\siD[#8\!\@fglAssReP{#5}{#2}\!\@fglAssReP{#6}{#3}\!\@fglAssReP{#7}{#4}]{#1}}
+\DeclareDocumentCommand{\sidr}{m m O{x} O{g}}{\sid[#4\!\@fglAssRep{#3}{#2}]{#1}}
+\DeclareDocumentCommand{\sidR}{m m O{x} O{g}}{\sid[#4\!\@fglAssReP{#3}{#2}]{#1}}
+\DeclareDocumentCommand{\siDr}{m m O{x} O{g}}{\siD[#4\!\@fglAssRep{#3}{#2}]{#1}}
+\DeclareDocumentCommand{\siDR}{m m O{x} O{g}}{\siD[#4\!\@fglAssReP{#3}{#2}]{#1}}
+\DeclareDocumentCommand{\sidrr}{m m m O{x} O{y} O{g}}{\sid[#6\!\@fglAssRep{#4}{#2}\!\@fglAssRep{#5}{#3}]{#1}}
+\DeclareDocumentCommand{\sidRR}{m m m O{x} O{y} O{g}}{\sid[#6\!\@fglAssReP{#4}{#2}\!\@fglAssReP{#5}{#3}]{#1}}
+\DeclareDocumentCommand{\siDrr}{m m m O{x} O{y} O{g}}{\siD[#6\!\@fglAssRep{#4}{#2}\!\@fglAssRep{#5}{#3}]{#1}}
+\DeclareDocumentCommand{\siDRR}{m m m O{x} O{y} O{g}}{\siD[#6\!\@fglAssReP{#4}{#2}\!\@fglAssReP{#5}{#3}]{#1}}
+\DeclareDocumentCommand{\sidrrr}{m m m m O{x} O{y} O{z} O{g}}{\sid[#8\!\@fglAssRep{#5}{#2}\!\@fglAssRep{#6}{#3}\!\@fglAssRep{#7}{#4}]{#1}}
+\DeclareDocumentCommand{\sidRRR}{m m m m O{x} O{y} O{z} O{g}}{\sid[#8\!\@fglAssReP{#5}{#2}\!\@fglAssReP{#6}{#3}\!\@fglAssReP{#7}{#4}]{#1}}
+\DeclareDocumentCommand{\siDrrr}{m m m m O{x} O{y} O{z} O{g}}{\siD[#8\!\@fglAssRep{#5}{#2}\!\@fglAssRep{#6}{#3}\!\@fglAssRep{#7}{#4}]{#1}}
+\DeclareDocumentCommand{\siDRRR}{m m m m O{x} O{y} O{z} O{g}}{\siD[#8\!\@fglAssReP{#5}{#2}\!\@fglAssReP{#6}{#3}\!\@fglAssReP{#7}{#4}]{#1}}
 
 %%% Direkt
-\let\sdi\@fglsundefined
-\let\sdI\@fglsundefined
-\let\sde\@fglsundefined
-\let\sdE\@fglsundefined
-\newcommand{\sdi}[1]{\ensuremath{\llbracket}\obl{#1}\ensuremath{\rrbracket}}
-\newcommand{\sdI}[1]{\pmb{\ensuremath{\llbracket}}\obl{#1}\pmb{\ensuremath{\rrbracket}}}
-\newcommand{\sde}[2][\sstar]{\ensuremath{\llbracket}\obl{#2}\ensuremath{\rrbracket}\textsuperscript{\!\ensuremath{#1}}\!}
-\newcommand{\sdem}[2][\sstar]{\ensuremath{\llbracket}\mel{#2}\ensuremath{\rrbracket}\textsuperscript{\!\ensuremath{#1}}\!}
-\newcommand{\sdE}[2][\sstar]{\pmb{\ensuremath{\llbracket}}\obl{#2}\pmb{\ensuremath{\rrbracket}}\textsuperscript{\!\ensuremath{#1}}}
+\DeclareDocumentCommand{\sdi}{m}{\ensuremath{\llbracket}\obl{#1}\ensuremath{\rrbracket}}
+\DeclareDocumentCommand{\sdI}{m}{\pmb{\ensuremath{\llbracket}}\obl{#1}\pmb{\ensuremath{\rrbracket}}}
+\DeclareDocumentCommand{\sdim}{m}{\ensuremath{\llbracket}\mel{#1}\ensuremath{\rrbracket}}
+\DeclareDocumentCommand{\sdiM}{m}{\pmb{\ensuremath{\llbracket}}\mel{#1}\pmb{\ensuremath{\rrbracket}}}
+\DeclareDocumentCommand{\sde}{O{\FGL@situation} m}{\ensuremath{\llbracket}\obl{#2}\ensuremath{\rrbracket}\textsuperscript{\!\ensuremath{#1}}\!}
+\DeclareDocumentCommand{\sdE}{O{\FGL@situation} m}{\pmb{\ensuremath{\llbracket}}\obl{#2}\pmb{\ensuremath{\rrbracket}}\textsuperscript{\!\ensuremath{#1}}}
+\DeclareDocumentCommand{\sdem}{O{\FGL@situation} m}{\ensuremath{\llbracket}\mel{#2}\ensuremath{\rrbracket}\textsuperscript{\!\ensuremath{#1}}\!}
+\DeclareDocumentCommand{\sdeM}{O{\FGL@situation} m}{\pmb{\ensuremath{\llbracket}}\mel{#2}\pmb{\ensuremath{\rrbracket}}\textsuperscript{\!\ensuremath{#1}}}
 
 %%% Rules
 \let\@srdesituation\FGL@rulesituation
 %%%% General
-\let\srgarrow\@fglsundefined
-\NewDocumentCommand{\srgarrow}{O{\ensuremath{x}} O{\ensuremath{f}}}{\sarrow{#2} = \set[#1]{#2(#1)\ =\ 1}}
+\DeclareDocumentCommand{\srgarrow}{O{\ensuremath{x}} O{\ensuremath{f}}}{\sarrow{#2} = \set[#1]{#2(#1)\ =\ 1}}
 %%%% Direkt
-
-\let\srde\@fglsundefined
-\let\srdE\@fglsundefined
-\let\srdi\@fglsundefined
-\NewDocumentCommand{\srde}{m m O{\@srdesituation}}{\sde[#3]{#1}\ =\ #2}
-\NewDocumentCommand{\srdE}{m m O{\@srdesituation}}{\sdE[#3]{#1}\ =\ #2}
-\NewDocumentCommand{\srdi}{m m}{\sdi{#1}\ = #2}
+\DeclareDocumentCommand{\srde}{m m O{\@srdesituation}}{\sde[#3]{#1}\ =\ #2}
+\DeclareDocumentCommand{\srdE}{m m O{\@srdesituation}}{\sdE[#3]{#1}\ =\ #2}
+\DeclareDocumentCommand{\srdi}{m m}{\sdi{#1}\ = #2}
 %%%%% Basic	
-\let\srdesbjpred\@fglsundefined
-\let\srdesbjpreD\@fglsundefined
-\let\srdeobjpred\@fglsundefined
-\let\srdeobjpreD\@fglsundefined
-\let\srdesbjquant\@fglsundefined
-\let\srdesbjquanT\@fglsundefined
-\let\srdequant\@fglsundefined
-\let\srdequanT\@fglsundefined
-\NewDocumentCommand{\srdesbjpred}{O{\@srdesituation} O{\text{\ensuremath{S}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{P}}}}{\srde{#2}{\sde[#1]{#4}(\sde[#1]{#3})}[#1]}
-\NewDocumentCommand{\srdeobjpred}{O{\@srdesituation} O{\text{\ensuremath{P}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{V}}}}{\srdesbjpred[#1][#2][#3][#4]}
-\NewDocumentCommand{\srdesbjquant}{O{\@srdesituation} O{\text{\ensuremath{S}}} O{\text{\ensuremath{P}}} O{\text{\ensuremath{QN}}}}{\srdesbjpred[#1][#2][#3][#4]}
-\NewDocumentCommand{\srdequant}{O{\@srdesituation} O{\text{\ensuremath{QN}}} O{\text{\ensuremath{N}}} O{\text{\ensuremath{D}}}}{\srdesbjpred[#1][#2][#3][#4]}
-\NewDocumentCommand{\srdeobjquant}{O{x} O{y} O{\@srdesituation} O{\text{\ensuremath{P}}} O{\text{\ensuremath{V}}} O{\text{\ensuremath{QN}}} O{\@typee} O{\@typee}}{\srde{#4}{\lambh{#1}[#7]\sde[#3]{#6}(\lambh{#2}[#8]\sde[#3]{#5}(\textit{#2})(\textit{#1}))}[#3]}
-	
-
+\DeclareDocumentCommand{\srdesbjpred}{O{\@srdesituation} O{\text{\ensuremath{S}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{P}}}}{\srde{#2}{\sde[#1]{#4}(\sde[#1]{#3})}[#1]}
+\DeclareDocumentCommand{\srdeobjpred}{O{\@srdesituation} O{\text{\ensuremath{P}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{V}}}}{\srdesbjpred[#1][#2][#3][#4]}
+\DeclareDocumentCommand{\srdesbjquant}{O{\@srdesituation} O{\text{\ensuremath{S}}} O{\text{\ensuremath{P}}} O{\text{\ensuremath{QN}}}}{\srdesbjpred[#1][#2][#3][#4]}
+\DeclareDocumentCommand{\srdequant}{O{\@srdesituation} O{\text{\ensuremath{QN}}} O{\text{\ensuremath{N}}} O{\text{\ensuremath{D}}}}{\srdesbjpred[#1][#2][#3][#4]}
+\DeclareDocumentCommand{\srdeobjquant}{O{x} O{y} O{\@srdesituation} O{\text{\ensuremath{P}}} O{\text{\ensuremath{V}}} O{\text{\ensuremath{QN}}} O{\@typee} O{\@typee}}{\srde{#4}{\lambh{#1}[#7]\sde[#3]{#6}(\lambh{#2}[#8]\sde[#3]{#5}(\textit{#2})(\textit{#1}))}[#3]}
 %%%%% Quantorenanhebung
-\let\srdeqrsemvar\@fglsundefined
-\let\srdeqrabs\@fglsundefined
-\let\srdeqrlex\@fglsundefined
-\let\srdeqrfa\@fglsundefined
-\let\srdeqrtree\@fglsundefined
-\NewDocumentCommand{\srdeqrsemvar}{O{\phi} O{\ensuremath{x}} O{\sblank} O{\textit{g}}}{\srde{\ensuremath{#1}}{\ensuremath{#4}(#2)}[\ensuremath{#4},\!\ensuremath{#3}]}
-\NewDocumentCommand{\srdeqrabs}{O{\phi} O{\textit{x}} O{\sblank} O{\textit{g}} O{\textit{f}} O{\ensuremath{\delta}}}{#5(#2)\ =\ \sde[#4\ensuremath{\lbrack\nicefrac{#6}{\!#2}\rbrack},\!#3]{\ensuremath{#1}}\ }
-\NewDocumentCommand{\srdeqrlex}{O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{\sblank} O{\text{\textit{g}}}}{\srde{#1}{\sde[#3]{#2}}[#4,\!#3]}
-\NewDocumentCommand{\srdeqrfa}{O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{\ensuremath{\gamma}} O{\sblank} O{\text{\textit{g}}}}{\srde{#1}{\sde[#5,\!#4]{#2}(\sde[#5,\!#4]{#3})}[#5,\!#4]}
-\NewDocumentCommand{\srdeqrtree}{O{x} O{\ensuremath{\psi}} O{\ensuremath{\phi}} O{\ensuremath{\xi}} O{\sblank} O{\text{\textit{g}}} O{\@typee}}{\srde{#2}{\lambh{#1}[#7]\sde[#6\ensuremath{\lbrack\nicefrac{#4}{\!#1}\rbrack},\!#5]{#3}}[#6,\!#5]}
+\DeclareDocumentCommand{\srdeqrsemvar}{O{\phi} O{\ensuremath{x}} O{\sblank} O{\textit{g}}}{\srde{\ensuremath{#1}}{\ensuremath{#4}(#2)}[\ensuremath{#4},\!\ensuremath{#3}]}
+\DeclareDocumentCommand{\srdeqrabs}{O{\phi} O{\textit{x}} O{\sblank} O{\textit{g}} O{\textit{f}} O{\ensuremath{\delta}}}{#5(#2)\ =\ \sde[#4\ensuremath{\lbrack\nicefrac{#6}{\!#2}\rbrack},\!#3]{\ensuremath{#1}}\ }
+\DeclareDocumentCommand{\srdeqrlex}{O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{\sblank} O{\text{\textit{g}}}}{\srde{#1}{\sde[#3]{#2}}[#4,\!#3]}
+\DeclareDocumentCommand{\srdeqrfa}{O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{\ensuremath{\gamma}} O{\sblank} O{\text{\textit{g}}}}{\srde{#1}{\sde[#5,\!#4]{#2}(\sde[#5,\!#4]{#3})}[#5,\!#4]}
+\DeclareDocumentCommand{\srdeqrtree}{O{x} O{\ensuremath{\psi}} O{\ensuremath{\phi}} O{\ensuremath{\xi}} O{\sblank} O{\text{\textit{g}}} O{\@typee}}{\srde{#2}{\lambh{#1}[#7]\sde[#6\ensuremath{\lbrack\nicefrac{#4}{\!#1}\rbrack},\!#5]{#3}}[#6,\!#5]}
 
 
 % ------------------------------------------------------------ 
@@ -1047,322 +815,169 @@
 % ------------------------------
 \DeclareDocumentEnvironment{fgls}{O{\FGL@situation}}{
 	\let\fgslisinfgls\@fglsundefined
-	\NewDocumentCommand{\fgslisinfgls}{}{true}
-	% Commands
-			\let\cs\@fglsundefined
-			\NewDocumentCommand{\cs}{}{#1}
+	\DeclareDocumentCommand{\fgslisinfgls}{}{true}
+			% Commands
+			\DeclareDocumentCommand{\cs}{}{#1}
+			
 			%% Text shortcuts
-			\let\o\@fglsundefined
-			\let\v\@fglsundefined
-			\let\m\@fglsundefined
-			\let\j\@fglsundefined
-			
-			
-			
-			
-			
-			\NewDocumentCommand{\o}{m}{\obl{##1}}
-			\NewDocumentCommand{\v}{m}{\obli{##1}}
-			\NewDocumentCommand{\m}{m}{\mel{##1}}
-			\NewDocumentCommand{\j}{m}{\meli{##1}}
-			
-			\let\l\@fglsundefined
-			\let\L\@fglsundefined
-			\NewDocumentCommand{\l}{m O{}}{\lambh{##1}[##2]}
-			\NewDocumentCommand{\L}{m O{}}{\lambH{##1}[##2]}
-			
-			\let\h\@fglsundefined
-			\NewDocumentCommand{\h}{m}{\type{##1}}
+			\DeclareDocumentCommand{\o}{m}{\obl{##1}}
+			\DeclareDocumentCommand{\v}{m}{\obli{##1}}
+			\DeclareDocumentCommand{\m}{m}{\mel{##1}}
+			\DeclareDocumentCommand{\j}{m}{\meli{##1}}
+
+			\DeclareDocumentCommand{\l}{m O{}}{\lambh{##1}[##2]}
+			\DeclareDocumentCommand{\L}{m O{}}{\lambH{##1}[##2]}
+
+			\DeclareDocumentCommand{\h}{m}{\type{##1}}
 	
-			\let\ox\@fglsundefined
-			\let\oX\@fglsundefined
-			\let\oy\@fglsundefined
-			\let\oY\@fglsundefined
-			\let\oz\@fglsundefined
-			\let\oZ\@fglsundefined
-			\let\oi\@fglsundefined
-			\let\oI\@fglsundefined
-			\let\op\@fglsundefined
-			\let\oP\@fglsundefined
-			\let\oq\@fglsundefined
-			\let\oQ\@fglsundefined
-			\let\oR\@fglsundefined
-			\let\os\@fglsundefined
-			\let\oS\@fglsundefined
-			\let\x\@fglsundefined
-			\let\X\@fglsundefined
-			\let\y\@fglsundefined
-			\let\Y\@fglsundefined
-			\let\z\@fglsundefined
-			\let\Z\@fglsundefined
 			% Constants
 			%% Object Language	
-			\NewDocumentCommand{\ox}{}{\v{x}}
-			\NewDocumentCommand{\oX}{}{\v{X}}
-			\NewDocumentCommand{\oy}{}{\v{y}}
-			\NewDocumentCommand{\oY}{}{\v{Y}}
-			\NewDocumentCommand{\oz}{}{\v{z}}
-			\NewDocumentCommand{\oZ}{}{\v{Z}}
-			\NewDocumentCommand{\oi}{}{\v{i}}
-			\NewDocumentCommand{\oI}{}{\v{I}}
-			\NewDocumentCommand{\os}{}{\v{s}}
-			\NewDocumentCommand{\oS}{}{\v{S}}
-			\NewDocumentCommand{\oq}{}{\v{q}}
-			\NewDocumentCommand{\oQ}{}{\v{Q}}
-			\NewDocumentCommand{\op}{}{\v{p}}
-			\NewDocumentCommand{\oP}{}{\v{P}}
-			\NewDocumentCommand{\oR}{}{\v{R}}
-			\NewDocumentCommand{\x}{}{\obli{x}}
-			\NewDocumentCommand{\X}{}{\obli{X}}
-			\NewDocumentCommand{\y}{}{\obli{y}}
-			\NewDocumentCommand{\Y}{}{\obli{Y}}
-			\NewDocumentCommand{\z}{}{\obli{z}}
-			\NewDocumentCommand{\Z}{}{\obli{Z}}
-			
-			\let\mx\@fglsundefined
-			\let\mX\@fglsundefined
-			\let\my\@fglsundefined
-			\let\mY\@fglsundefined
-			\let\mz\@fglsundefined
-			\let\mZ\@fglsundefined
-			\let\mi\@fglsundefined
-			\let\mI\@fglsundefined
-			\let\ms\@fglsundefined
-			\let\mS\@fglsundefined
-			\let\mp\@fglsundefined
-			\let\mP\@fglsundefined
-			\let\mq\@fglsundefined
-			\let\mQ\@fglsundefined
-			\let\mr\@fglsundefined
-			\let\mR\@fglsundefined
+			\DeclareDocumentCommand{\ox}{}{\v{x}}
+			\DeclareDocumentCommand{\oX}{}{\v{X}}
+			\DeclareDocumentCommand{\oy}{}{\v{y}}
+			\DeclareDocumentCommand{\oY}{}{\v{Y}}
+			\DeclareDocumentCommand{\oz}{}{\v{z}}
+			\DeclareDocumentCommand{\oZ}{}{\v{Z}}
+			\DeclareDocumentCommand{\oi}{}{\v{i}}
+			\DeclareDocumentCommand{\oI}{}{\v{I}}
+			\DeclareDocumentCommand{\os}{}{\v{s}}
+			\DeclareDocumentCommand{\oS}{}{\v{S}}
+			\DeclareDocumentCommand{\oq}{}{\v{q}}
+			\DeclareDocumentCommand{\oQ}{}{\v{Q}}
+			\DeclareDocumentCommand{\op}{}{\v{p}}
+			\DeclareDocumentCommand{\oP}{}{\v{P}}
+			\DeclareDocumentCommand{\oR}{}{\v{R}}
+			\DeclareDocumentCommand{\x}{}{\obli{x}}
+			\DeclareDocumentCommand{\X}{}{\obli{X}}
+			\DeclareDocumentCommand{\y}{}{\obli{y}}
+			\DeclareDocumentCommand{\Y}{}{\obli{Y}}
+			\DeclareDocumentCommand{\z}{}{\obli{z}}
+			\DeclareDocumentCommand{\Z}{}{\obli{Z}}
 		
 			%% Meta Language
-			\NewDocumentCommand{\mx}{}{\text{\textit{x}}}
-			\NewDocumentCommand{\mX}{}{\text{\textit{X}}}
-			\NewDocumentCommand{\my}{}{\text{\textit{y}}}
-			\NewDocumentCommand{\mY}{}{\text{\textit{Y}}}
-			\NewDocumentCommand{\mz}{}{\text{\textit{z}}}
-			\NewDocumentCommand{\mZ}{}{\text{\textit{Z}}}
-			\NewDocumentCommand{\mi}{}{\text{\textit{i}}}
-			\NewDocumentCommand{\mI}{}{\text{\textit{I}}}
-			\NewDocumentCommand{\ms}{}{\text{\textit{s}}}
-			\NewDocumentCommand{\mS}{}{\text{\textit{S}}}
-			\NewDocumentCommand{\mp}{}{\text{\textit{p}}}
-			\NewDocumentCommand{\mP}{}{\text{\textit{P}}}
-			\NewDocumentCommand{\mq}{}{\text{\textit{q}}}
-			\NewDocumentCommand{\mQ}{}{\text{\textit{Q}}}
-			\NewDocumentCommand{\mr}{}{\text{\textit{r}}}
-			\NewDocumentCommand{\mR}{}{\text{\textit{R}}}
-	
-			\let\qe\@fglsundefined
-			\let\qE\@fglsundefined
-			\let\qu\@fglsundefined
-			\let\qU\@fglsundefined
-			\let\qa\@fglsundefined
-			\let\qA\@fglsundefined
-			\let\jn\@fglsundefined
-			\let\jN\@fglsundefined
-			\let\jk\@fglsundefined
-			\let\jK\@fglsundefined
-			\let\jd\@fglsundefined
-			\let\jD\@fglsundefined
-			\let\ji\@fglsundefined
-			\let\jI\@fglsundefined
-			\let\ci\@fglsundefined
-			\let\cI\@fglsundefined
+			\DeclareDocumentCommand{\mx}{}{\text{\textit{x}}}
+			\DeclareDocumentCommand{\mX}{}{\text{\textit{X}}}
+			\DeclareDocumentCommand{\my}{}{\text{\textit{y}}}
+			\DeclareDocumentCommand{\mY}{}{\text{\textit{Y}}}
+			\DeclareDocumentCommand{\mz}{}{\text{\textit{z}}}
+			\DeclareDocumentCommand{\mZ}{}{\text{\textit{Z}}}
+			\DeclareDocumentCommand{\mi}{}{\text{\textit{i}}}
+			\DeclareDocumentCommand{\mI}{}{\text{\textit{I}}}
+			\DeclareDocumentCommand{\ms}{}{\text{\textit{s}}}
+			\DeclareDocumentCommand{\mS}{}{\text{\textit{S}}}
+			\DeclareDocumentCommand{\mp}{}{\text{\textit{p}}}
+			\DeclareDocumentCommand{\mP}{}{\text{\textit{P}}}
+			\DeclareDocumentCommand{\mq}{}{\text{\textit{q}}}
+			\DeclareDocumentCommand{\mQ}{}{\text{\textit{Q}}}
+			\DeclareDocumentCommand{\mr}{}{\text{\textit{r}}}
+			\DeclareDocumentCommand{\mR}{}{\text{\textit{R}}}
 		
 			%% Logic
-			\NewDocumentCommand{\qe}{}{\ensuremath{\exists}}
-			\NewDocumentCommand{\qE}{}{\ensuremath{\bm{\exists}}}
-			\NewDocumentCommand{\qu}{}{\ensuremath{\exists}!}
-			\NewDocumentCommand{\qU}{}{\ensuremath{\bm{\exists}!}}
-			\NewDocumentCommand{\qa}{}{\ensuremath{\forall}}
-			\NewDocumentCommand{\qA}{}{\ensuremath{\bm{\forall}}}
-			\NewDocumentCommand{\jn}{}{\ensuremath{\neg}}
-			\NewDocumentCommand{\jN}{}{\ensuremath{\bm{\neg}}}
-			\NewDocumentCommand{\jk}{}{\ensuremath{\land}}
-			\NewDocumentCommand{\jK}{}{\ensuremath{\bm{\land}}}
-			\NewDocumentCommand{\jd}{}{\ensuremath{\lor}}
-			\NewDocumentCommand{\jD}{}{\ensuremath{\bm{\lor}}}
-			\NewDocumentCommand{\ji}{}{\ensuremath{\rightarrow}}
-			\NewDocumentCommand{\jI}{}{\ensuremath{\bm{\rightarrow}}}
-			\NewDocumentCommand{\ci}{}{\ensuremath{\in}}
-			\NewDocumentCommand{\cI}{}{\ensuremath{\bm{\in}}}
-			\NewDocumentCommand{\cd}{}{\ensuremath{\downarrow}}
-			\NewDocumentCommand{\cD}{}{\ensuremath{\bm{\downarrow}}}
-			\NewDocumentCommand{\ce}{}{\ensuremath{\emptyset}}
-			\NewDocumentCommand{\cE}{}{\ensuremath{\bm{\emptyset}}}
-	
-			\let\ax\@fglsundefined
-			\let\aX\@fglsundefined
-			\let\ay\@fglsundefined
-			\let\aY\@fglsundefined
-			\let\az\@fglsundefined
-			\let\aZ\@fglsundefined
-			\let\ai\@fglsundefined
-			\let\aI\@fglsundefined
-			\let\as\@fglsundefined
-			\let\aS\@fglsundefined
-			\let\ar\@fglsundefined
-			\let\aR\@fglsundefined
-			\let\ap\@fglsundefined
-			\let\aP\@fglsundefined
-			\let\aq\@fglsundefined
-			\let\aQ\@fglsundefined
-			\let\ae\@fglsundefined
-			\let\aE\@fglsundefined
+			\DeclareDocumentCommand{\qe}{}{\ensuremath{\exists}}
+			\DeclareDocumentCommand{\qE}{}{\ensuremath{\bm{\exists}}}
+			\DeclareDocumentCommand{\qu}{}{\ensuremath{\exists}!}
+			\DeclareDocumentCommand{\qU}{}{\ensuremath{\bm{\exists}!}}
+			\DeclareDocumentCommand{\qa}{}{\ensuremath{\forall}}
+			\DeclareDocumentCommand{\qA}{}{\ensuremath{\bm{\forall}}}
+			\DeclareDocumentCommand{\jn}{}{\ensuremath{\neg}}
+			\DeclareDocumentCommand{\jN}{}{\ensuremath{\bm{\neg}}}
+			\DeclareDocumentCommand{\jk}{}{\ensuremath{\land}}
+			\DeclareDocumentCommand{\jK}{}{\ensuremath{\bm{\land}}}
+			\DeclareDocumentCommand{\jd}{}{\ensuremath{\lor}}
+			\DeclareDocumentCommand{\jD}{}{\ensuremath{\bm{\lor}}}
+			\DeclareDocumentCommand{\ji}{}{\ensuremath{\rightarrow}}
+			\DeclareDocumentCommand{\jI}{}{\ensuremath{\bm{\rightarrow}}}
+			\DeclareDocumentCommand{\ci}{}{\ensuremath{\in}}
+			\DeclareDocumentCommand{\cI}{}{\ensuremath{\bm{\in}}}
+			\DeclareDocumentCommand{\cd}{}{\ensuremath{\downarrow}}
+			\DeclareDocumentCommand{\cD}{}{\ensuremath{\bm{\downarrow}}}
+			\DeclareDocumentCommand{\ce}{}{\ensuremath{\emptyset}}
+			\DeclareDocumentCommand{\cE}{}{\ensuremath{\bm{\emptyset}}}
 	
 			%% Arguments Variables
-			\NewDocumentCommand{\ax}{}{\a{x}}
-			\NewDocumentCommand{\aX}{}{\a{X}}
-			\NewDocumentCommand{\ay}{}{\a{y}}
-			\NewDocumentCommand{\aY}{}{\a{Y}}
-			\NewDocumentCommand{\az}{}{\a{z}}
-			\NewDocumentCommand{\aZ}{}{\a{Z}}
-			\NewDocumentCommand{\ai}{}{\a{i}}
-			\NewDocumentCommand{\aI}{}{\a{I}}
-			\NewDocumentCommand{\as}{}{\a{s}}
-			\NewDocumentCommand{\aS}{}{\a{S}}
-			\NewDocumentCommand{\ar}{}{\a{r}}
-			\NewDocumentCommand{\aR}{}{\a{R}}
-			\NewDocumentCommand{\ap}{}{\a{p}}
-			\NewDocumentCommand{\aP}{}{\a{P}}
-			\NewDocumentCommand{\aq}{}{\a{q}}
-			\NewDocumentCommand{\aQ}{}{\a{Q}}
-			\NewDocumentCommand{\ae}{}{\a{e}}
-			\NewDocumentCommand{\aE}{}{\a{E}}
-			
-			\let\bx\@fglsundefined
-			\let\bX\@fglsundefined
-			\let\by\@fglsundefined
-			\let\bY\@fglsundefined
-			\let\bz\@fglsundefined
-			\let\bZ\@fglsundefined
-			\let\bi\@fglsundefined
-			\let\bI\@fglsundefined
-			\let\bs\@fglsundefined
-			\let\bS\@fglsundefined
-			\let\br\@fglsundefined
-			\let\bR\@fglsundefined
-			\let\bp\@fglsundefined
-			\let\bP\@fglsundefined
-			\let\bq\@fglsundefined
-			\let\bQ\@fglsundefined
-			\let\be\@fglsundefined
-			\let\bE\@fglsundefined
+			\DeclareDocumentCommand{\ax}{}{\a{x}}
+			\DeclareDocumentCommand{\aX}{}{\a{X}}
+			\DeclareDocumentCommand{\ay}{}{\a{y}}
+			\DeclareDocumentCommand{\aY}{}{\a{Y}}
+			\DeclareDocumentCommand{\az}{}{\a{z}}
+			\DeclareDocumentCommand{\aZ}{}{\a{Z}}
+			\DeclareDocumentCommand{\ai}{}{\a{i}}
+			\DeclareDocumentCommand{\aI}{}{\a{I}}
+			\DeclareDocumentCommand{\as}{}{\a{s}}
+			\DeclareDocumentCommand{\aS}{}{\a{S}}
+			\DeclareDocumentCommand{\ar}{}{\a{r}}
+			\DeclareDocumentCommand{\aR}{}{\a{R}}
+			\DeclareDocumentCommand{\ap}{}{\a{p}}
+			\DeclareDocumentCommand{\aP}{}{\a{P}}
+			\DeclareDocumentCommand{\aq}{}{\a{q}}
+			\DeclareDocumentCommand{\aQ}{}{\a{Q}}
+			\DeclareDocumentCommand{\ae}{}{\a{e}}
+			\DeclareDocumentCommand{\aE}{}{\a{E}}
 			
 			%% Arguments Variables Meta
-			\NewDocumentCommand{\bx}{}{(\j{x})}
-			\NewDocumentCommand{\bX}{}{(\j{X})}
-			\NewDocumentCommand{\by}{}{(\j{y})}
-			\NewDocumentCommand{\bY}{}{(\j{Y})}
-			\NewDocumentCommand{\bz}{}{(\j{z})}
-			\NewDocumentCommand{\bZ}{}{(\j{Z})}
-			\NewDocumentCommand{\bi}{}{(\j{i})}
-			\NewDocumentCommand{\bI}{}{(\j{I})}
-			\NewDocumentCommand{\bs}{}{(\j{s})}
-			\NewDocumentCommand{\bS}{}{(\j{S})}
-			\NewDocumentCommand{\br}{}{(\j{r})}
-			\NewDocumentCommand{\bR}{}{(\j{R})}
-			\NewDocumentCommand{\bp}{}{(\j{p})}
-			\NewDocumentCommand{\bP}{}{(\j{P})}
-			\NewDocumentCommand{\bq}{}{(\j{q})}
-			\NewDocumentCommand{\bQ}{}{(\j{Q})}
-			\NewDocumentCommand{\be}{}{(\j{e})}
-			\NewDocumentCommand{\bE}{}{(\j{E})}
+			\DeclareDocumentCommand{\bx}{}{(\j{x})}
+			\DeclareDocumentCommand{\bX}{}{(\j{X})}
+			\DeclareDocumentCommand{\by}{}{(\j{y})}
+			\DeclareDocumentCommand{\bY}{}{(\j{Y})}
+			\DeclareDocumentCommand{\bz}{}{(\j{z})}
+			\DeclareDocumentCommand{\bZ}{}{(\j{Z})}
+			\DeclareDocumentCommand{\bi}{}{(\j{i})}
+			\DeclareDocumentCommand{\bI}{}{(\j{I})}
+			\DeclareDocumentCommand{\bs}{}{(\j{s})}
+			\DeclareDocumentCommand{\bS}{}{(\j{S})}
+			\DeclareDocumentCommand{\br}{}{(\j{r})}
+			\DeclareDocumentCommand{\bR}{}{(\j{R})}
+			\DeclareDocumentCommand{\bp}{}{(\j{p})}
+			\DeclareDocumentCommand{\bP}{}{(\j{P})}
+			\DeclareDocumentCommand{\bq}{}{(\j{q})}
+			\DeclareDocumentCommand{\bQ}{}{(\j{Q})}
+			\DeclareDocumentCommand{\be}{}{(\j{e})}
+			\DeclareDocumentCommand{\bE}{}{(\j{E})}
 			
-			
-			\let\Ax\@fglsundefined
-			\let\AX\@fglsundefined
-			\let\Ay\@fglsundefined
-			\let\AY\@fglsundefined
-			\let\Az\@fglsundefined
-			\let\AZ\@fglsundefined
-			\let\Ai\@fglsundefined
-			\let\AI\@fglsundefined
-			\let\As\@fglsundefined
-			\let\AS\@fglsundefined
-			\let\Ar\@fglsundefined
-			\let\AR\@fglsundefined
-			\let\Ap\@fglsundefined
-			\let\AP\@fglsundefined
-			\let\Aq\@fglsundefined
-			\let\AQ\@fglsundefined
-			\let\Ae\@fglsundefined
-			\let\AE\@fglsundefined
-			
-			
-			
-			\NewDocumentCommand{\Ax}{}{\A{x}}
-			\NewDocumentCommand{\AX}{}{\A{X}}
-			\NewDocumentCommand{\Ay}{}{\A{y}}
-			\NewDocumentCommand{\AY}{}{\A{Y}}
-			\NewDocumentCommand{\Az}{}{\A{z}}
-			\NewDocumentCommand{\AZ}{}{\A{Z}}
-			\NewDocumentCommand{\Ai}{}{\A{i}}
-			\NewDocumentCommand{\AI}{}{\A{I}}
-			\NewDocumentCommand{\As}{}{\A{s}}
-			\NewDocumentCommand{\AS}{}{\A{S}}
-			\NewDocumentCommand{\Ar}{}{\A{r}}
-			\NewDocumentCommand{\AR}{}{\A{R}}
-			\NewDocumentCommand{\Ap}{}{\A{p}}
-			\NewDocumentCommand{\AP}{}{\A{P}}
-			\NewDocumentCommand{\Aq}{}{\A{q}}
-			\NewDocumentCommand{\AQ}{}{\A{Q}}
-			\NewDocumentCommand{\Ae}{}{\A{e}}
-			\NewDocumentCommand{\AE}{}{\A{E}}
+			\DeclareDocumentCommand{\Ax}{}{\A{x}}
+			\DeclareDocumentCommand{\AX}{}{\A{X}}
+			\DeclareDocumentCommand{\Ay}{}{\A{y}}
+			\DeclareDocumentCommand{\AY}{}{\A{Y}}
+			\DeclareDocumentCommand{\Az}{}{\A{z}}
+			\DeclareDocumentCommand{\AZ}{}{\A{Z}}
+			\DeclareDocumentCommand{\Ai}{}{\A{i}}
+			\DeclareDocumentCommand{\AI}{}{\A{I}}
+			\DeclareDocumentCommand{\As}{}{\A{s}}
+			\DeclareDocumentCommand{\AS}{}{\A{S}}
+			\DeclareDocumentCommand{\Ar}{}{\A{r}}
+			\DeclareDocumentCommand{\AR}{}{\A{R}}
+			\DeclareDocumentCommand{\Ap}{}{\A{p}}
+			\DeclareDocumentCommand{\AP}{}{\A{P}}
+			\DeclareDocumentCommand{\Aq}{}{\A{q}}
+			\DeclareDocumentCommand{\AQ}{}{\A{Q}}
+			\DeclareDocumentCommand{\Ae}{}{\A{e}}
+			\DeclareDocumentCommand{\AE}{}{\A{E}}
 			
 			\let\sss\ss
 			
-			\let\ss\@fglsundefined
-			\let\sS\@fglsundefined
-			\let\sz\@fglsundefined
-			\let\sZ\@fglsundefined
-			\let\so\@fglsundefined
-			\let\sO\@fglsundefined
-			\let\st\@fglsundefined
-			\let\sT\@fglsundefined
-			
-	
-			
 			%% Situations
-			\NewDocumentCommand{\ss}{}{\sstar}
-			\NewDocumentCommand{\sS}{}{\sstaR}
-			\NewDocumentCommand{\sz}{}{\szero}
-			\NewDocumentCommand{\sZ}{}{\szerO}
-			\NewDocumentCommand{\so}{}{\sone}
-			\NewDocumentCommand{\sO}{}{\sonE}
-			\NewDocumentCommand{\st}{}{\stwo}
-			\NewDocumentCommand{\sT}{}{\stwO}
+			\DeclareDocumentCommand{\ss}{}{\sstar}
+			\DeclareDocumentCommand{\sS}{}{\sstaR}
+			\DeclareDocumentCommand{\sz}{}{\szero}
+			\DeclareDocumentCommand{\sZ}{}{\szerO}
+			\DeclareDocumentCommand{\so}{}{\sone}
+			\DeclareDocumentCommand{\sO}{}{\sonE}
+			\DeclareDocumentCommand{\st}{}{\stwo}
+			\DeclareDocumentCommand{\sT}{}{\stwO}
 			
-			%% Traces
-			
-			\let\tx\@fglsundefined
-			\let\tX\@fglsundefined
-			\let\Tx\@fglsundefined
-			\let\TX\@fglsundefined
-			\let\ty\@fglsundefined
-			\let\tY\@fglsundefined
-			\let\Ty\@fglsundefined
-			\let\TY\@fglsundefined
-			\let\tz\@fglsundefined
-			\let\tZ\@fglsundefined
-			\let\Tz\@fglsundefined
-			\let\TZ\@fglsundefined
-			
-			
-			\NewDocumentCommand{\tx}{}{\tracex}
-			\NewDocumentCommand{\tX}{}{\traceX}
-			\NewDocumentCommand{\Tx}{}{\tracEx}
-			\NewDocumentCommand{\TX}{}{\tracEX}
-			\NewDocumentCommand{\ty}{}{\tracey}
-			\NewDocumentCommand{\tY}{}{\traceY}
-			\NewDocumentCommand{\Ty}{}{\tracEy}
-			\NewDocumentCommand{\TY}{}{\tracEY}
-			\NewDocumentCommand{\tz}{}{\tracez}
-			\NewDocumentCommand{\tZ}{}{\traceZ}
-			\NewDocumentCommand{\Tz}{}{\tracEz}
-			\NewDocumentCommand{\TZ}{}{\tracEZ}
+			%% Traces		
+			\DeclareDocumentCommand{\tx}{}{\tracex}
+			\DeclareDocumentCommand{\tX}{}{\traceX}
+			\DeclareDocumentCommand{\Tx}{}{\tracEx}
+			\DeclareDocumentCommand{\TX}{}{\tracEX}
+			\DeclareDocumentCommand{\ty}{}{\tracey}
+			\DeclareDocumentCommand{\tY}{}{\traceY}
+			\DeclareDocumentCommand{\Ty}{}{\tracEy}
+			\DeclareDocumentCommand{\TY}{}{\tracEY}
+			\DeclareDocumentCommand{\tz}{}{\tracez}
+			\DeclareDocumentCommand{\tZ}{}{\traceZ}
+			\DeclareDocumentCommand{\Tz}{}{\tracEz}
+			\DeclareDocumentCommand{\TZ}{}{\tracEZ}
 	
 		
 		% Commands
@@ -1370,195 +985,104 @@
 	
 	
 		%% Arguments
-		\let\a\@fglsundefined
-		\let\A\@fglsundefined
-		\let\sa\@fglsundefined
-		\let\sA\@fglsundefined
-		\NewDocumentCommand{\a}{m}{\obl{(}\obli{##1}\obl{)}}
-		\NewDocumentCommand{\A}{m}{\obl{(##1)}}
-		\NewDocumentCommand{\sa}{m}{\sarrow{##1}}
-		\NewDocumentCommand{\sA}{m}{\sarroW{##1}}
+		\DeclareDocumentCommand{\a}{m}{\obl{(}\obli{##1}\obl{)}}
+		\DeclareDocumentCommand{\A}{m}{\obl{(##1)}}
+		\DeclareDocumentCommand{\sa}{m}{\sarrow{##1}}
+		\DeclareDocumentCommand{\sA}{m}{\sarroW{##1}}
 		
 		%% Lambdas
-		\let\lx\@fglsundefined
-		\let\lX\@fglsundefined
-		\let\Lx\@fglsundefined
-		\let\LX\@fglsundefined
-		\let\ly\@fglsundefined
-		\let\lY\@fglsundefined
-		\let\Ly\@fglsundefined
-		\let\LY\@fglsundefined
-		\let\lz\@fglsundefined
-		\let\lZ\@fglsundefined
-		\let\Lz\@fglsundefined
-		\let\LZ\@fglsundefined
-		\let\lp\@fglsundefined
-		\let\lP\@fglsundefined
-		\let\Lp\@fglsundefined
-		\let\LP\@fglsundefined
-		\let\lq\@fglsundefined
-		\let\lQ\@fglsundefined
-		\let\Lq\@fglsundefined
-		\let\LQ\@fglsundefined
-		\let\ls\@fglsundefined
-		\let\lS\@fglsundefined
-		\let\Ls\@fglsundefined
-		\let\LS\@fglsundefined
-		\let\li\@fglsundefined
-		\let\lI\@fglsundefined
-		\let\Li\@fglsundefined
-		\let\LI\@fglsundefined
-		\let\lr\@fglsundefined
-		\let\lR\@fglsundefined
-		\let\Lr\@fglsundefined
-		\let\LR\@fglsundefined
-		\let\lu\@fglsundefined
-		\let\lU\@fglsundefined
-		\let\Lu\@fglsundefined
-		\let\LU\@fglsundefined
-		\let\lv\@fglsundefined
-		\let\lV\@fglsundefined
-		\let\Lv\@fglsundefined
-		\let\LV\@fglsundefined
-	
-	
-		\NewDocumentCommand{\lx}{O{}}{\lmdx[##1]}
-		\NewDocumentCommand{\lX}{O{}}{\lmdX[##1]}
-		\NewDocumentCommand{\Lx}{O{}}{\lmDx[##1]}
-		\NewDocumentCommand{\LX}{O{}}{\lmDX[##1]}
-		\NewDocumentCommand{\ly}{O{}}{\lmdy[##1]}
-		\NewDocumentCommand{\lY}{O{}}{\lmdY[##1]}
-		\NewDocumentCommand{\Ly}{O{}}{\lmDy[##1]}
-		\NewDocumentCommand{\LY}{O{}}{\lmDY[##1]}
-		\NewDocumentCommand{\lz}{O{}}{\lmdz[##1]}
-		\NewDocumentCommand{\lZ}{O{}}{\lmdZ[##1]}
-		\NewDocumentCommand{\Lz}{O{}}{\lmDz[##1]}
-		\NewDocumentCommand{\LZ}{O{}}{\lmDZ[##1]}
-		\NewDocumentCommand{\lp}{O{}}{\lmdp[##1]}
-		\NewDocumentCommand{\lP}{O{}}{\lmdP[##1]}
-		\NewDocumentCommand{\Lp}{O{}}{\lmDp[##1]}
-		\NewDocumentCommand{\LP}{O{}}{\lmDP[##1]}
-		\NewDocumentCommand{\lq}{O{}}{\lmdq[##1]}
-		\NewDocumentCommand{\lQ}{O{}}{\lmdQ[##1]}
-		\NewDocumentCommand{\Lq}{O{}}{\lmDq[##1]}
-		\NewDocumentCommand{\LQ}{O{}}{\lmDQ[##1]}
-		\NewDocumentCommand{\ls}{O{}}{\lmds[##1]}
-		\NewDocumentCommand{\lS}{O{}}{\lmdS[##1]}
-		\NewDocumentCommand{\Ls}{O{}}{\lmDs[##1]}
-		\NewDocumentCommand{\LS}{O{}}{\lmDS[##1]}
-		\NewDocumentCommand{\li}{O{}}{\lmdi[##1]}
-		\NewDocumentCommand{\lI}{O{}}{\lmdI[##1]}
-		\NewDocumentCommand{\Li}{O{}}{\lmDi[##1]}
-		\NewDocumentCommand{\LI}{O{}}{\lmDI[##1]}
-		\NewDocumentCommand{\lr}{O{}}{\lmdr[##1]}
-		\NewDocumentCommand{\lR}{O{}}{\lmdR[##1]}
-		\NewDocumentCommand{\Lr}{O{}}{\lmDr[##1]}
-		\NewDocumentCommand{\LR}{O{}}{\lmDR[##1]}
-		\NewDocumentCommand{\lu}{O{}}{\lmdu[##1]}
-		\NewDocumentCommand{\lU}{O{}}{\lmdU[##1]}
-		\NewDocumentCommand{\Lu}{O{}}{\lmDu[##1]}
-		\NewDocumentCommand{\LU}{O{}}{\lmDU[##1]}
-		\NewDocumentCommand{\lv}{O{}}{\lmdv[##1]}
-		\NewDocumentCommand{\lV}{O{}}{\lmdV[##1]}
-		\NewDocumentCommand{\Lv}{O{}}{\lmDv[##1]}
-		\NewDocumentCommand{\LV}{O{}}{\lmDV[##1]}
+		\DeclareDocumentCommand{\lx}{O{}}{\lmdx[##1]}
+		\DeclareDocumentCommand{\lX}{O{}}{\lmdX[##1]}
+		\DeclareDocumentCommand{\Lx}{O{}}{\lmDx[##1]}
+		\DeclareDocumentCommand{\LX}{O{}}{\lmDX[##1]}
+		\DeclareDocumentCommand{\ly}{O{}}{\lmdy[##1]}
+		\DeclareDocumentCommand{\lY}{O{}}{\lmdY[##1]}
+		\DeclareDocumentCommand{\Ly}{O{}}{\lmDy[##1]}
+		\DeclareDocumentCommand{\LY}{O{}}{\lmDY[##1]}
+		\DeclareDocumentCommand{\lz}{O{}}{\lmdz[##1]}
+		\DeclareDocumentCommand{\lZ}{O{}}{\lmdZ[##1]}
+		\DeclareDocumentCommand{\Lz}{O{}}{\lmDz[##1]}
+		\DeclareDocumentCommand{\LZ}{O{}}{\lmDZ[##1]}
+		\DeclareDocumentCommand{\lp}{O{}}{\lmdp[##1]}
+		\DeclareDocumentCommand{\lP}{O{}}{\lmdP[##1]}
+		\DeclareDocumentCommand{\Lp}{O{}}{\lmDp[##1]}
+		\DeclareDocumentCommand{\LP}{O{}}{\lmDP[##1]}
+		\DeclareDocumentCommand{\lq}{O{}}{\lmdq[##1]}
+		\DeclareDocumentCommand{\lQ}{O{}}{\lmdQ[##1]}
+		\DeclareDocumentCommand{\Lq}{O{}}{\lmDq[##1]}
+		\DeclareDocumentCommand{\LQ}{O{}}{\lmDQ[##1]}
+		\DeclareDocumentCommand{\ls}{O{}}{\lmds[##1]}
+		\DeclareDocumentCommand{\lS}{O{}}{\lmdS[##1]}
+		\DeclareDocumentCommand{\Ls}{O{}}{\lmDs[##1]}
+		\DeclareDocumentCommand{\LS}{O{}}{\lmDS[##1]}
+		\DeclareDocumentCommand{\li}{O{}}{\lmdi[##1]}
+		\DeclareDocumentCommand{\lI}{O{}}{\lmdI[##1]}
+		\DeclareDocumentCommand{\Li}{O{}}{\lmDi[##1]}
+		\DeclareDocumentCommand{\LI}{O{}}{\lmDI[##1]}
+		\DeclareDocumentCommand{\lr}{O{}}{\lmdr[##1]}
+		\DeclareDocumentCommand{\lR}{O{}}{\lmdR[##1]}
+		\DeclareDocumentCommand{\Lr}{O{}}{\lmDr[##1]}
+		\DeclareDocumentCommand{\LR}{O{}}{\lmDR[##1]}
+		\DeclareDocumentCommand{\lu}{O{}}{\lmdu[##1]}
+		\DeclareDocumentCommand{\lU}{O{}}{\lmdU[##1]}
+		\DeclareDocumentCommand{\Lu}{O{}}{\lmDu[##1]}
+		\DeclareDocumentCommand{\LU}{O{}}{\lmDU[##1]}
+		\DeclareDocumentCommand{\lv}{O{}}{\lmdv[##1]}
+		\DeclareDocumentCommand{\lV}{O{}}{\lmdV[##1]}
+		\DeclareDocumentCommand{\Lv}{O{}}{\lmDv[##1]}
+		\DeclareDocumentCommand{\LV}{O{}}{\lmDV[##1]}
 		
 		
 		%% Lambda Functions
-			\let\lfx\@fglsundefined
-			\let\lfX\@fglsundefined
-			\let\lfy\@fglsundefined
-			\let\lfY\@fglsundefined
-			\let\lfz\@fglsundefined
-			\let\lfZ\@fglsundefined
-		\NewDocumentCommand{\lfx}{m O{} O{x} O{#1} O{}}{\lambh{##3}[##5]\ifempty{##2}\bool{\j{##3} ##1 in ##4}\else\bool{##2}\fi}
-		\NewDocumentCommand{\lfX}{m O{} O{x} O{#1} O{}}{\lambH{##3}[##5]\ifempty{##2}\booL{\j{##3} ##1 in ##4}\else\booL{##2}\fi}
-		\NewDocumentCommand{\lfy}{m O{} O{y} O{x} O{#1} O{} O{}}{\lambh{##3}[##6]\lambh{##4}[##7]\ifempty{##2}\bool{\j{##4} ##1 \j{##3} in ##5}\else\bool{##2}\fi}
-		\NewDocumentCommand{\lfY}{m O{} O{y} O{x} O{#1} O{} O{}}{\lambH{##3}[##6]\lambH{##4}[##7]\ifempty{##2}\booL{\j{##4} ##1 \j{##3} in ##5}\else\booL{##2}\fi}
-		\NewDocumentCommand{\lfz}{m O{} O{z} O{y} O{x} O{#1} O{} O{} O{}}{\lambh{##3}[##7]\lambh{##4}[##8]\lambh{##5}[##9]\ifempty{##2}\bool{\j{##5} ##1 \j{##4}\ \j{##3} in ##6}\else\bool{##2}\fi}
-		\NewDocumentCommand{\lfZ}{m O{} O{z} O{y} O{x} O{#1} O{} O{} O{}}{\lambH{##3}[##7]\lambH{##4}[##8]\lambH{##5}[##9]\ifempty{##2}\booL{\j{##5} ##1 \j{##4}\ \j{##3} in ##6}\else\booL{##2}\fi}
+		\DeclareDocumentCommand{\lfx}{m O{} O{x} O{#1} O{}}{\lambh{##3}[##5]\ifempty{##2}\bool{\j{##3} ##1 in ##4}\else\bool{##2}\fi}
+		\DeclareDocumentCommand{\lfX}{m O{} O{x} O{#1} O{}}{\lambH{##3}[##5]\ifempty{##2}\booL{\j{##3} ##1 in ##4}\else\booL{##2}\fi}
+		\DeclareDocumentCommand{\lfy}{m O{} O{y} O{x} O{#1} O{} O{}}{\lambh{##3}[##6]\lambh{##4}[##7]\ifempty{##2}\bool{\j{##4} ##1 \j{##3} in ##5}\else\bool{##2}\fi}
+		\DeclareDocumentCommand{\lfY}{m O{} O{y} O{x} O{#1} O{} O{}}{\lambH{##3}[##6]\lambH{##4}[##7]\ifempty{##2}\booL{\j{##4} ##1 \j{##3} in ##5}\else\booL{##2}\fi}
+		\DeclareDocumentCommand{\lfz}{m O{} O{z} O{y} O{x} O{#1} O{} O{} O{}}{\lambh{##3}[##7]\lambh{##4}[##8]\lambh{##5}[##9]\ifempty{##2}\bool{\j{##5} ##1 \j{##4}\ \j{##3} in ##6}\else\bool{##2}\fi}
+		\DeclareDocumentCommand{\lfZ}{m O{} O{z} O{y} O{x} O{#1} O{} O{} O{}}{\lambH{##3}[##7]\lambH{##4}[##8]\lambH{##5}[##9]\ifempty{##2}\booL{\j{##5} ##1 \j{##4}\ \j{##3} in ##6}\else\booL{##2}\fi}
 	
-			\let\lfsx\@fglsundefined
-			\let\lfsX\@fglsundefined
-			\let\lfsy\@fglsundefined
-			\let\lfsY\@fglsundefined
-			\let\lfsz\@fglsundefined
-			\let\lfsZ\@fglsundefined
-		\NewDocumentCommand{\lfsx}{m O{} O{\sblank} O{x} O{} O{}}{\lambh{##3}[##5]\lambh{##4}[##6]\ifempty{##2}\bool{\j{##4} ##1 in ##3}\else\bool{##2}\fi}
-		\NewDocumentCommand{\lfsX}{m O{} O{\sblank} O{x} O{} O{}}{\lambH{##3}[##5]\lambH{##4}[##6]\ifempty{##2}\booL{\j{##4} ##1 in ##3}\else\booL{##2}\fi}
-		\NewDocumentCommand{\lfsy}{m O{} O{\sblank} O{y} O{x} O{} O{} O{}}{\lambh{##3}[##6]\lambh{##4}[##7]\lambh{##5}[##8]\ifempty{##2}\bool{\j{##5} ##1 \j{##4} in ##3}\else\bool{##2}\fi}
-		\NewDocumentCommand{\lfsY}{m O{} O{\sblank} O{y} O{x} O{} O{} O{}}{\lambH{##3}[##6]\lambH{##4}[##7]\lambH{##5}[##8]\ifempty{##2}\booL{\j{##5} ##1 \j{##4} in ##3}\else\booL{##2}\fi}
-		\NewDocumentCommand{\lfsz}{m O{} O{\sblank} O{z} O{y} O{x} O{} O{} O{}}{\lambh{##3}[##7]\lambh{##4}[##8]\lambh{##5}[##9]\lambh{##6}[##9]\ifempty{##2}\bool{\j{##6} ##1 \j{##5}\ \j{##4} in ##3}\else\bool{##2}\fi}
-		\NewDocumentCommand{\lfsZ}{m O{} O{\sblank} O{z} O{y} O{x} O{} O{} O{}}{\lambH{##3}[##7]\lambH{##4}[##8]\lambH{##5}[##9]\lambH{##6}[##9]\ifempty{##2}\booL{\j{##6} ##1 \j{##5}\ \j{##4} in ##3}\else\booL{##2}\fi}
+		\DeclareDocumentCommand{\lfsx}{m O{} O{\sblank} O{x} O{} O{}}{\lambh{##3}[##5]\lambh{##4}[##6]\ifempty{##2}\bool{\j{##4} ##1 in ##3}\else\bool{##2}\fi}
+		\DeclareDocumentCommand{\lfsX}{m O{} O{\sblank} O{x} O{} O{}}{\lambH{##3}[##5]\lambH{##4}[##6]\ifempty{##2}\booL{\j{##4} ##1 in ##3}\else\booL{##2}\fi}
+		\DeclareDocumentCommand{\lfsy}{m O{} O{\sblank} O{y} O{x} O{} O{} O{}}{\lambh{##3}[##6]\lambh{##4}[##7]\lambh{##5}[##8]\ifempty{##2}\bool{\j{##5} ##1 \j{##4} in ##3}\else\bool{##2}\fi}
+		\DeclareDocumentCommand{\lfsY}{m O{} O{\sblank} O{y} O{x} O{} O{} O{}}{\lambH{##3}[##6]\lambH{##4}[##7]\lambH{##5}[##8]\ifempty{##2}\booL{\j{##5} ##1 \j{##4} in ##3}\else\booL{##2}\fi}
+		\DeclareDocumentCommand{\lfsz}{m O{} O{\sblank} O{z} O{y} O{x} O{} O{} O{}}{\lambh{##3}[##7]\lambh{##4}[##8]\lambh{##5}[##9]\lambh{##6}[##9]\ifempty{##2}\bool{\j{##6} ##1 \j{##5}\ \j{##4} in ##3}\else\bool{##2}\fi}
+		\DeclareDocumentCommand{\lfsZ}{m O{} O{\sblank} O{z} O{y} O{x} O{} O{} O{}}{\lambH{##3}[##7]\lambH{##4}[##8]\lambH{##5}[##9]\lambH{##6}[##9]\ifempty{##2}\booL{\j{##6} ##1 \j{##5}\ \j{##4} in ##3}\else\booL{##2}\fi}
 	
 		
 		%% fast derivation calc commands
-		\let\r\@fglsundefined
-		\let\R\@fglsundefined
-		\let\n\@fglsundefined
-		\let\N\@fglsundefined
-		\let\s\@fglsundefined
-		\let\S\@fglsundefined
-		\let\cset\@fglsundefined
-		
-		\NewDocumentCommand{\r}{O{} O{} m}{\lambby[##1][##2]{##3}}
-		\NewDocumentCommand{\R}{O{} O{} m}{\lambbY[##1][##2]{##3}}
-		\NewDocumentCommand{\n}{m}{\bool{##1}}
-		\NewDocumentCommand{\N}{m}{\booL{##1}}
-		\NewDocumentCommand{\s}{O{x} m}{\set[##1]{##2}}
-		\NewDocumentCommand{\S}{O{x} m}{\seT[##1]{##2}}
-		\NewDocumentCommand{\cset}{m O{} O{\cs}}{\ensuremath{##1_\text{##3}^\text{##2}}}
-	
-		\let\i\@fglsundefined
-		\let\I\@fglsundefined
-		\let\e\@fglsundefined
-		\let\E\@fglsundefined
-		
-		\NewDocumentCommand{\i}{m}{\sdi{##1}}
-		\NewDocumentCommand{\I}{m}{\sdI{##1}}
-		\NewDocumentCommand{\e}{O{#1} m}{\sde[##1]{##2}}
-		\NewDocumentCommand{\E}{O{#1} m}{\sdE[##1]{##2}}
-		
-		\let\c\@fglsundefined
-		\let\C\@fglsundefined
-		
-		\NewDocumentCommand{\c}{O{\bm{i}} m}{\sic[##1]{##2}}
-		\NewDocumentCommand{\C}{O{\bm{i}} m}{\siC[##1]{##2}}
-	
-		\let\t\@fglsundefined
-		\let\T\@fglsundefined
-		\let\ti\@fglsundefined
-		\let\tI\@fglsundefined
-		\let\tb\@fglsundefined
-		\let\tB\@fglsundefined
-		\let\tbi\@fglsundefined
-		\let\tbI\@fglsundefined
-		\let\d\@fglsundefined
-		\let\D\@fglsundefined
-		
-		\NewDocumentCommand{\t}{m}{\sit{##1}}
-		\NewDocumentCommand{\T}{m}{\siT{##1}}
-		\NewDocumentCommand{\ti}{m}{\sit{\textit{##1}}}
-		\NewDocumentCommand{\tI}{m}{\siT{\textit{##1}}}
-		\NewDocumentCommand{\tb}{m}{\sitnobf{##1}}
-		\NewDocumentCommand{\tB}{m}{\sitnobF{##1}}
-		\NewDocumentCommand{\tbi}{m}{\sitnobfi{##1}}
-		\NewDocumentCommand{\tbI}{m}{\sitnobfI{##1}}
-		\NewDocumentCommand{\d}{O{g} m}{\sid[##1]{##2}}
-		\NewDocumentCommand{\D}{O{g} m}{\siD[##1]{##2}}
-	
-		\let\dr\@fglsundefined
-		\let\dR\@fglsundefined
-		\let\drr\@fglsundefined
-		\let\dRR\@fglsundefined
-		\let\drrr\@fglsundefined
-		\let\dRRR\@fglsundefined
-		\NewDocumentCommand{\dr}{m O{r} O{g} O{x}}{\sidr{##1}{##2}[##4][##3]}
-		\NewDocumentCommand{\dR}{m O{r} O{g} O{x}}{\sidR{##1}{##2}[##4][##3]}
-		\NewDocumentCommand{\drr}{m O{r} O{d} O{g} O{x} O{y}}{\sidrr{##1}{##2}{##3}[##5][##6][##4]}
-		\NewDocumentCommand{\dRR}{m O{r} O{d} O{g} O{x} O{y}}{\sidRR{##1}{##2}{##3}[##5][##6][##4]}
-		\NewDocumentCommand{\drrr}{m O{r} O{d} O{t} O{g} O{x} O{y} O{z}}{\sidrrr{##1}{##2}{##3}{##4}[##6][##7][##8][##5]}
-		\NewDocumentCommand{\dRRR}{m O{r} O{d} O{t} O{g} O{x} O{y} O{z}}{\sidRRR{##1}{##2}{##3}{##4}[##6][##7][##8][##5]}
+		\DeclareDocumentCommand{\r}{O{} O{} m}{\lambby[##1][##2]{##3}}
+		\DeclareDocumentCommand{\R}{O{} O{} m}{\lambbY[##1][##2]{##3}}
+		\DeclareDocumentCommand{\n}{m}{\bool{##1}}
+		\DeclareDocumentCommand{\N}{m}{\booL{##1}}
+		\DeclareDocumentCommand{\s}{O{x} m}{\set[##1]{##2}}
+		\DeclareDocumentCommand{\S}{O{x} m}{\seT[##1]{##2}}
+		\DeclareDocumentCommand{\cset}{m O{} O{\cs}}{\ensuremath{##1_\text{##3}^\text{##2}}}
+
+		\DeclareDocumentCommand{\i}{m}{\sdi{##1}}
+		\DeclareDocumentCommand{\I}{m}{\sdI{##1}}
+		\DeclareDocumentCommand{\e}{O{#1} m}{\sde[##1]{##2}}
+		\DeclareDocumentCommand{\E}{O{#1} m}{\sdE[##1]{##2}}
+
+		\DeclareDocumentCommand{\c}{O{\bm{i}} m}{\sic[##1]{##2}}
+		\DeclareDocumentCommand{\C}{O{\bm{i}} m}{\siC[##1]{##2}}
+
+		\DeclareDocumentCommand{\t}{m}{\sit{##1}}
+		\DeclareDocumentCommand{\T}{m}{\siT{##1}}
+		\DeclareDocumentCommand{\ti}{m}{\sit{\textit{##1}}}
+		\DeclareDocumentCommand{\tI}{m}{\siT{\textit{##1}}}
+		\DeclareDocumentCommand{\tb}{m}{\sitnobf{##1}}
+		\DeclareDocumentCommand{\tB}{m}{\sitnobF{##1}}
+		\DeclareDocumentCommand{\tbi}{m}{\sitnobfi{##1}}
+		\DeclareDocumentCommand{\tbI}{m}{\sitnobfI{##1}}
+		\DeclareDocumentCommand{\d}{O{g} m}{\sid[##1]{##2}}
+		\DeclareDocumentCommand{\D}{O{g} m}{\siD[##1]{##2}}
+
+		\DeclareDocumentCommand{\dr}{m O{r} O{g} O{x}}{\sidr{##1}{##2}[##4][##3]}
+		\DeclareDocumentCommand{\dR}{m O{r} O{g} O{x}}{\sidR{##1}{##2}[##4][##3]}
+		\DeclareDocumentCommand{\drr}{m O{r} O{d} O{g} O{x} O{y}}{\sidrr{##1}{##2}{##3}[##5][##6][##4]}
+		\DeclareDocumentCommand{\dRR}{m O{r} O{d} O{g} O{x} O{y}}{\sidRR{##1}{##2}{##3}[##5][##6][##4]}
+		\DeclareDocumentCommand{\drrr}{m O{r} O{d} O{t} O{g} O{x} O{y} O{z}}{\sidrrr{##1}{##2}{##3}{##4}[##6][##7][##8][##5]}
+		\DeclareDocumentCommand{\dRRR}{m O{r} O{d} O{t} O{g} O{x} O{y} O{z}}{\sidRRR{##1}{##2}{##3}{##4}[##6][##7][##8][##5]}
 	}{
 	\let\fgslisinfgls\@fglsundefined
 }
@@ -1575,6 +1099,7 @@
 	\ifempty{\fglsisinderivation}\stepcounter{@fglsderivationcounter}\fi
 	\let\@snote\@fglsundefined
 	\newcommand{\@snote}[1]{\strut\hfill \raisebox{.22ex}{\tiny ##1}}
+	
 	\let\fa\@fglsundefined
 	\let\abs\@fglsundefined
 	\let\mod\@fglsundefined
@@ -1595,18 +1120,12 @@
 	\newcommand{\nc}{\@fragolivarnotationconvention}
 	
 	
-	\let\cdr\@fglsundefined
-	\NewDocumentCommand{\cdr}{}{sem:deri:\ifempty{#2}\the@fglsderivationcounter\else#2\fi}
-	
-	\let\ds\@fglsundefined
-	
-	\NewDocumentCommand{\ds}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[\ifempty{##3}\ensuremath{\stackrel{\color{deivationrowcountcolor}\the@fglscalcitemcounter.\color{black}}{=\ }}\else##3\fi]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
-	\let\dS\@fglsundefined
-	\NewDocumentCommand{\dS}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[##3]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
+	\DeclareDocumentCommand{\cdr}{}{sem:deri:\ifempty{#2}\the@fglsderivationcounter\else#2\fi}
+	\DeclareDocumentCommand{\ds}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[\ifempty{##3}\ensuremath{\stackrel{\color{deivationrowcountcolor}\the@fglscalcitemcounter.\color{black}}{=\ }}\else##3\fi]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
+	\DeclareDocumentCommand{\dS}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[##3]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
 	\let\@fglsopenedfglsderi\@fglsundefined
 	
 	\ifempty{\fglsisinderivation}\begin{fgls}[#1]\fi
-	
 		\begin{cps}
 			\ifempty{\fglsisinderivation}\begin{itemize}[leftmargin=*,noitemsep]\edef\@currentlabel{\the@fglsderivationcounter}\label{sem:deri:\@fglsinterladeriref}\else\begin{itemize}\fi
 			}
@@ -1621,12 +1140,12 @@
 	% Counter
 	% ------------------------------
 	\let\fglsisinderivation\@fglsundefined
-	\NewDocumentCommand{\fglsisinderivation}{}{true}
+	\DeclareDocumentCommand{\fglsisinderivation}{}{true}
 	
 	
 	
 	\let\@fglscurrentdersit\@fglsundefined
-	\NewDocumentCommand{\@fglscurrentdersit}{}{#1}
+	\DeclareDocumentCommand{\@fglscurrentdersit}{}{#1}
 	
 	\let\@fglsrefname\@fgslundefined
 	\newcommand{\@fglsrefname}{#2}
@@ -1639,17 +1158,12 @@
 	\stepcounter{@fglscalcitemcounter}
 	\stepcounter{@fglsderivationcounter}
 	
-	\let\cdr\@fglsundefined
-	\NewDocumentCommand{\cdr}{}{sem:deri:\@fglsinterladeriref}
-	
-	\let\rr\@fglsundefined
-	\NewDocumentCommand{\rr}{m}{\ref{\cdr:r:##1}}
-	\let\rrs\@fglsundefined
-	\NewDocumentCommand{\rrs}{m}{\ref{\cdr:rs:##1}}
-	\let\rl\@fglsundefined
-	\NewDocumentCommand{\rl}{m}{\ref{\cdr:l:##1}}
-	\let\rla\@fglsundefined
-	\NewDocumentCommand{\rla}{m}{\ref{\cdr:la:##1}}
+
+	\DeclareDocumentCommand{\cdr}{}{sem:deri:\@fglsinterladeriref}
+	\DeclareDocumentCommand{\rr}{m}{\ref{\cdr:r:##1}}
+	\DeclareDocumentCommand{\rrs}{m}{\ref{\cdr:rs:##1}}
+	\DeclareDocumentCommand{\rl}{m}{\ref{\cdr:l:##1}}
+	\DeclareDocumentCommand{\rla}{m}{\ref{\cdr:la:##1}}
 	
 	\let\@snote\@fglsundefined
 	\let\rentrysub\@fglsundefined
@@ -1657,7 +1171,7 @@
 	
 	\newcommand{\@snote}[1]{\strut\hfill \raisebox{.22ex}{\tiny ##1}}
 	
-	\NewDocumentCommand{\rentry}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[\ifempty{##3}\text{\@rentrylabel}\the@fglscalcitemcounter:\else##3\fi]\edef\@currentlabel{\@rentrylabel\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:\@rentrylabellower:\the@fglscalcitemcounter}##2 \@snote{##1}}
+	\DeclareDocumentCommand{\rentry}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[\ifempty{##3}\text{\@rentrylabel}\the@fglscalcitemcounter:\else##3\fi]\edef\@currentlabel{\@rentrylabel\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:\@rentrylabellower:\the@fglscalcitemcounter}##2 \@snote{##1}}
 	\newcommand{\rentrysub}[2][]{\begin{itemize}\item[##1] {\footnotesize ##2}\end{itemize}}
 	\edef\@currentlabel{\the@fglsderivationcounter}\label{sem:deri:\@fglsinterladeriref}
 	\begin{fgls}[#1]
@@ -1675,7 +1189,7 @@
 	
 	
 	\let\rlang\@fglsundefined
-	\NewDocumentCommand{\rlang}{m O{} O{} O{} O{} O{} O{} O{} O{L}}{\rentry[]{= \ifempty{##2}\else\text{L\textsubscript{##2}}\fi \ifempty{##3}\else\ $\cup$\ \text{L\textsubscript{##3}}\fi\ifempty{##4}\else\ $\cup$\ \text{L\textsubscript{##4}}\fi\ifempty{##5}\else\ $\cup$\ \text{L\textsubscript{##5}}\fi\ifempty{##6}\else\ $\cup$\ \text{L\textsubscript{##6}}\fi\ifempty{##7}\else\ $\cup$\ \text{L\textsubscript{##7}}\fi\ifempty{##8}\else\ $\cup$\ \text{L\textsubscript{##8}}\fi\ifempty{##2}\else\text{\ =\ }\fi$\{$##1$\}$}[##9]}
+	\DeclareDocumentCommand{\rlang}{m O{} O{} O{} O{} O{} O{} O{} O{L}}{\rentry[]{= \ifempty{##2}\else\text{L\textsubscript{##2}}\fi \ifempty{##3}\else\ $\cup$\ \text{L\textsubscript{##3}}\fi\ifempty{##4}\else\ $\cup$\ \text{L\textsubscript{##4}}\fi\ifempty{##5}\else\ $\cup$\ \text{L\textsubscript{##5}}\fi\ifempty{##6}\else\ $\cup$\ \text{L\textsubscript{##6}}\fi\ifempty{##7}\else\ $\cup$\ \text{L\textsubscript{##7}}\fi\ifempty{##8}\else\ $\cup$\ \text{L\textsubscript{##8}}\fi\ifempty{##2}\else\text{\ =\ }\fi$\{$##1$\}$}[##9]}
 	
 	\renewcommand{\@rentrylabel}{LA}
 	\let\@rentrylabellower\@fglsundefined
@@ -1734,163 +1248,99 @@
 	%% Direct
 	%%% Extension
 	%%%% General
-	\let\sldex\@fglsundefined
-	\let\sldey\@fglsundefined
-	\let\sldez\@fglsundefined
-	\NewDocumentCommand{\sldex}{m O{} O{} O{x} O{\cs} O{\@typee} O{}}{\rentry[##3]{\e[##5]{##1} = \l{##4}[##6]\ifempty{##2}\n{\j{##4} ##1 in ##5}\else\n{##2}\fi}[##7]}
-	\NewDocumentCommand{\sldey}{m O{} O{} O{x} O{y} O{\cs} O{\@typee} O{\@typee} O{}}{\rentry[##3]{\sde[##6]{##1} = \lambh{##5}[##8]\lambh{##4}[##7]\ifempty{##2}\bool{\j{##4} ##1 \j{##5} in ##6}\else\bool{##2}\fi}[##9]}
-	\NewDocumentCommand{\sldez}{m O{} O{} O{x} O{y} O{z} O{\cs} O{\@typee} O{\@typee}}{\rentry[##3]{\sde[##7]{##1} = \lambh{##6}[##9]\lambh{##5}[##9]\lambh{##4}[##8]\ifempty{##2}\bool{\j{##4} ##1 \j{##5} \j{##6} in ##7}\else\bool{##2}\fi}}
+	\DeclareDocumentCommand{\sldex}{m O{} O{} O{x} O{\cs} O{\@typee} O{}}{\rentry[##3]{\e[##5]{##1} = \l{##4}[##6]\ifempty{##2}\n{\j{##4} ##1 in ##5}\else\n{##2}\fi}[##7]}
+	\DeclareDocumentCommand{\sldey}{m O{} O{} O{x} O{y} O{\cs} O{\@typee} O{\@typee} O{}}{\rentry[##3]{\sde[##6]{##1} = \lambh{##5}[##8]\lambh{##4}[##7]\ifempty{##2}\bool{\j{##4} ##1 \j{##5} in ##6}\else\bool{##2}\fi}[##9]}
+	\DeclareDocumentCommand{\sldez}{m O{} O{} O{x} O{y} O{z} O{\cs} O{\@typee} O{\@typee}}{\rentry[##3]{\sde[##7]{##1} = \lambh{##6}[##9]\lambh{##5}[##9]\lambh{##4}[##8]\ifempty{##2}\bool{\j{##4} ##1 \j{##5} \j{##6} in ##7}\else\bool{##2}\fi}}
 	%%%% Proper Names
-	\let\sldenn\@fglsundefined
-	\NewDocumentCommand{\sldenn}{m O{} O{\cs} O{}}{\rentry[##2]{\sde[##3]{##1} = ##1}[##4]}
-		\let\sldennpeter\@fglsundefined
-		\let\sldennmaria\@fglsundefined
-		\let\sldennanna\@fglsundefined
-		\let\sldennalina\@fglsundefined
-		\let\sldennmarta\@fglsundefined
-		\let\sldennpaul\@fglsundefined
-		\let\sldenneike\@fglsundefined
-		\let\sldennida\@fglsundefined
-		\let\sldenolaf\@fglsundefined
-		\let\sldenmichael\@fglsundefined
-		\NewDocumentCommand{\sldennpeter}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Peter} = Peter}[##3]}
-		\NewDocumentCommand{\sldennmaria}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Maria} = Maria}[##3]}
-		\NewDocumentCommand{\sldennanna}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Anna} = Anna}[##3]}
-		\NewDocumentCommand{\sldennalina}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Alina} = Alina}[##3]}
-		\NewDocumentCommand{\sldennmarta}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Marta} = Marta}[##3]}
-		\NewDocumentCommand{\sldennpaul}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Paul} = Paul}[##3]}
-		\NewDocumentCommand{\sldenneike}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Eike} = Eike}[##3]}
-		\NewDocumentCommand{\sldennida}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Ida} = Ida}[##3]}
-		\NewDocumentCommand{\sldenolaf}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Olaf} = Olaf}[##3]}
-		\NewDocumentCommand{\sldenmichael}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Michael} = Michael}[##3]}
+	\DeclareDocumentCommand{\sldenn}{m O{} O{\cs} O{}}{\rentry[##2]{\sde[##3]{##1} = ##1}[##4]}
+	\DeclareDocumentCommand{\sldennpeter}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Peter} = Peter}[##3]}
+	\DeclareDocumentCommand{\sldennmaria}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Maria} = Maria}[##3]}
+	\DeclareDocumentCommand{\sldennanna}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Anna} = Anna}[##3]}
+	\DeclareDocumentCommand{\sldennalina}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Alina} = Alina}[##3]}
+	\DeclareDocumentCommand{\sldennmarta}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Marta} = Marta}[##3]}
+	\DeclareDocumentCommand{\sldennpaul}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Paul} = Paul}[##3]}
+	\DeclareDocumentCommand{\sldenneike}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Eike} = Eike}[##3]}
+	\DeclareDocumentCommand{\sldennida}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Ida} = Ida}[##3]}
+	\DeclareDocumentCommand{\sldenolaf}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Olaf} = Olaf}[##3]}
+	\DeclareDocumentCommand{\sldenmichael}{O{} O{\cs} O{}}{\rentry[##1]{\sde[##2]{Michael} = Michael}[##3]}
 	%%%% Nominals
 	\let\@fglssldenbuilder\@fglsundefined
-	\let\slden\@fglsundefined
-	\NewDocumentCommand{\@fglssldenbuilder}{m m m m}{\ensuremath{##1} \@fragolivarlexbool[##2]{##3} ##4}
-	\NewDocumentCommand{\slden}{m O{\@fragolivarlarticle} O{} O{x} O{\cs} O{\@typee} O{}}{\sldex{##1}[\@fglssldenbuilder{##4}{\ifempty{##2}\@fragolivarlarticle\else##2\fi}{##1}{##5}][##3][##4][##5][##6][##7]}
-		\let\sldenman\@fglsundefined
-		\let\sldenwoman\@fglsundefined
-		\let\sldenchild\@fglsundefined
-		\let\sldendog\@fglsundefined
-		\let\sldenhouse\@fglsundefined
-		\let\sldenanimal\@fglsundefined
-		\NewDocumentCommand{\sldenman}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexman}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
-		\NewDocumentCommand{\sldenwoman}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexwoman}[\@fragolivarlarticlegermanswitch][##1][##2][##3][##4][##5]}
-		\NewDocumentCommand{\sldenchild}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexchild}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
-		\NewDocumentCommand{\sldendog}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexdog}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
-		\NewDocumentCommand{\sldenhouse}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexhouse}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
-		\NewDocumentCommand{\sldenanimal}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexanimal}[\@fragolivarlarticlegermanswitchn][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\@fglssldenbuilder}{m m m m}{\ensuremath{##1} \@fragolivarlexbool[##2]{##3} ##4}
+	\DeclareDocumentCommand{\slden}{m O{\@fragolivarlarticle} O{} O{x} O{\cs} O{\@typee} O{}}{\sldex{##1}[\@fglssldenbuilder{##4}{\ifempty{##2}\@fragolivarlarticle\else##2\fi}{##1}{##5}][##3][##4][##5][##6][##7]}
+	\DeclareDocumentCommand{\sldenman}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexman}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldenwoman}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexwoman}[\@fragolivarlarticlegermanswitch][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldenchild}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexchild}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldendog}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexdog}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldencat}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexcat}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldendonkey}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexdonkey}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldenhouse}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexhouse}[\@fragolivarlarticle][##1][##2][##3][##4][##5]}
+	\DeclareDocumentCommand{\sldenanimal}{O{} O{x} O{\cs} O{\@typee} O{}}{\slden{\@fragolivarlexanimal}[\@fragolivarlarticlegermanswitchn][##1][##2][##3][##4][##5]}
 	%%% Intension
 	%%%% General
-	\let\sldix\@fglsundefined
-	\let\sldiy\@fglsundefined
-	\let\sldiz\@fglsundefined
-	\NewDocumentCommand{\sldix}{m O{} O{} O{x} O{\sblank} O{\@typee} O{\@types} O{}}{\rentry[##3]{\i{##1} = \l{##5}[##7]\l{##4}[##6]\ifempty{##2}\n{\j{##4} ##1 in ##5}\else\n{##2}\fi}[##8]}
-	\NewDocumentCommand{\sldiy}{m O{} O{} O{x} O{y} O{\sblank} O{\@typee} O{\@typee} O{\@types}}{\rentry[##3]{\i{##1} = \l{##6}[##9]\l{##5}[##8]\l{##4}[##7]\ifempty{##2}\n{\j{##4} ##1 \j{##5} in ##6}\else\n{##2}\fi}}
-	\NewDocumentCommand{\sldiz}{m O{} O{} O{x} O{y} O{z} O{\sblank} O{\@typee} O{\@types}}{\rentry[##3]{\i{##1} = \l{##7}[##9]\l{##6}[##8]\l{##5}[##8]\l{##4}[##8]\ifempty{##2}\n{\j{##4} ##1 \j{##5} \j{##6} in ##7}\else\n{##2}\fi}}
+	\DeclareDocumentCommand{\sldix}{m O{} O{} O{x} O{\sblank} O{\@typee} O{\@types} O{}}{\rentry[##3]{\i{##1} = \l{##5}[##7]\l{##4}[##6]\ifempty{##2}\n{\j{##4} ##1 in ##5}\else\n{##2}\fi}[##8]}
+	\DeclareDocumentCommand{\sldiy}{m O{} O{} O{x} O{y} O{\sblank} O{\@typee} O{\@typee} O{\@types}}{\rentry[##3]{\i{##1} = \l{##6}[##9]\l{##5}[##8]\l{##4}[##7]\ifempty{##2}\n{\j{##4} ##1 \j{##5} in ##6}\else\n{##2}\fi}}
+	\DeclareDocumentCommand{\sldiz}{m O{} O{} O{x} O{y} O{z} O{\sblank} O{\@typee} O{\@types}}{\rentry[##3]{\i{##1} = \l{##7}[##9]\l{##6}[##8]\l{##5}[##8]\l{##4}[##8]\ifempty{##2}\n{\j{##4} ##1 \j{##5} \j{##6} in ##7}\else\n{##2}\fi}}
 	%%%% Proper Names
-	\let\sldinn\@fglsundefined
-	\NewDocumentCommand{\sldinn}{m O{} O{\sblank} O{\@types} O{}}{\rentry[##2]{\sdi{##1} = \lambh{##3}[##4]##1}[##5]}
+	\DeclareDocumentCommand{\sldinn}{m O{} O{\sblank} O{\@types} O{}}{\rentry[##2]{\sdi{##1} = \lambh{##3}[##4]##1}[##5]}
 	
 	%% Indirect
 	%%% Translation
-	\let\slit\@fglsundefined
-	\NewDocumentCommand{\slit}{m m O{} O{}}{\rentry[##3]{\sit{##1} = ##2}[##4]}
+	\DeclareDocumentCommand{\slit}{m m O{} O{}}{\rentry[##3]{\sit{##1} = ##2}[##4]}
 	%%%% General
-	\let\slitnn\@fglsundefined
-	\NewDocumentCommand{\slitnn}{m O{} O{}}{\slit{##1}{\obl{\lowercase{\StrMid{##1}{1}{1}}}}[##2][##3]}
-		\let\slitnnpeter\@fglsundefined
-		\let\slitnnmaria\@fglsundefined
-		\let\slitnnmarta\@fglsundefined
-		\let\slitnnalina\@fglsundefined
-		\let\slitnnanna\@fglsundefined
-		\let\slitnnpaul\@fglsundefined
-		\let\slitnneike\@fglsundefined
-		\let\slitnnida\@fglsundefined
-		\let\slitnnolaf\@fglsundefined
-		\let\slitnnmichael\@fglsundefined
-		\NewDocumentCommand{\slitnnpeter}{O{} O{}}{\slitnn{Peter}[##1][##2]}
-		\NewDocumentCommand{\slitnnmaria}{O{} O{}}{\slitnn{Maria}[##1][##2]}
-		\NewDocumentCommand{\slitnnmarta}{O{} O{}}{\slitnn{Marta}[##1][##2]}
-		\NewDocumentCommand{\slitnnalina}{O{} O{}}{\slitnn{Alina}[##1][##2]}
-		\NewDocumentCommand{\slitnnanna}{O{} O{}}{\slitnn{Anna}[##1][##2]}
-		\NewDocumentCommand{\slitnnpaul}{O{} O{}}{\slitnn{Paul}[##1][##2]}
-		\NewDocumentCommand{\slitnneike}{O{} O{}}{\slitnn{Eike}[##1][##2]}
-		\NewDocumentCommand{\slitnnida}{O{} O{}}{\slitnn{Ida}[##1][##2]}
-		\NewDocumentCommand{\slitnnolaf}{O{} O{}}{\slitnn{Olaf}[##1][##2]}
-		\NewDocumentCommand{\slitnnmichael}{O{} O{}}{\slitnn{Michael}[##1][##2]}
-	\let\slitf\@fglsundefined
-	\NewDocumentCommand{\slitf}{m O{\bm{i}} O{} O{}}{\slit{##1}{\sic[##2]{\uppercase{\StrMid{##1}{1}{1}}}}[##3][##4]}
+	\DeclareDocumentCommand{\slitnn}{m O{} O{}}{\slit{##1}{\obl{\lowercase{\StrMid{##1}{1}{1}}}}[##2][##3]}
+	\DeclareDocumentCommand{\slitnnpeter}{O{} O{}}{\slitnn{Peter}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnmaria}{O{} O{}}{\slitnn{Maria}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnmarta}{O{} O{}}{\slitnn{Marta}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnalina}{O{} O{}}{\slitnn{Alina}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnanna}{O{} O{}}{\slitnn{Anna}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnpaul}{O{} O{}}{\slitnn{Paul}[##1][##2]}
+	\DeclareDocumentCommand{\slitnneike}{O{} O{}}{\slitnn{Eike}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnida}{O{} O{}}{\slitnn{Ida}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnolaf}{O{} O{}}{\slitnn{Olaf}[##1][##2]}
+	\DeclareDocumentCommand{\slitnnmichael}{O{} O{}}{\slitnn{Michael}[##1][##2]}
+	\DeclareDocumentCommand{\slitf}{m O{\bm{i}} O{} O{}}{\slit{##1}{\sic[##2]{\uppercase{\StrMid{##1}{1}{1}}}}[##3][##4]}
 	
 	%%%% Logic
-	\let\slitland\@fglsundefined
-	\let\slitlor\@fglsundefined
-	\NewDocumentCommand{\slitland}{O{} O{}}{\slit{\@fragolivarand}{\jK}[##1][##2]}
-	\NewDocumentCommand{\slitlor}{O{} O{q} O{p} O{\@typet} O{\@typet} O{}}{\slit{\@fragolivaror}{\l{##2}[##4]\l{##3}[##5]\jN\R{\jn\ensuremath{##3}\jK\jN\ensuremath{##2}}}[##1][##6]}
+	\DeclareDocumentCommand{\slitland}{O{} O{}}{\slit{\@fragolivarand}{\jK}[##1][##2]}
+	\DeclareDocumentCommand{\slitlor}{O{} O{q} O{p} O{\@typet} O{\@typet} O{}}{\slit{\@fragolivaror}{\l{##2}[##4]\l{##3}[##5]\jN\R{\jn\ensuremath{##3}\jK\jN\ensuremath{##2}}}[##1][##6]}
 	
 	%%%% Quantifier
-	\let\slitlmost\@fglsundefined
-	\let\slitlno\@fglsundefined
-	\let\slitlevery\@fglsundefined
-	\let\slitloneindef\@fglsundefined
-	\let\slitldefarticle\@fglsundefined
-	\let\slitlonenum\@fglsundefined
-	\NewDocumentCommand{\slitlmost}{O{} O{}}{\rentry[##1]{\sit{\@fragolivarmost} = \obl{MOST}}[##2]}
-	\NewDocumentCommand{\slitlno}{O{} O{Q} O{P} O{x} O{\@typeet} O{\@typeet} O{\@typee} O{}}{\rentry[##1]{\t{\@fragolivarno} = \L{##2}[##5]\o{(}\L{##3}[##6]\lambheN[##4][##7]\R{\sanD{\v{##2}\a{##4}}{\v{##3}\a{##4}}}\o{)}}[##8]}
-	\NewDocumentCommand{\slitlevery}{O{} O{Q} O{P} O{x} O{\@typeet} O{\@typeet} O{\@typee} O{}}{\rentry[##1]{\t{\@fragolivarevery} = \L{##2}[##5]\obl{(}\L{##3}[##6]\lambheN[##4][##7]\R{\sanD{\v{##2}\a{##4}}{\sneg\v{##3}\a{##4}}}\o{)}}[##8]}
-	\NewDocumentCommand{\slitloneindef}{O{} O{Q} O{P} O{x}  O{\@typeet} O{\@typeet} O{\@typee} O{}}{\rentry[##1]{\t{\@fragolivaroneindef} = \L{##2}[##5]\o{(}\L{##3}[##6]\lambhE[##4][##7]\R{\sanD{\v{##2}\a{##4}}{\v{##3}\a{##4}}}\o{)}}[##8]}
-	\NewDocumentCommand{\slitlonenum} {O{} O{Q} O{P} O{x} O{y} O{\@typeet} O{\@typeet} O{\@typee} O{\@typee}} {\rentry[##1]{ \t{\@fragolivaronenum} = \L{##2}[##6]\obl{(}\L{##3}[##7]\lambhE[##4][##8]\R{\sanD{ \sanD{\v{##2}\a{##4}}{\v{##3}\a{##4}}}{\lambheN[##5][##9]\R{\sanD{\sanD{\sneg\a{##4 = ##5} }{\v{##2}\a{##5}}}{\v{##3}\a{##5}}}}}\obl{)}}}
-	\NewDocumentCommand{\slitldefarticle}{O{} O{Q} O{P} O{x} O{y} O{\@typeet} O{\@typeet} O{\@typee} O{\@typee}}{\rentry[##1]{\t{\@fragolivardefarticle} = \L{##2}[##6]\o{(}\L{##3}[##7]\lambhE[##4][##8]\R{\sanD{\v{##2}\a{##4}}{\lambheN[##5][##9]\sanD{\R{\sanD{\sneg\a{##4 = ##5}}{\v{##2}\a{##5}}}}{\v{##3}\a{##4}}}}\o{)}}}
+	\DeclareDocumentCommand{\slitlmost}{O{} O{}}{\rentry[##1]{\sit{\@fragolivarmost} = \obl{MOST}}[##2]}
+	\DeclareDocumentCommand{\slitlno}{O{} O{Q} O{P} O{x} O{\@typeet} O{\@typeet} O{\@typee} O{}}{\rentry[##1]{\t{\@fragolivarno} = \L{##2}[##5]\o{(}\L{##3}[##6]\lambheN[##4][##7]\R{\sanD{\v{##2}\a{##4}}{\v{##3}\a{##4}}}\o{)}}[##8]}
+	\DeclareDocumentCommand{\slitlevery}{O{} O{Q} O{P} O{x} O{\@typeet} O{\@typeet} O{\@typee} O{}}{\rentry[##1]{\t{\@fragolivarevery} = \L{##2}[##5]\obl{(}\L{##3}[##6]\lambheN[##4][##7]\R{\sanD{\v{##2}\a{##4}}{\sneg\v{##3}\a{##4}}}\o{)}}[##8]}
+	\DeclareDocumentCommand{\slitloneindef}{O{} O{Q} O{P} O{x}  O{\@typeet} O{\@typeet} O{\@typee} O{}}{\rentry[##1]{\t{\@fragolivaroneindef} = \L{##2}[##5]\o{(}\L{##3}[##6]\lambhE[##4][##7]\R{\sanD{\v{##2}\a{##4}}{\v{##3}\a{##4}}}\o{)}}[##8]}
+	\DeclareDocumentCommand{\slitlonenum} {O{} O{Q} O{P} O{x} O{y} O{\@typeet} O{\@typeet} O{\@typee} O{\@typee}} {\rentry[##1]{ \t{\@fragolivaronenum} = \L{##2}[##6]\obl{(}\L{##3}[##7]\lambhE[##4][##8]\R{\sanD{ \sanD{\v{##2}\a{##4}}{\v{##3}\a{##4}}}{\lambheN[##5][##9]\R{\sanD{\sanD{\sneg\a{##4 = ##5} }{\v{##2}\a{##5}}}{\v{##3}\a{##5}}}}}\obl{)}}}
+	\DeclareDocumentCommand{\slitldefarticle}{O{} O{Q} O{P} O{x} O{y} O{\@typeet} O{\@typeet} O{\@typee} O{\@typee}}{\rentry[##1]{\t{\@fragolivardefarticle} = \L{##2}[##6]\o{(}\L{##3}[##7]\lambhE[##4][##8]\R{\sanD{\v{##2}\a{##4}}{\lambheN[##5][##9]\sanD{\R{\sanD{\sneg\a{##4 = ##5}}{\v{##2}\a{##5}}}}{\v{##3}\a{##4}}}}\o{)}}}
 	%%%% Attitude
-	\let\slitAttitudeBuilder\@fglsundefined
-	\let\slitadox\@fglsundefined
-	\let\slitaepi\@fglsundefined
-	\let\slitabou\@fglsundefined
-	\NewDocumentCommand{\slitAttitudeBuilder}{m m O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types}}{\sit{##1} = \lambH{##3}[##7]\obl{(}\lambH{##4}[##8]\lambhA[##5][##9]\R{\simP{\o{##2}\a{##4}\a{##6}\a{##5}}{\c{\obli{##3}}}}\obl{)}}
-	\NewDocumentCommand{\slitadox}{O{} O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types} O{}}{\rentry[##1]{\slitAttitudeBuilder{\@fragolivarlexattdox}{DOX}[##2][##3][##4][##5][##6][##7][##8]}[##9]}
-	\NewDocumentCommand{\slitaepi}{O{} O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types} O{}}{\rentry[##1]{\slitAttitudeBuilder{\@fragolivarlexattepi}{EPI}[##2][##3][##4][##5][##6][##7][##8]}[##9]}
-	\NewDocumentCommand{\slitabou}{O{} O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types} O{}}{\rentry[##1]{\slitAttitudeBuilder{\@fragolivarlexattbou}{BOU}[##2][##3][##4][##5][##6][##7][##8]}[##9]}
+	\DeclareDocumentCommand{\slitAttitudeBuilder}{m m O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types}}{\sit{##1} = \lambH{##3}[##7]\obl{(}\lambH{##4}[##8]\lambhA[##5][##9]\R{\simP{\o{##2}\a{##4}\a{##6}\a{##5}}{\c{\obli{##3}}}}\obl{)}}
+	\DeclareDocumentCommand{\slitadox}{O{} O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types} O{}}{\rentry[##1]{\slitAttitudeBuilder{\@fragolivarlexattdox}{DOX}[##2][##3][##4][##5][##6][##7][##8]}[##9]}
+	\DeclareDocumentCommand{\slitaepi}{O{} O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types} O{}}{\rentry[##1]{\slitAttitudeBuilder{\@fragolivarlexattepi}{EPI}[##2][##3][##4][##5][##6][##7][##8]}[##9]}
+	\DeclareDocumentCommand{\slitabou}{O{} O{p} O{x} O{j} O{i} O{\@typest} O{\@typee} O{\@types} O{}}{\rentry[##1]{\slitAttitudeBuilder{\@fragolivarlexattbou}{BOU}[##2][##3][##4][##5][##6][##7][##8]}[##9]}
 	%%% Denotation
 	%%%% General
-	\let\slid\@fglsundefined
-	\NewDocumentCommand{\slid}{m m O{} O{} O{}}{\rentry[##3]{\sid[##4]{##1} = ##2}[##5]}
+	\DeclareDocumentCommand{\slid}{m m O{} O{} O{}}{\rentry[##3]{\sid[##4]{##1} = ##2}[##5]}
 	%%%% Proper Names
-	\let\slidnn\@fglsundefined
-	\NewDocumentCommand{\slidnn}{m O{} O{} O{}}{\slid{\obl{\lowercase{\StrMid{##1}{1}{1}}}}{##1}[##2][##3][##4]}
-		\let\slidnnpeter\@fglsundefined
-		\let\slidnnmaria\@fglsundefined
-		\let\slidnnmarta\@fglsundefined
-		\let\slidnnalina\@fglsundefined
-		\let\slidnnanna\@fglsundefined
-		\let\slidnnpaul\@fglsundefined
-		\let\slidnneike\@fglsundefined
-		\let\slidnnida\@fglsundefined
-		\let\slidnnolaf\@fglsundefined
-		\let\slidnnmichael\@fglsundefined
-		\NewDocumentCommand{\slidnnpeter}{O{} O{} O{}}{\slidnn{Peter}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnmaria}{O{} O{} O{}}{\slidnn{Maria}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnmarta}{O{} O{} O{}}{\slidnn{Marta}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnalina}{O{} O{} O{}}{\slidnn{Alina}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnanna}{O{} O{} O{}}{\slidnn{Anna}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnpaul}{O{} O{} O{}}{\slidnn{Paul}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnneike}{O{} O{} O{}}{\slidnn{Eike}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnida}{O{} O{} O{}}{\slidnn{Ida}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnolaf}{O{} O{} O{}}{\slidnn{Olaf}[##1][##2][##3]}
-		\NewDocumentCommand{\slidnnmichael}{O{} O{} O{}}{\slidnn{Michael}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnn}{m O{} O{} O{}}{\slid{\obl{\lowercase{\StrMid{##1}{1}{1}}}}{##1}[##2][##3][##4]}
+	\DeclareDocumentCommand{\slidnnpeter}{O{} O{} O{}}{\slidnn{Peter}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnmaria}{O{} O{} O{}}{\slidnn{Maria}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnmarta}{O{} O{} O{}}{\slidnn{Marta}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnalina}{O{} O{} O{}}{\slidnn{Alina}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnanna}{O{} O{} O{}}{\slidnn{Anna}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnpaul}{O{} O{} O{}}{\slidnn{Paul}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnneike}{O{} O{} O{}}{\slidnn{Eike}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnida}{O{} O{} O{}}{\slidnn{Ida}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnolaf}{O{} O{} O{}}{\slidnn{Olaf}[##1][##2][##3]}
+	\DeclareDocumentCommand{\slidnnmichael}{O{} O{} O{}}{\slidnn{Michael}[##1][##2][##3]}
 	%%%% Logic
-	\let\slidland\@fglsundefined
-	\let\slidlequal\@fglsundefined
-	\let\slidlneg\@fglsundefined
-	\let\slidlexists\@fglsundefined
-	\NewDocumentCommand{\slidland}{O{} O{v} O{u} O{} O{\@typet} O{\@typet} O{}}{\slid{\ensuremath{\land}}{\lambh{##2}[##5]\lambh{##3}[##6]\r{\meli{##2} \ensuremath{\cdot} \meli{##3}}}[##1][##4][##7]}
-	\NewDocumentCommand{\slidlequal}{O{} O{y} O{x} O{} O{\@typet} O{\@typet} O{}}{\slid{=}{\lambh{##2}[##5]\lambh{##3}[##6]\n{\meli{##2} = \meli{##3}}}[##1][##4][##7]}
-	\NewDocumentCommand{\slidlneg}{O{} O{u} O{} O{\@typet} O{}}{\slid{\ensuremath{\neg}}{\lambh{##2}[##4]\r{1 - \meli{##2}}}[##1][##3][##5]}
-	\NewDocumentCommand{\slidlexists}{O{} O{P} O{} O{\@typeet} O{}}{\slid{\ensuremath{\exists}}{\lambh{##2}[##4]\n{\ensuremath{\downarrow}\meli{##2} \ensuremath{\neq} \ensuremath{\emptyset}}}[##1][##3][##5]}
+	\DeclareDocumentCommand{\slidland}{O{} O{v} O{u} O{} O{\@typet} O{\@typet} O{}}{\slid{\ensuremath{\land}}{\lambh{##2}[##5]\lambh{##3}[##6]\r{\meli{##2} \ensuremath{\cdot} \meli{##3}}}[##1][##4][##7]}
+	\DeclareDocumentCommand{\slidlequal}{O{} O{y} O{x} O{} O{\@typet} O{\@typet} O{}}{\slid{=}{\lambh{##2}[##5]\lambh{##3}[##6]\n{\meli{##2} = \meli{##3}}}[##1][##4][##7]}
+	\DeclareDocumentCommand{\slidlneg}{O{} O{u} O{} O{\@typet} O{}}{\slid{\ensuremath{\neg}}{\lambh{##2}[##4]\r{1 - \meli{##2}}}[##1][##3][##5]}
+	\DeclareDocumentCommand{\slidlexists}{O{} O{P} O{} O{\@typeet} O{}}{\slid{\ensuremath{\exists}}{\lambh{##2}[##4]\n{\ensuremath{\downarrow}\meli{##2} \ensuremath{\neq} \ensuremath{\emptyset}}}[##1][##3][##5]}
 	%%%% Attitude
-	\NewDocumentCommand{\slidAttitudeBuilder}{m m O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slid{##1}{\lambh{##3}[##6]\lambh{##4}[##7]\lambh{##5}[##8]\n{##5 \@fragolivarlis\ \@fragolivarlarticlegermanswitch\ ##2 alternative\  \@fragolivarlof\ \meli{##3} in ##4}}[##9]}
-	\NewDocumentCommand{\slidadox}{O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slidAttitudeBuilder{DOX}{\@fragolivarlexattdoxterm}[##1][##2][##3][##4][##5][##6][##7]}
-	\NewDocumentCommand{\slidaepi}{O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slidAttitudeBuilder{EPI}{\@fragolivarlexattepiterm}[##1][##2][##3][##4][##5][##6][##7]}
-	\NewDocumentCommand{\slidabou}{O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slidAttitudeBuilder{BOU}{\@fragolivarlexattbouterm}[##1][##2][##3][##4][##5][##6][##7]}
+	\DeclareDocumentCommand{\slidAttitudeBuilder}{m m O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slid{##1}{\lambh{##3}[##6]\lambh{##4}[##7]\lambh{##5}[##8]\n{##5 \@fragolivarlis\ \@fragolivarlarticlegermanswitch\ ##2 alternative\  \@fragolivarlof\ \meli{##3} in ##4}}[##9]}
+	\DeclareDocumentCommand{\slidadox}{O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slidAttitudeBuilder{DOX}{\@fragolivarlexattdoxterm}[##1][##2][##3][##4][##5][##6][##7]}
+	\DeclareDocumentCommand{\slidaepi}{O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slidAttitudeBuilder{EPI}{\@fragolivarlexattepiterm}[##1][##2][##3][##4][##5][##6][##7]}
+	\DeclareDocumentCommand{\slidabou}{O{x} O{\sz} O{\so} O{\@typee} O{\@types} O{\@types} O{}}{\slidAttitudeBuilder{BOU}{\@fragolivarlexattbouterm}[##1][##2][##3][##4][##5][##6][##7]}
 	
 	
 	\ifempty{#1}\item\textit{\@fragolivarlexicon}:\else\item[#1]\fi
@@ -1906,8 +1356,7 @@
 		\newcommand{\@rentrylabellower}{rs}
 	% Rules
 	%% General
-	\let\rsrgarrow\@fglsundefined
-	\NewDocumentCommand{\rsrgarrow}{O{} O{\ensuremath{x}} O{\ensuremath{f}} O{}}{\rentry[##1]{\srgarrow[##2][##3]}[##4]}
+	\DeclareDocumentCommand{\rsrgarrow}{O{} O{\ensuremath{x}} O{\ensuremath{f}} O{}}{\rentry[##1]{\srgarrow[##2][##3]}[##4]}
 	
 	\ifempty{#1}\item\textit{\@fragolivarrulessyn}:\else\item[#1]\fi
 	\begin{itemize}
@@ -1923,86 +1372,53 @@
 
 	% Rules
 	%% General
-	\let\rsrgarrow\@fglsundefined
-	\NewDocumentCommand{\rsrgarrow}{O{} O{\ensuremath{x}} O{\ensuremath{f}} O{}}{\rentry[##1]{\srgarrow[##2][##3]}[##4]}
+	\DeclareDocumentCommand{\rsrgarrow}{O{} O{\ensuremath{x}} O{\ensuremath{f}} O{}}{\rentry[##1]{\srgarrow[##2][##3]}[##4]}
 	
 	%% Direkt
-	\let\rsrde\@fglsundefined
-	\let\rsrdi\@fglsundefined
-	\NewDocumentCommand{\rsrde}{m m O{} O{#2} O{}}{\rentry[##3]{\e[##4]{##1}= ##2}[##5]}
-	\NewDocumentCommand{\rsrdi}{m m O{} O{}}{\rentry[##3]{\sdi{##1}\ = ##2}[##4]}
+	\DeclareDocumentCommand{\rsrde}{m m O{} O{#2} O{}}{\rentry[##3]{\e[##4]{##1}= ##2}[##5]}
+	\DeclareDocumentCommand{\rsrdi}{m m O{} O{}}{\rentry[##3]{\sdi{##1}\ = ##2}[##4]}
 	
 	%%% Common Zimmerman
-	\let\rsrdesbjpred\@fglsundefined
-	\let\rsrdesbjquant\@fglsundefined
-	\let\rsrdeobjpred\@fglsundefined
-	\let\rsrdeobjquant\@fglsundefined
-	\let\rsrdequantnounph\@fglsundefined
-	\NewDocumentCommand{\rsrdesbjpred}{O{} O{#2} O{\text{\ensuremath{S}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{P}}} O{}}{\rentry[##1]{\srdesbjpred[##2][##3][##4][##5]}[##6]}
-	\NewDocumentCommand{\rsrdesbjquant}{O{} O{#2} O{\text{\ensuremath{S}}} O{\text{\ensuremath{P}}} O{\text{\ensuremath{QN}}} O{}}{\rsrdesbjpred[##1][##2][##3][##4][##5][##6]}
-	\NewDocumentCommand{\rsrdeobjpred}{O{} O{#2} O{\text{\ensuremath{P}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{V}}} O{}}{\rsrdesbjpred[##1][##2][##3][##4][##5][##6]}
-	\NewDocumentCommand{\rsrdeobjquant}{O{} O{x} O{y} O{#2} O{\text{\ensuremath{P}}} O{\text{\ensuremath{V}}} O{\text{\ensuremath{QN}}} O{\@typee} O{}}{\rentry[##1]{\srdeobjquant[##2][##3][##4][##5][##6][##7][##8][##8]}[##9]}
-	\NewDocumentCommand{\rsrdequant}{O{} O{#2} O{\text{\ensuremath{QN}}} O{\text{\ensuremath{N}}} O{\text{\ensuremath{D}}} O{}}{\rsrdesbjpred[##1][##2][##3][##4][##5][##6]}
+	\DeclareDocumentCommand{\rsrdesbjpred}{O{} O{#2} O{\text{\ensuremath{S}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{P}}} O{}}{\rentry[##1]{\srdesbjpred[##2][##3][##4][##5]}[##6]}
+	\DeclareDocumentCommand{\rsrdesbjquant}{O{} O{#2} O{\text{\ensuremath{S}}} O{\text{\ensuremath{P}}} O{\text{\ensuremath{QN}}} O{}}{\rsrdesbjpred[##1][##2][##3][##4][##5][##6]}
+	\DeclareDocumentCommand{\rsrdeobjpred}{O{} O{#2} O{\text{\ensuremath{P}}} O{\text{\ensuremath{NN}}} O{\text{\ensuremath{V}}} O{}}{\rsrdesbjpred[##1][##2][##3][##4][##5][##6]}
+	\DeclareDocumentCommand{\rsrdeobjquant}{O{} O{x} O{y} O{#2} O{\text{\ensuremath{P}}} O{\text{\ensuremath{V}}} O{\text{\ensuremath{QN}}} O{\@typee} O{}}{\rentry[##1]{\srdeobjquant[##2][##3][##4][##5][##6][##7][##8][##8]}[##9]}
+	\DeclareDocumentCommand{\rsrdequant}{O{} O{#2} O{\text{\ensuremath{QN}}} O{\text{\ensuremath{N}}} O{\text{\ensuremath{D}}} O{}}{\rsrdesbjpred[##1][##2][##3][##4][##5][##6]}
 	
 	%%% Logic
-	\let\rsrdecoordination\@fglsundefined
-	\let\rsrdiconva\@fglsundefined
-	\let\rsrdiconvb\@fglsundefined
-	\let\rsrdeattitude\@fglsundefined
-	\NewDocumentCommand{\rsrdecoordination}{O{} O{#1} O{}}{\rsrde{\v{S K \^{S}}}{\e[##2]{\v{K}}\a{\e[##2]{\^{S}}}\a{\e[##2]{S}}}[##1][##2][##3]}
-	\NewDocumentCommand{\rsrdiconva}{O{} O{s} O{\@types} O{}}{\rsrdi{\v{A}}{\lambh{##2}[##3]\e[##2]{\v{A}}}[##1][##4]}
-	\NewDocumentCommand{\rsrdiconvb}{O{} O{s} O{\@types} O{}}{\rentry[##1]{\sdi{\v{A}}\obl{(}\textit{##2}\obl{)} = \e[\meli{##2}]{\v{A}}}[##4]}
-	\NewDocumentCommand{\rsrdeattitude}{O{} O{\sstar} O{}}{\rsrde{\v{P}}{\e[##2]{\v{V}}\a{\sdi{S}}}[##1][##2][##3]}
+	\DeclareDocumentCommand{\rsrdecoordination}{O{} O{#1} O{}}{\rsrde{\v{S K \^{S}}}{\e[##2]{\v{K}}\a{\e[##2]{\^{S}}}\a{\e[##2]{S}}}[##1][##2][##3]}
+	\DeclareDocumentCommand{\rsrdiconva}{O{} O{s} O{\@types} O{}}{\rsrdi{\v{A}}{\lambh{##2}[##3]\e[##2]{\v{A}}}[##1][##4]}
+	\DeclareDocumentCommand{\rsrdiconvb}{O{} O{s} O{\@types} O{}}{\rentry[##1]{\sdi{\v{A}}\obl{(}\textit{##2}\obl{)} = \e[\meli{##2}]{\v{A}}}[##4]}
+	\DeclareDocumentCommand{\rsrdeattitude}{O{} O{\sstar} O{}}{\rsrde{\v{P}}{\e[##2]{\v{V}}\a{\sdi{S}}}[##1][##2][##3]}
 	
 	%%% Quantorenanhebung
-	\let\rsrdeqrsemvar\@fglsundefined
-	\let\rsrdeqrabs\@fglsundefined
-	\let\rsrdeqrlex\@fglsundefined
-	\let\rsrdeqrfa\@fglsundefined
-	\let\rsrdeqrtree\@fglsundefined
-	\NewDocumentCommand{\rsrdeqrsemvar}{O{} O{\phi} O{\ensuremath{x}} O{#2} O{\textit{g}} O{}}{\rentry[##1]{\srdeqrsemvar[##2][##3][##4][##5]}[##6]}
-	\NewDocumentCommand{\rsrdeqrabs}{O{} O{\phi} O{\textit{x}} O{#2} O{\textit{g}} O{\textit{f}} O{\ensuremath{\delta}} O{}}{\rentry[##1]{\srdeqrabs[##2][##3][##4][##5][##6][##7]}[##8]}
-	\NewDocumentCommand{\rsrdeqrlex}{O{} O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{#2} O{\text{\textit{g}}} O{} }{\rentry[##1]{\srdeqrlex[##2][##3][##4][##5]}[##6]}
-	\NewDocumentCommand{\rsrdeqrfa}{O{} O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{\ensuremath{\gamma}} O{#2} O{\text{\textit{g}}} O{}}{\rentry[##1]{\srdeqrfa[##2][##3][##4][##5][##6]}[##7]}
-	\NewDocumentCommand{\rsrdeqrtree}{O{} O{x} O{\ensuremath{\psi}} O{\ensuremath{\phi}} O{\ensuremath{\delta}} O{#2} O{\text{\textit{g}}} O{\@typee} O{}}{\rentry[##1]{\srdeqrtree[##2][##3][##4][##5][##6][##7][##8]}[##9]}
+	\DeclareDocumentCommand{\rsrdeqrsemvar}{O{} O{\phi} O{\ensuremath{x}} O{#2} O{\textit{g}} O{}}{\rentry[##1]{\srdeqrsemvar[##2][##3][##4][##5]}[##6]}
+	\DeclareDocumentCommand{\rsrdeqrabs}{O{} O{\phi} O{\textit{x}} O{#2} O{\textit{g}} O{\textit{f}} O{\ensuremath{\delta}} O{}}{\rentry[##1]{\srdeqrabs[##2][##3][##4][##5][##6][##7]}[##8]}
+	\DeclareDocumentCommand{\rsrdeqrlex}{O{} O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{#2} O{\text{\textit{g}}} O{} }{\rentry[##1]{\srdeqrlex[##2][##3][##4][##5]}[##6]}
+	\DeclareDocumentCommand{\rsrdeqrfa}{O{} O{\ensuremath{\alpha}} O{\ensuremath{\beta}} O{\ensuremath{\gamma}} O{#2} O{\text{\textit{g}}} O{}}{\rentry[##1]{\srdeqrfa[##2][##3][##4][##5][##6]}[##7]}
+	\DeclareDocumentCommand{\rsrdeqrtree}{O{} O{x} O{\ensuremath{\psi}} O{\ensuremath{\phi}} O{\ensuremath{\delta}} O{#2} O{\text{\textit{g}}} O{\@typee} O{}}{\rentry[##1]{\srdeqrtree[##2][##3][##4][##5][##6][##7][##8]}[##9]}
 	
 	
 	%% Indirekt 
 	%%% Translation
-	\let\rsrit\@fglsundefined
-	\let\rsriti\@fglsundefined
-	\let\rsritibasic\@fglsundefined
-	\let\rsritcoordination\@fglsundefined
-	\let\rsritpredication\@fglsundefined
-	\let\rsritnamedirectobject\@fglsundefined
-	\let\rsritquantification\@fglsundefined
-	\let\rsritquantificational\@fglsundefined
-	\let\rsritquantificationasobj\@fglsundefined
-	\let\rsritattitude\@fglsundefined
-	\let\rsritraisedsubj\@fglsundefined
-	\let\rsritcontrolverbs\@fglsundefined
-	\NewDocumentCommand{\rsrit}{m m O{} O{}}{\rentry[##3]{\t{##1} = ##2}[##4]}
-	\NewDocumentCommand{\rsriti}{m m O{} O{}}{\rentry[##3]{\ti{##1} = ##2}[##4]}
-	\NewDocumentCommand{\rsritibasic}{m m m O{} O{}}{\rentry[##4]{\ti{##1} = \ti{##2}(\ti{##3})}[##5]}
-	\NewDocumentCommand{\rsritcoordination}{O{} O{}}{\rsriti{S K \^{S}}{\ti{K}(\ti{\^{S}})(\ti{S})}[##1][##2]}
-	\NewDocumentCommand{\rsritpredication}{O{} O{}}{\rsritibasic{S}{P}{NN}[##1][##2]}
-	\NewDocumentCommand{\rsritnamedirectobject}{O{} O{}}{\rsritibasic{P}{V}{NN}[##1][##2]}
-	\NewDocumentCommand{\rsritquantification}{O{} O{}}{\rsritibasic{S}{Q}{P}[##1][##2]}
-	\NewDocumentCommand{\rsritquantificational}{O{} O{}}{\rsritibasic{Q}{D}{N}[##1][##2]}
-	\NewDocumentCommand{\rsritquantificationasobj}{O{} O{x} O{y} O{\@typeet} O{\@typeet} O{}}{\rsriti{P}{\L{##2}[##4]\ti{Q}\o{(}\L{##3}[##5]\ti{V}\a{\v{##3}}\a{\v{##2}}\o{)}}[##1][##6]}
-	\NewDocumentCommand{\rsritattitude}{O{} O{i} O{\@types} O{}}{\rsriti{P}{\ti{V}\o{(}\L{##2}[##3]\ti{S}\o{)}}[##1][##4]}
-	\NewDocumentCommand{\rsritraisedsubj}{O{} O{i} O{\@types} O{}}{\rsriti{S}{\ti{VP}(\L{##2}[##3]\ti{Q})}[##1][##4]}
-	\NewDocumentCommand{\rsritcontrolverbs}{O{} O{x} O{i} O{\@typee} O{\@types} O{}}{\rsriti{VP}{\L{##2}[##4]\ti{V}\o{(}\L{##3}[##5]\ti{P}\a{\v{##2}}\o{)}\a{\v{##2}}}[##1][##6]}
+	\DeclareDocumentCommand{\rsrit}{m m O{} O{}}{\rentry[##3]{\t{##1} = ##2}[##4]}
+	\DeclareDocumentCommand{\rsriti}{m m O{} O{}}{\rentry[##3]{\ti{##1} = ##2}[##4]}
+	\DeclareDocumentCommand{\rsritibasic}{m m m O{} O{}}{\rentry[##4]{\ti{##1} = \ti{##2}(\ti{##3})}[##5]}
+	\DeclareDocumentCommand{\rsritcoordination}{O{} O{}}{\rsriti{S K \^{S}}{\ti{K}(\ti{\^{S}})(\ti{S})}[##1][##2]}
+	\DeclareDocumentCommand{\rsritpredication}{O{} O{}}{\rsritibasic{S}{P}{NN}[##1][##2]}
+	\DeclareDocumentCommand{\rsritnamedirectobject}{O{} O{}}{\rsritibasic{P}{V}{NN}[##1][##2]}
+	\DeclareDocumentCommand{\rsritquantification}{O{} O{}}{\rsritibasic{S}{Q}{P}[##1][##2]}
+	\DeclareDocumentCommand{\rsritquantificational}{O{} O{}}{\rsritibasic{Q}{D}{N}[##1][##2]}
+	\DeclareDocumentCommand{\rsritquantificationasobj}{O{} O{x} O{y} O{\@typeet} O{\@typeet} O{}}{\rsriti{P}{\L{##2}[##4]\ti{Q}\o{(}\L{##3}[##5]\ti{V}\a{\v{##3}}\a{\v{##2}}\o{)}}[##1][##6]}
+	\DeclareDocumentCommand{\rsritattitude}{O{} O{i} O{\@types} O{}}{\rsriti{P}{\ti{V}\o{(}\L{##2}[##3]\ti{S}\o{)}}[##1][##4]}
+	\DeclareDocumentCommand{\rsritraisedsubj}{O{} O{i} O{\@types} O{}}{\rsriti{S}{\ti{VP}(\L{##2}[##3]\ti{Q})}[##1][##4]}
+	\DeclareDocumentCommand{\rsritcontrolverbs}{O{} O{x} O{i} O{\@typee} O{\@types} O{}}{\rsriti{VP}{\L{##2}[##4]\ti{V}\o{(}\L{##3}[##5]\ti{P}\a{\v{##2}}\o{)}\a{\v{##2}}}[##1][##6]}
 	
 	%%% Denotation
-	\let\rsrid\@fglsundefined
-	\let\rsridinterpretvar\@fglsundefined
-	\let\rsridapp\@fglsundefined
-	\let\rsridabs\@fglsundefined
-	\NewDocumentCommand{\rsrid}{m m O{} O{g} O{}}{\rentry[##3]{\sid[##4]{##1} = ##2}[##5]}
-	\NewDocumentCommand{\rsridinterpretvar}{O{} O{g} O{x} O{}}{\rsrid{\v{##3}}{\j{##2}\a{##3}}[##1][##2][##4]}
-	\NewDocumentCommand{\rsridapp}{O{} O{g} O{\ensuremath{\bm{\alpha}}} O{\ensuremath{\bm{\beta}}} O{}}{\rsrid{##3\a{##4}}{\d[##2]{##3}\a{\d[##2]{##4}}}[##1][##2][##5]}
-	\NewDocumentCommand{\rsridabs}{O{} O{g} O{\ensuremath{\bm{\alpha}}} O{x} O{u} O{}}{\rsrid{\L{##4}##3}{\l{##5}\sidR{##3}{##5}[##4]}[##1][##2][##6]}
+	\DeclareDocumentCommand{\rsrid}{m m O{} O{g} O{}}{\rentry[##3]{\sid[##4]{##1} = ##2}[##5]}
+	\DeclareDocumentCommand{\rsridinterpretvar}{O{} O{g} O{x} O{}}{\rsrid{\v{##3}}{\j{##2}\a{##3}}[##1][##2][##4]}
+	\DeclareDocumentCommand{\rsridapp}{O{} O{g} O{\ensuremath{\bm{\alpha}}} O{\ensuremath{\bm{\beta}}} O{}}{\rsrid{##3\a{##4}}{\d[##2]{##3}\a{\d[##2]{##4}}}[##1][##2][##5]}
+	\DeclareDocumentCommand{\rsridabs}{O{} O{g} O{\ensuremath{\bm{\alpha}}} O{x} O{u} O{}}{\rsrid{\L{##4}##3}{\l{##5}\sidR{##3}{##5}[##4]}[##1][##2][##6]}
 	
 	\ifempty{#1}\item\textit{\@fragolivarrules}:\else\item[#1]\fi
 	\begin{itemize}
