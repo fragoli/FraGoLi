@@ -1,28 +1,35 @@
-% FraGoLi v. 1.0.0 \y 2025
+% FraGoLi v. 1.0.0 y. 2025
 % 
 % (c) 2025 Paul Eduard Koenig
 % pauleduardkoenig (at) gmail [dot] com
-% University of Frankfurt, Department of Linguistics/Semantics
-%
-%88~~                    e88~~\           888     ,e, 
-%88___ 888-~\   /~~~8e  d888      e88~-_  888      "  
-%88    888          88b 8888 __  d888   i 888     888 
-%88    888     e88~-888 8888   | 8888   | 888     888 
-%88    888    C888  888 Y888   | Y888   ' 888     888 
-%88    888     "88_-888  "88__/   "88_-~  888____ 888 
-%  
-% The package is mainly designed for the semantics department and focuses on providing a minimal syntax for fast formula derivation. 
-% Formula-Style is losely based on the accompanying material to an introductory course to linguistic semantics by T. E. Zimmermann.
-%
-%% This program can be redistributed and/or modified under the terms
-%% of the LaTeX Project Public License Distributed from CTAN archives
-%% in directory macros/latex/base/lppl.txt.
+% Goethe University Frankfurt, Institute of Linguistics
 % 
+% O))))))))                    O))))             O))
+% O))                        O)    O))           O))       O)
+% O))      O) O)))   O))    O))           O))    O))
+% O))))))   O))    O))  O)) O))         O))  O)) O))      O))
+% O))       O))   O))   O)) O))   O))))O))    O))O))      O))
+% O))       O))   O))   O))  O))    O)  O))  O)) O))      O))
+% O))      O)))     O)) O)))  O)))))      O))    O))))))))O))
+% 
+% The package is mainly designed for the semantics department and focuses on providing a minimal syntax for fast formula derivation.
+% Formula-Style is losely based on the accompanying material to an introductory course to linguistic semantics by Prof. Dr. Thomas Ede Zimmermann
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.3c of this license or (at your option) any later
+% version. The latest version of this license is in:
+% http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of
+% LaTeX version 2008-05-04 or later.
+% 
+% ------------------------------------------------------------ 
+% header
+% ------------------------------------------------------------ 
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{fragoli}[2025/03/07 v. 1.0.0 LaTeX package for the department of Linguistics/Semantics at Goethe University of Frankfurt]
-% Packages
+\ProvidesPackage{fragoli}[2025-03-11 v. 1.0.0 LaTeX package for the institute of linguistics at Goethe University Frankfurt]
 \RequirePackage{xparse, xcolor, enumitem, nicefrac, bm, amsmath, xstring, pdftexcmds, etoolbox, kvoptions, comment}
-
+\RequirePackage[normalem]{ulem}
 % ------------------------------------------------------------ 
 % options
 % ------------------------------------------------------------ 
@@ -55,7 +62,7 @@
 \fi
 
 \ifFGL@usedscount
-	\definecolor{deivationrowcountcolor}{rgb}{255,255,255}
+	\definecolor{fgldeivationrowcountcolor}{rgb}{255,255,255}
 \fi
 
 \let\fgslisinfgls\@fglsundefined
@@ -118,7 +125,7 @@
 \newcommand{\@fragolivardefarticle}{the\textsubscript{\textit{\text{R.}}}}
 \newcommand{\@fragolivarmost}{the most}
 \newcommand{\@fragolivarlis}{is}
-\newcommand{\@fragolivarlof}{is}
+\newcommand{\@fragolivarlof}{of}
 \newcommand{\@fragolivarlarticle}{a}
 \newcommand{\@fragolivarlarticlen}{an}
 \newcommand{\@fragolivarlarticlegermanswitch}{\@fragolivarlarticle}
@@ -206,7 +213,7 @@
 % traces
 % ------------------------------
 
-\DeclareDocumentCommand{\trace}{m O{\textit{t}}}{\text{\textit{#2}\textsubscript{{\normalfont \textit{#1}}}} }
+\DeclareDocumentCommand{\trace}{m O{\textit{t}}}{\text{\textit{#2}\textsubscript{{\normalfont \textit{#1}}}}}
 \DeclareDocumentCommand{\tracE}{m O{\textit{t}}}{\text{\textbf{#2}\textsubscript{\textit{#1}}}}
 \DeclareDocumentCommand{\tracex}{O{\textit{t}}}{\trace{\textit{x}}[#1]}
 \DeclareDocumentCommand{\tracEx}{O{\textit{t}}}{\tracE{\textit{x}}[#1]}
@@ -447,10 +454,10 @@
 \definecolor{fglcpcolor4}{RGB}{156, 194, 50}  % Level 3
 \definecolor{fglcpcolor5}{RGB}{000, 204, 000} % Level 3
 
-\definecolor{dunkelgrau}{rgb}{0.72,0.72,0.72}
+\definecolor{fglquestioncolor}{rgb}{0.72,0.72,0.72}
 \definecolor{grau}{rgb}{0.85,0.85,0.85}
 \definecolor{hellgrau}{rgb}{0.95,0.95,0.95}
-\definecolor{deivationrowcountcolor}{rgb}{0.72,0.72,0.72}
+\definecolor{fgldeivationrowcountcolor}{rgb}{0.72,0.72,0.72}
 
 % ------------------------------------------------------------
 % Commands
@@ -806,7 +813,7 @@
 % Homeworks
 % ------------------------------
 
-\newenvironment{question}{\ifFGL@showawnser\color{dunkelgrau}\else\color{black}\fi}{}
+\newenvironment{question}{\ifFGL@showawnser\color{fglquestioncolor}\else\color{black}\fi}{}
 \specialcomment{awnser}{\color{black}\normalfont}{}
 \ifFGL@showawnser\includecomment{awnser}\else\excludecomment{awnser}\fi
 
@@ -1121,7 +1128,7 @@
 	
 	
 	\DeclareDocumentCommand{\cdr}{}{sem:deri:\ifempty{#2}\the@fglsderivationcounter\else#2\fi}
-	\DeclareDocumentCommand{\ds}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[\ifempty{##3}\ensuremath{\stackrel{\color{deivationrowcountcolor}\the@fglscalcitemcounter.\color{black}}{=\ }}\else##3\fi]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
+	\DeclareDocumentCommand{\ds}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[\ifempty{##3}\ensuremath{\stackrel{\color{fgldeivationrowcountcolor}\the@fglscalcitemcounter.\color{black}}{=\ }}\else##3\fi]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
 	\DeclareDocumentCommand{\dS}{O{} m O{}}{\stepcounter{@fglscalcitemcounter}\item[##3]\edef\@currentlabel{\the@fglscalcitemcounter}\label{sem:deri:\@fglsinterladeriref:ds:\the@fglscalcitemcounter} ##2 \@snote{##1}}
 	\let\@fglsopenedfglsderi\@fglsundefined
 	
@@ -1427,4 +1434,4 @@
 	\end{itemize}
 }
 \endinput
-%%
+% End of file `fragoli.sty'.
