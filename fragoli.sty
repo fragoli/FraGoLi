@@ -1,8 +1,9 @@
 % FraGoLi v. 1.0.0 y. 2025
 % 
-% (c) 2025 Paul Eduard Koenig
+% Copyright (C) 2025 Paul Eduard Koenig
 % pauleduardkoenig (at) gmail [dot] com
 % Goethe University Frankfurt, Institute of Linguistics
+% --------------------------------
 % 
 % O))))))))                    O))))             O))
 % O))                        O)    O))           O))       O)
@@ -11,6 +12,8 @@
 % O))       O))   O))   O)) O))   O))))O))    O))O))      O))
 % O))       O))   O))   O))  O))    O)  O))  O)) O))      O))
 % O))      O)))     O)) O)))  O)))))      O))    O))))))))O))
+%
+% --------------------------------
 % 
 % The package is mainly designed for the semantics department and focuses on providing a minimal syntax for fast formula derivation.
 % Formula-Style is losely based on the accompanying material to an introductory course to linguistic semantics by Prof. Dr. Thomas Ede Zimmermann
@@ -208,6 +211,7 @@
 % constants
 % ------------------------------------------------------------ 
 
+\newcommand{\@fglsetspacer}{:}
 
 % ------------------------------
 % traces
@@ -459,6 +463,15 @@
 \definecolor{hellgrau}{rgb}{0.95,0.95,0.95}
 \definecolor{fgldeivationrowcountcolor}{rgb}{0.72,0.72,0.72}
 
+% ------------------------------------------------------------ 
+% internal variables
+% ------------------------------------------------------------ 
+
+\let\@fglssetvariable\@fglsundefined
+\newcommand{\setvar}{\ensuremath{\StrBefore{\!\romannumeral-`\0\@fglssetvariable}{ }}}
+\let\@fglssetvariable\@fglsundefined
+\newcommand{\Setvar}{\ensuremath{\StrBefore{\!\romannumeral-`\0\@fglssetvariable}{ }}\ }
+
 % ------------------------------------------------------------
 % Commands
 % ------------------------------------------------------------
@@ -483,13 +496,16 @@
 % ------------------------------
 % Encapsulation
 % ------------------------------
-
+ 
 \DeclareDocumentCommand{\zit}{m}{``#1''}				
-\DeclareDocumentCommand{\her}{m}{`#1'}						
+\DeclareDocumentCommand{\ziT}{m}{\ensuremath{\bm{``}}#1\ensuremath{\bm{''}}}				
+\DeclareDocumentCommand{\her}{m}{`#1'}	
+\DeclareDocumentCommand{\heR}{m}{\ensuremath{\bm{`}}#1\ensuremath{\bm{'}}}					
+
 
 %% Brackets
-\DeclareDocumentCommand{\set}{O{x} m}{\{\ensuremath{#1} : #2\}}
-\DeclareDocumentCommand{\seT}{O{x} m}{\obl{\{}\ensuremath{#1} \obl{:} #2\obl{\}}}
+\DeclareDocumentCommand{\set}{O{x} m O{}}{\DeclareDocumentCommand{\@fglssetvariable}{}{#1}\ifempty{#3}\else#3\ =\ \fi\{\ensuremath{#1} \@fglsetspacer\ #2\}}
+\DeclareDocumentCommand{\seT}{O{x} m O{}}{\DeclareDocumentCommand{\@fglssetvariable}{}{#1}\ifempty{#3}\else\obl{#3}\ \obl{=}\ \fi\obl{\{}\ensuremath{#1} \obl{\@fglsetspacer}\ #2\obl{\}}}
 \DeclareDocumentCommand{\cset}{m O{} O{\sstar}}{\ensuremath{#1_\text{#3}^\text{#2}}}
 \DeclareDocumentCommand{\bool}{m}{\ensuremath{\vdash}#1\ensuremath{\dashv}}
 \DeclareDocumentCommand{\booL}{m}{\ensuremath{\bm{\vdash}}#1\ensuremath{\bm{\dashv}}}
@@ -505,18 +521,58 @@
 \newcommand{\sneg}{\ensuremath{\neg}}
 \newcommand{\sneG}{\ensuremath{\bm{\neg}}}
 
+\let\strue\@fglsundefined
+\let\struE\@fglsundefined
+\newcommand{\strue}{\ensuremath{\top}}
+\newcommand{\struE}{\ensuremath{\bm{\top}}}
+
+\let\sfalse\@fglsundefined
+\let\sfalsE\@fglsundefined
+\newcommand{\sfalse}{\ensuremath{\bot}}
+\newcommand{\sfalsE}{\ensuremath{\bm{\bot}}}
+
+\let\snec\@fglsundefined
+\let\sneC\@fglsundefined
+\newcommand{\snec}{\ensuremath{\Box}}
+\newcommand{\sneC}{\ensuremath{\bm{\Box}}}
+
+\let\sposs\@fglsundefined
+\let\sposS\@fglsundefined
+\newcommand{\sposs}{\ensuremath{\Diamond}}
+\newcommand{\sposS}{\ensuremath{\bm{\Diamond}}}
+
 \DeclareDocumentCommand{\simp}{m m}{#1 \ensuremath{\rightarrow} #2}
 \DeclareDocumentCommand{\simP}{m m}{#1 \ensuremath{\bm{\rightarrow}} #2}
 \DeclareDocumentCommand{\simpnc}{m m}{\ensuremath{\rightarrow}(#1)(#2)}
 \DeclareDocumentCommand{\simpnC}{m m}{\ensuremath{\bm{\rightarrow}}\obl{(}#1\obl{)}\obl{(}#2\obl{)}}
-\DeclareDocumentCommand{\soR}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\lor}} #2\ifempty{#3}\else\ \ensuremath{\bm{\lor}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\lor}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\lor}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\lor}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\lor}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\lor}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\lor}} #9\fi}
-\DeclareDocumentCommand{\sor}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\lor} #2\ifempty{#3}\else\ \ensuremath{\lor} #3\fi\ifempty{#4}\else\ \ensuremath{\lor} #4\fi\ifempty{#5}\else\ \ensuremath{\lor} #5\fi\ifempty{#6}\else\ \ensuremath{\lor} #6\fi\ifempty{#7}\else\ \ensuremath{\lor} #7\fi\ifempty{#8}\else\ \ensuremath{\lor} #8\fi\ifempty{#9}\else\ \ensuremath{\lor} #9\fi}
+
 \DeclareDocumentCommand{\sanD}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\land}} #2\ifempty{#3}\else\ \ensuremath{\bm{\land}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\land}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\land}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\land}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\land}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\land}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\land}} #9\fi}
 \DeclareDocumentCommand{\sand}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\land} #2\ifempty{#3}\else\ \ensuremath{\land} #3\fi\ifempty{#4}\else\ \ensuremath{\land} #4\fi\ifempty{#5}\else\ \ensuremath{\land} #5\fi\ifempty{#6}\else\ \ensuremath{\land} #6\fi\ifempty{#7}\else\ \ensuremath{\land} #7\fi\ifempty{#8}\else\ \ensuremath{\land}#8\fi\ifempty{#9}\else\ \ensuremath{\land} #9\fi}
 \DeclareDocumentCommand{\sandnc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\land}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
 \DeclareDocumentCommand{\sandnC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\land}}\oblA{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+
 \DeclareDocumentCommand{\sornc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\lor}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
 \DeclareDocumentCommand{\sornC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\lor}}\obla{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+
+
+
+\DeclareDocumentCommand{\soR}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\lor}} #2\ifempty{#3}\else\ \ensuremath{\bm{\lor}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\lor}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\lor}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\lor}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\lor}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\lor}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\lor}} #9\fi}
+\DeclareDocumentCommand{\sor}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\lor} #2\ifempty{#3}\else\ \ensuremath{\lor} #3\fi\ifempty{#4}\else\ \ensuremath{\lor} #4\fi\ifempty{#5}\else\ \ensuremath{\lor} #5\fi\ifempty{#6}\else\ \ensuremath{\lor} #6\fi\ifempty{#7}\else\ \ensuremath{\lor} #7\fi\ifempty{#8}\else\ \ensuremath{\lor} #8\fi\ifempty{#9}\else\ \ensuremath{\lor} #9\fi}
+
+%% exclusive disjunction
+\DeclareDocumentCommand{\sxornc}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\veebar}\mela{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+\DeclareDocumentCommand{\sxornC}{m m O{} O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{\veebar}}\obla{#1}[#2][#3][#4][#5][#6][#7][#8][#9]}
+
+\DeclareDocumentCommand{\sxoR}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\bm{\veebar}} #2\ifempty{#3}\else\ \ensuremath{\bm{\veebar}} #3\fi\ifempty{#4}\else\ \ensuremath{\bm{\veebar}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{\veebar}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{\veebar}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{\veebar}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{\veebar}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{\veebar}} #9\fi}
+\DeclareDocumentCommand{\sxor}{m m O{} O{} O{} O{} O{} O{} O{}}{#1 \ensuremath{\veebar} #2\ifempty{#3}\else\ \ensuremath{\veebar} #3\fi\ifempty{#4}\else\ \ensuremath{\veebar} #4\fi\ifempty{#5}\else\ \ensuremath{\veebar} #5\fi\ifempty{#6}\else\ \ensuremath{\veebar} #6\fi\ifempty{#7}\else\ \ensuremath{\veebar} #7\fi\ifempty{#8}\else\ \ensuremath{\veebar} #8\fi\ifempty{#9}\else\ \ensuremath{\veebar} #9\fi}
+
+%% genral junctor builder
+\DeclareDocumentCommand{\slogic}{m m m O{} O{} O{} O{} O{} O{}}{#2 \ensuremath{#1} #3\ifempty{#4}\else\ \ensuremath{#3} #4\fi\ifempty{#5}\else\ \ensuremath{#3} #5\fi\ifempty{#6}\else\ \ensuremath{#3} #6\fi\ifempty{#7}\else\ \ensuremath{#3} #7\fi\ifempty{#8}\else\ \ensuremath{#3} #8\fi\ifempty{#9}\else\ \ensuremath{#3} #9\fi}
+
+\DeclareDocumentCommand{\slogiC}{m m m O{} O{} O{} O{} O{} O{}}{#2 \ensuremath{\bm{#1}} #3\ifempty{#4}\else\ \ensuremath{\bm{#3}} #4\fi\ifempty{#5}\else\ \ensuremath{\bm{#3}} #5\fi\ifempty{#6}\else\ \ensuremath{\bm{#3}} #6\fi\ifempty{#7}\else\ \ensuremath{\bm{#3}} #7\fi\ifempty{#8}\else\ \ensuremath{\bm{#3}} #8\fi\ifempty{#9}\else\ \ensuremath{\bm{#3}} #9\fi}
+
+\DeclareDocumentCommand{\slogicnc}{m m m O{} O{} O{} O{} O{} O{}}{\ensuremath{#1}\mela{#2}[#3][#4][#5][#6][#7][#8][#9]}
+\DeclareDocumentCommand{\slogicnC}{m m m O{} O{} O{} O{} O{} O{}}{\ensuremath{\bm{#1}}\obla{#2}[#3][#4][#5][#6][#7][#8][#9]}
 
 % ------------------------------
 % Lambda
@@ -825,6 +881,9 @@
 	\DeclareDocumentCommand{\fgslisinfgls}{}{true}
 			% Commands
 			\DeclareDocumentCommand{\cs}{}{#1}
+			\DeclareDocumentCommand{\cS}{}{\o{#1}}
+			\DeclareDocumentCommand{\Cs}{}{#1\ }
+			\DeclareDocumentCommand{\CS}{}{\o{#1}\ }
 			
 			%% Text shortcuts
 			\DeclareDocumentCommand{\o}{m}{\obl{##1}}
@@ -847,6 +906,8 @@
 			\DeclareDocumentCommand{\oZ}{}{\v{Z}}
 			\DeclareDocumentCommand{\oi}{}{\v{i}}
 			\DeclareDocumentCommand{\oI}{}{\v{I}}
+			\DeclareDocumentCommand{\oj}{}{\v{j}}
+			\DeclareDocumentCommand{\oJ}{}{\v{J}}
 			\DeclareDocumentCommand{\os}{}{\v{s}}
 			\DeclareDocumentCommand{\oS}{}{\v{S}}
 			\DeclareDocumentCommand{\oq}{}{\v{q}}
@@ -854,12 +915,30 @@
 			\DeclareDocumentCommand{\op}{}{\v{p}}
 			\DeclareDocumentCommand{\oP}{}{\v{P}}
 			\DeclareDocumentCommand{\oR}{}{\v{R}}
-			\DeclareDocumentCommand{\x}{}{\obli{x}}
-			\DeclareDocumentCommand{\X}{}{\obli{X}}
-			\DeclareDocumentCommand{\y}{}{\obli{y}}
-			\DeclareDocumentCommand{\Y}{}{\obli{Y}}
-			\DeclareDocumentCommand{\z}{}{\obli{z}}
-			\DeclareDocumentCommand{\Z}{}{\obli{Z}}
+			\DeclareDocumentCommand{\x}{}{\v{x}}
+			\DeclareDocumentCommand{\X}{}{\v{X}}
+			\DeclareDocumentCommand{\y}{}{\v{y}}
+			\DeclareDocumentCommand{\Y}{}{\v{Y}}
+			\DeclareDocumentCommand{\z}{}{\v{z}}
+			\DeclareDocumentCommand{\Z}{}{\v{Z}}
+			
+			\DeclareDocumentCommand{\Ox}{}{\ox\ }
+			\DeclareDocumentCommand{\OX}{}{\oX\ }
+			\DeclareDocumentCommand{\Oy}{}{\oy\ }
+			\DeclareDocumentCommand{\OY}{}{\oY\ }
+			\DeclareDocumentCommand{\Oz}{}{\oz\ }
+			\DeclareDocumentCommand{\OZ}{}{\oZ\ }
+			\DeclareDocumentCommand{\Oi}{}{\oi\ }
+			\DeclareDocumentCommand{\OI}{}{\oI\ }
+			\DeclareDocumentCommand{\Oj}{}{\oj\ }
+			\DeclareDocumentCommand{\OJ}{}{\oJ\ }
+			\DeclareDocumentCommand{\Os}{}{\os\ }
+			\DeclareDocumentCommand{\OS}{}{\oS\ }
+			\DeclareDocumentCommand{\Oq}{}{\oq\ }
+			\DeclareDocumentCommand{\OQ}{}{\oQ\ }
+			\DeclareDocumentCommand{\Op}{}{\op\ }
+			\DeclareDocumentCommand{\OP}{}{\oP\ }
+			\DeclareDocumentCommand{\OR}{}{\oR\ }
 		
 			%% Meta Language
 			\DeclareDocumentCommand{\mx}{}{\text{\textit{x}}}
@@ -870,6 +949,8 @@
 			\DeclareDocumentCommand{\mZ}{}{\text{\textit{Z}}}
 			\DeclareDocumentCommand{\mi}{}{\text{\textit{i}}}
 			\DeclareDocumentCommand{\mI}{}{\text{\textit{I}}}
+			\DeclareDocumentCommand{\mj}{}{\text{\textit{j}}}
+			\DeclareDocumentCommand{\mJ}{}{\text{\textit{J}}}
 			\DeclareDocumentCommand{\ms}{}{\text{\textit{s}}}
 			\DeclareDocumentCommand{\mS}{}{\text{\textit{S}}}
 			\DeclareDocumentCommand{\mp}{}{\text{\textit{p}}}
@@ -878,6 +959,25 @@
 			\DeclareDocumentCommand{\mQ}{}{\text{\textit{Q}}}
 			\DeclareDocumentCommand{\mr}{}{\text{\textit{r}}}
 			\DeclareDocumentCommand{\mR}{}{\text{\textit{R}}}
+			
+			\DeclareDocumentCommand{\Mx}{}{\mx\ }
+			\DeclareDocumentCommand{\MX}{}{\mX\ }
+			\DeclareDocumentCommand{\My}{}{\my\ }
+			\DeclareDocumentCommand{\MY}{}{\mY\ }
+			\DeclareDocumentCommand{\Mz}{}{\mz\ }
+			\DeclareDocumentCommand{\MZ}{}{\mZ\ }
+			\DeclareDocumentCommand{\Mi}{}{\mi\ }
+			\DeclareDocumentCommand{\MI}{}{\mI\ }
+			\DeclareDocumentCommand{\Mj}{}{\mj\ }
+			\DeclareDocumentCommand{\MJ}{}{\mJ\ }
+			\DeclareDocumentCommand{\Ms}{}{\ms\ }
+			\DeclareDocumentCommand{\MS}{}{\mS\ }
+			\DeclareDocumentCommand{\Mp}{}{\mp\ }
+			\DeclareDocumentCommand{\MP}{}{\mP\ }
+			\DeclareDocumentCommand{\Mq}{}{\mq\ }
+			\DeclareDocumentCommand{\MQ}{}{\mQ\ }
+			\DeclareDocumentCommand{\Mr}{}{\mr\ }
+			\DeclareDocumentCommand{\MR}{}{\mR\ }
 		
 			%% Logic
 			\DeclareDocumentCommand{\qe}{}{\ensuremath{\exists}}
@@ -886,14 +986,60 @@
 			\DeclareDocumentCommand{\qU}{}{\ensuremath{\bm{\exists}!}}
 			\DeclareDocumentCommand{\qa}{}{\ensuremath{\forall}}
 			\DeclareDocumentCommand{\qA}{}{\ensuremath{\bm{\forall}}}
+			
 			\DeclareDocumentCommand{\jn}{}{\ensuremath{\neg}}
 			\DeclareDocumentCommand{\jN}{}{\ensuremath{\bm{\neg}}}
-			\DeclareDocumentCommand{\jk}{}{\ensuremath{\land}}
-			\DeclareDocumentCommand{\jK}{}{\ensuremath{\bm{\land}}}
+			\DeclareDocumentCommand{\jc}{}{\ensuremath{\land}}
+			\DeclareDocumentCommand{\jC}{}{\ensuremath{\bm{\land}}}
 			\DeclareDocumentCommand{\jd}{}{\ensuremath{\lor}}
 			\DeclareDocumentCommand{\jD}{}{\ensuremath{\bm{\lor}}}
 			\DeclareDocumentCommand{\ji}{}{\ensuremath{\rightarrow}}
 			\DeclareDocumentCommand{\jI}{}{\ensuremath{\bm{\rightarrow}}}
+			\DeclareDocumentCommand{\jj}{}{\ensuremath{\leftrightarrow}}
+			\DeclareDocumentCommand{\jJ}{}{\ensuremath{\bm{\leftrightarrow}}}
+			\DeclareDocumentCommand{\jx}{}{\ensuremath{\veebar}}
+			\DeclareDocumentCommand{\jX}{}{\ensuremath{\bm{\veebar}}}
+			\DeclareDocumentCommand{\jb}{}{\ensuremath{\Box}}
+			\DeclareDocumentCommand{\jB}{}{\ensuremath{\bm{\Box}}}
+			\DeclareDocumentCommand{\jp}{}{\ensuremath{\Diamond}}
+			\DeclareDocumentCommand{\jP}{}{\ensuremath{\bm{\Diamond}}}
+			\DeclareDocumentCommand{\jt}{}{\ensuremath{\top}}
+			\DeclareDocumentCommand{\jT}{}{\ensuremath{\bm{\top}}}
+			\DeclareDocumentCommand{\jf}{}{\ensuremath{\bot}}
+			\DeclareDocumentCommand{\jF}{}{\ensuremath{\bm{\bot}}}
+			\DeclareDocumentCommand{\je}{}{\ensuremath{\equiv}}
+			\DeclareDocumentCommand{\jE}{}{\ensuremath{\bm{\equiv}}}
+			\DeclareDocumentCommand{\jo}{}{\ensuremath{\oplus}}
+			\DeclareDocumentCommand{\jO}{}{\ensuremath{\bm{\oplus}}}
+			
+			\DeclareDocumentCommand{\Jn}{}{\jn\ }
+			\DeclareDocumentCommand{\JN}{}{\jN\ }
+			\DeclareDocumentCommand{\Jc}{}{\jc\ }
+			\DeclareDocumentCommand{\JC}{}{\jC\ }
+			\DeclareDocumentCommand{\Jd}{}{\jd\ }
+			\DeclareDocumentCommand{\JD}{}{\jD\ }
+			\DeclareDocumentCommand{\Ji}{}{\ji\ }
+			\DeclareDocumentCommand{\JI}{}{\jI\ }
+			\DeclareDocumentCommand{\Jj}{}{\jj\ }
+			\DeclareDocumentCommand{\JJ}{}{\jJ\ }
+			\DeclareDocumentCommand{\Jx}{}{\jx\ }
+			\DeclareDocumentCommand{\JX}{}{\jX\ }
+			\DeclareDocumentCommand{\Jb}{}{\jb\ }
+			\DeclareDocumentCommand{\JB}{}{\jB\ }
+			\DeclareDocumentCommand{\Jp}{}{\jp\ }
+			\DeclareDocumentCommand{\JP}{}{\jP\ }
+			\DeclareDocumentCommand{\Jt}{}{\jt\ }
+			\DeclareDocumentCommand{\JT}{}{\jT\ }
+			\DeclareDocumentCommand{\Jf}{}{\jf\ }
+			\DeclareDocumentCommand{\JF}{}{\jF\ }
+			\DeclareDocumentCommand{\Je}{}{\je\ }
+			\DeclareDocumentCommand{\JE}{}{\jE\ }
+			\DeclareDocumentCommand{\Jo}{}{\jo\ }
+			\DeclareDocumentCommand{\JO}{}{\jO\ }
+		
+			
+			
+			%% Set theory
 			\DeclareDocumentCommand{\ci}{}{\ensuremath{\in}}
 			\DeclareDocumentCommand{\cI}{}{\ensuremath{\bm{\in}}}
 			\DeclareDocumentCommand{\cd}{}{\ensuremath{\downarrow}}
@@ -971,6 +1117,19 @@
 			\DeclareDocumentCommand{\sO}{}{\sonE}
 			\DeclareDocumentCommand{\st}{}{\stwo}
 			\DeclareDocumentCommand{\sT}{}{\stwO}
+			\DeclareDocumentCommand{\si}{}{\textsubscript{\ensuremath{i}}}
+			\DeclareDocumentCommand{\sI}{}{\textsubscript{\ensuremath{\obl{i}}}}
+			
+			\DeclareDocumentCommand{\Ss}{}{\ss\ }
+			\DeclareDocumentCommand{\SS}{}{\sS\ }
+			\DeclareDocumentCommand{\Sz}{}{\sz\ }
+			\DeclareDocumentCommand{\SZ}{}{\sZ\ }
+			\DeclareDocumentCommand{\So}{}{\so\ }
+			\DeclareDocumentCommand{\SO}{}{\sO\ }
+			\DeclareDocumentCommand{\St}{}{\st\ }
+			\DeclareDocumentCommand{\ST}{}{\sT\ }
+			\DeclareDocumentCommand{\Si}{}{\meli{i}\ }
+			\DeclareDocumentCommand{\SI}{}{\obli{i}\ }
 			
 			%% Traces		
 			\DeclareDocumentCommand{\tx}{}{\tracex}
@@ -1308,8 +1467,8 @@
 	\DeclareDocumentCommand{\slitf}{m O{\bm{i}} O{} O{}}{\slit{##1}{\sic[##2]{\uppercase{\StrMid{##1}{1}{1}}}}[##3][##4]}
 	
 	%%%% Logic
-	\DeclareDocumentCommand{\slitland}{O{} O{}}{\slit{\@fragolivarand}{\jK}[##1][##2]}
-	\DeclareDocumentCommand{\slitlor}{O{} O{q} O{p} O{\@typet} O{\@typet} O{}}{\slit{\@fragolivaror}{\l{##2}[##4]\l{##3}[##5]\jN\R{\jn\ensuremath{##3}\jK\jN\ensuremath{##2}}}[##1][##6]}
+	\DeclareDocumentCommand{\slitland}{O{} O{}}{\slit{\@fragolivarand}{\jC}[##1][##2]}
+	\DeclareDocumentCommand{\slitlor}{O{} O{q} O{p} O{\@typet} O{\@typet} O{}}{\slit{\@fragolivaror}{\l{##2}[##4]\l{##3}[##5]\jN\R{\jn\ensuremath{##3}\jC\jN\ensuremath{##2}}}[##1][##6]}
 	
 	%%%% Quantifier
 	\DeclareDocumentCommand{\slitlmost}{O{} O{}}{\rentry[##1]{\sit{\@fragolivarmost} = \obl{MOST}}[##2]}
