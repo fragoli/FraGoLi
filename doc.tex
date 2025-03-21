@@ -14,17 +14,15 @@
 % O))      O)))     O)) O)))  O)))))      O))    O))))))))O))
 % 
 % --------------------------------
-%
+% 
 % This file may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3
-% of this license or (at your option) any later version.
-% The latest version of this license is in:
-%
+% conditions of the LaTeX Project Public License, either
+% version 1.3c of this license or (at your option) any later
+% version. The latest version of this license is in:
 % http://www.latex-project.org/lppl.txt
-%
-% and version 1.3c or later is part of all distributions of LaTeX
-% version 2008-05-04 or later.
-%
+% and version 1.3c or later is part of all distributions of
+% LaTeX version 2008-05-04 or later.
+% 
 
 \documentclass[10pt, a4paper]{article}
 \usepackage{hyperref}
@@ -155,8 +153,8 @@
 				\ds{\e{loves Maria}(Peter)}
 				\ds{\e{loves}(\e{Maria})(Peter)}
 				\ds{\e{loves}(Maria)(Peter)}
-				\ds{\ly\lx\n{\mx\ loves \my\ in \cs}(Maria)(Peter)}
-				\ds{\lx\n{\mx\ loves Maria in \cs}(Peter)}
+				\ds{\ly\lx\n{\Mx loves \My in \cs}(Maria)(Peter)}
+				\ds{\lx\n{\Mx loves Maria in \cs}(Peter)}
 				\ds{\n{Peter loves Maria in \cs}}
 			\end{semderivation}
 	\end{lstlisting} 
@@ -166,8 +164,8 @@
 		\ds{\e{loves Maria}(Peter)}
 		\ds{\e{loves}(\e{Maria})(Peter)}
 		\ds{\e{loves}(Maria)(Peter)}
-		\ds{\ly\lx\n{\mx\ loves \my\ in \cs}(Maria)(Peter)}
-		\ds{\lx\n{\mx\ loves Maria in \cs}(Peter)}
+		\ds{\ly\lx\n{\Mx loves \My in \cs}(Maria)(Peter)}
+		\ds{\lx\n{\Mx loves Maria in \cs}(Peter)}
 		\ds{\n{Peter loves Maria in \cs}}
 	\end{semderivation}
 	Note that the default situation has been changed from \sstar to \szero. To ensure consistency within a derivation, it is recommended to specify the desired situation as an environment parameter and reference it within the derivation using the \verb=\cs= command, which represents the current situation. To reference a specific derivation step, use:
@@ -251,7 +249,7 @@
 			\ds[\lc]{\n{Peter sleeps in \cs}}
 		\end{semderi}
 	\end{semcalc}
-	As shown on the right, each step references the corresponding rule or lexical entry to indicate to the reader which resource was used to reach the next step. These resources can also be referenced outside of the \textit{semderivation} environment using the command \verb=\ref{sem:deri:refName:resCode:resNumber}=, where \texttt{refName} refers to the derivation reference name (as explained earlier), \texttt{resNumber} is the index of the desired resource (starting from 1), and \texttt{resCode} specifies the kind of resource. There are four types of resource codes: \texttt{r}, \texttt{rs}, \texttt{l}, and \texttt{la}, which stand for resource, resource-syntax, lexicon, and language, respectively. For further details, see Command \ref{command:resourceCounter}.
+	As shown on the right, each step references the corresponding rule or lexical entry to indicate to the reader which resource was used to reach the next step. These resources can also be referenced outside of the \textit{semderivation} environment using the command \verb=\ref{sem:deri:refNameresCoderesNumber}=, where \texttt{refName} refers to the derivation reference name (as explained earlier), \texttt{resNumber} is the index of the desired resource (starting from 1), and \texttt{resCode} specifies the kind of resource. There are four types of resource codes: \texttt{r}, \texttt{rs}, \texttt{l}, and \texttt{la}, which stand for resource, resource-syntax, lexicon, and language, respectively. For further details, see Command \ref{command:resourceCounter}.
 	\\
 	An additional example of a more complex derivation involving indirect interpretation would look like this:
 	\begin{lstlisting}[style=B]
@@ -515,16 +513,17 @@
 	This section lists general text bracketing commands.
 	\pex\begin{itemizeexamplecommand}
 			\item[] \begin{lstlisting}[style=B]
-			\set[var]{properties}
+			\set[var]{properties}[name]
 			\end{lstlisting}
 			{\scriptsize
 				\item[] Arguments:\begin{itemizeexamplecommand}
-					\item[] \texttt{properties}: Set-builder notation
 					\item[] \texttt{var}(def=x): Varibale name and/or domain specifier
+					\item[] \texttt{properties}: Set-builder notation
+					\item[] \texttt{var}(def=): The name of the set
 				\end{itemizeexamplecommand}
-				\item[] Description: Creating an inensional build set.
+				\item[] Description: Creating an inensional build set. Each use of this command will override the \verb=\setvar= command. This command should be used inside the set properties to reference the set variable. The reference will always cut the content of the optional \textit{var} argument before the first space character. Use \verb=\Setvar= to automatically add a space behind the command. To change the style of the set from : to e.g. $|$ replace the \verb=\@fglsetspacer= constant using \verb=\newcommand{\@fglsetspacer}{$|$}=.
 				\item[] Bold Option: Yes
-				\item[] Example: \set[n \in \mathbb{N}]{$n$ is even}}
+				\item[] Example: \verb=\set[n \in \mathbb{N}]{\Setvar is even}[A]= will result in: \set[n \in \mathbb{N}]{\Setvar is even}[A]}
 		\end{itemizeexamplecommand}
 	\xe
 	\pex\begin{itemizeexamplecommand}
@@ -596,6 +595,46 @@
 	\xe
 	\pex\begin{itemizeexamplecommand}
 			\item[] \begin{lstlisting}[style=B]
+			\strue
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Description: Creating a verum symbol.
+				\item[] Bold Option: Yes
+				\item[] Example: \strue}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\sfalse
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Description: Creating a falsum symbol.
+				\item[] Bold Option: Yes
+				\item[] Example: \sfalse}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\snec
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Description: Creating a necessity symbol.
+				\item[] Bold Option: Yes
+				\item[] Example: \snec}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\sposs
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Description: Creating a possible symbol.
+				\item[] Bold Option: Yes
+				\item[] Example: \sposs}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
 			\simp{arg1}{arg2}
 			\end{lstlisting}
 			{\scriptsize
@@ -654,6 +693,36 @@
 	\xe
 	\pex\begin{itemizeexamplecommand}
 			\item[] \begin{lstlisting}[style=B]
+			\sxor{arg1}{arg2}[arg3][arg4][arg5][arg6][arg7][arg8][arg9]
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Arguments:\begin{itemizeexamplecommand}
+					\item[] \texttt{arg1}: 1st disjunct
+					\item[] \texttt{arg2}: 2nd disjunct
+					\item[] \texttt{argN}: nth disjunct
+				\end{itemizeexamplecommand}
+				\item[] Description: Creating an exclusive disjunctive formula with min. 2 disjuncts.
+				\item[] Bold Option: Yes
+				\item[] Example: \sxor{a}{b}[c]}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\sxornc{arg1}{arg2}[arg3][arg4][arg5][arg6][arg7][arg8][arg9]
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Arguments:\begin{itemizeexamplecommand}
+					\item[] \texttt{arg1}: 1st disjunct
+					\item[] \texttt{arg2}: 2nd disjunct
+					\item[] \texttt{argN}: nth disjunct
+				\end{itemizeexamplecommand}
+				\item[] Description: Creating an exclusive disjunctive formula with min. 2 disjuncts but without the notational convention.
+				\item[] Bold Option: Yes
+				\item[] Example: \sxornc{a}{b}[c]}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
 			\sand{arg1}{arg2}[arg3][arg4][arg5][arg6][arg7][arg8][arg9]
 			\end{lstlisting}
 			{\scriptsize
@@ -680,6 +749,38 @@
 				\item[] Description: Creating a conjunctive formula with min. 2 conjuncts but without the notational convention.
 				\item[] Bold Option: Yes
 				\item[] Example: \sandnc{a}{b}[c]}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\slogic{symbol}{arg1}{arg2}[arg3][arg4][arg5][arg6][arg7][arg8]
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Arguments:\begin{itemizeexamplecommand}
+					\item[] \texttt{symbol}: the junctor symbol (math mode is enforced)
+					\item[] \texttt{arg1}: 1st conjunct
+					\item[] \texttt{arg2}: 2nd conjunct
+					\item[] \texttt{argN}: nth conjunct
+				\end{itemizeexamplecommand}
+				\item[] Description: Creating a blank formula with min. 2 arguments.
+				\item[] Bold Option: Yes
+				\item[] Example: \verb=\slogic{\oplus}{a}{b}= will result in: \slogic{\oplus}{a}{b}}
+		\end{itemizeexamplecommand}
+	\xe
+	\pex\begin{itemizeexamplecommand}
+			\item[] \begin{lstlisting}[style=B]
+			\slogicnc{symbol}{arg1}{arg2}[arg3][arg4][arg5][arg6][arg7][arg8]
+			\end{lstlisting}
+			{\scriptsize
+				\item[] Arguments:\begin{itemizeexamplecommand}
+					\item[] \texttt{symbol}: the junctor symbol (math mode is enforced)
+					\item[] \texttt{arg1}: 1st conjunct
+					\item[] \texttt{arg2}: 2nd conjunct
+					\item[] \texttt{argN}: nth conjunct
+				\end{itemizeexamplecommand}
+				\item[] Description: Creating a blank formula with min. 2 arguments but without the general notational convention.
+				\item[] Bold Option: Yes
+				\item[] Example: \verb=\slogicnc{\oplus}{a}{b}}= will result in:  \slogicnc{\oplus}{a}{b}}
 		\end{itemizeexamplecommand}
 	\xe
 	\subsection{Lambda}
@@ -1343,119 +1444,118 @@
 	\begin{enumerate}
 		\item Object Language\\\verb=\or= is currently not available.
 		\begin{center}
-			\begin{minipage}[h][8.7cm][t]{15em}
+			\begin{minipage}[h][4.8cm][t]{15em}
 				\begin{lstlisting}[style=B]
 			\ox
-			\oX
 			\oy
-			\oY
 			\oz
-			\oZ
 			\oi
-			\oI
+			\oj
 			\os
-			\oS
 			\oR
 			\oq
-			\oQ
 			\op
-			\oP
 			\x
-			\X
 			\y
-			\Y
 			\z
-			\Z
 				\end{lstlisting}
 			\end{minipage}
-			\begin{minipage}[h][8.7cm][t]{15em}
+			\begin{minipage}[h][4.8cm][t]{15em}
 				\begin{fgls}
 					\ \\
 					\ox\\
-					\oX\\
 					\oy\\
-					\oY\\
 					\oz\\
-					\oZ\\
 					\oi\\
-					\oI\\
+					\oj\\
 					\os\\
-					\oS\\
 					\oR\\
 					\oq\\
-					\oQ\\
 					\op\\
-					\oP\\
 					\x\\
-					\X\\
 					\y\\
-					\Y\\
-					\z\\
-					\Z
+					\z
 				\end{fgls}
 			\end{minipage}
 		\end{center}
+		Each object language constant exists in two forms: lowercase and uppercase. The uppercase version is represented by capitalizing the second letter of the command. Additionally, each constant has a secondary mode that automatically adds a space following the constant. To activate this mode, capitalize the first letter of the command. Both forms can be used simultaneously. The letters x, y, and z have special single-character commands, as they are the most commonly used. As a trade-off, these letters do not have a secondary mode that automatically appends a space.
 		\item Meta Language
 		\begin{center}
-			\begin{minipage}[h][7cm][t]{15em}
+			\begin{minipage}[h][5cm][t]{15em}
 				\begin{lstlisting}[style=B]
 			\mx
-			\mX
 			\my
-			\mY
 			\mz
-			\mZ
 			\mi
-			\mI
+			\mj
 			\ms
-			\mS
 			\mr
-			\mR
 			\mp
-			\mP
 			\mq
-			\mQ
 				\end{lstlisting}
 			\end{minipage}
-			\begin{minipage}[h][7cm][t]{15em}
+			\begin{minipage}[h][5cm][t]{15em}
 				\begin{fgls}
 					\ \\
 					\mx\\
-					\mX\\
 					\my\\
-					\mY\\
 					\mz\\
-					\mZ\\
 					\mi\\
-					\mI\\
+					\mj\\
 					\ms\\
-					\mS\\
 					\mr\\
-					\mR\\
 					\mp\\
-					\mP\\
-					\mq\\
-					\mQ
+					\mq
 				\end{fgls}
 			\end{minipage}
 		\end{center}
+		Each meta language constant exists in two forms: lowercase and uppercase. The uppercase version is represented by capitalizing the second letter of the command. Additionally, each constant has a secondary mode that automatically adds a space following the constant. To activate this mode, capitalize the first letter of the command. Both forms can be used simultaneously.
 		\item Logic \begin{center}
-			\begin{minipage}[h][8.6cm][t]{15em}
+			\begin{minipage}[h][8cm][t]{15em}
 				\begin{lstlisting}[style=B]
 			\qe
-			\qE
 			\qu
-			\qU
 			\qa
-			\qA
 			\jn
-			\jN
-			\jk
-			\jK
+			\jc
 			\jd
-			\jD
 			\ji
-			\jI
+			\jj
+			\jx
+			\jb
+			\jp
+			\jt
+			\jf
+			\je
+			\jo
+				\end{lstlisting}
+			\end{minipage}
+			\begin{minipage}[h][8cm][t]{15em}
+				\begin{fgls}
+					\ \\
+					\qe\\
+					\qu\\
+					\qa\\
+					\jn\\
+					\jc\\
+					\jd\\
+					\ji\\
+					\jj\\
+					\jx\\
+					\jb\\
+					\jp\\
+					\jt\\
+					\jf\\
+					\je\\
+					\jo
+				\end{fgls}
+			\end{minipage}
+			
+		\end{center}
+		Every logic constant exists in two version, normal and bold. For the bold version just write the second letter in uppercase. All junctor constants have a second mode that automatically adds a space behind them. To use this mode just write the first letter in uppercase. Both versions can be combined.
+		\item Set theory \begin{center}
+			\begin{minipage}[h][8.6cm][t]{15em}
+				\begin{lstlisting}[style=B]
 			\ci
 			\cI
 			\cd
@@ -1467,20 +1567,6 @@
 			\begin{minipage}[h][8.6cm][t]{15em}
 				\begin{fgls}
 					\ \\
-					\qe\\
-					\qE\\
-					\qu\\
-					\qU\\
-					\qa\\
-					\qA\\
-					\jn\\
-					\jN\\
-					\jk\\
-					\jK\\
-					\jd\\
-					\jD\\
-					\ji\\
-					\jI\\
 					\ci\\
 					\cI\\
 					\cd\\
@@ -1636,32 +1722,27 @@
 		\item Situations
 		\\\verb=\cs= will always return the current situation set in the current fgls env. (def=\sstar)
 		\begin{center}
-			\begin{minipage}[h][3.5cm][t]{15em}
+			\begin{minipage}[h][2.5cm][t]{15em}
 				\begin{lstlisting}[style=B]
 			\ss
-			\sS
 			\sz
-			\sZ
 			\so
-			\sO
 			\st
-			\sT
+			\si
 				\end{lstlisting}
 			\end{minipage}
-			\begin{minipage}[h][3.5cm][t]{15em}
+			\begin{minipage}[h][2.5cm][t]{15em}
 				\begin{fgls}
 					\ \\
 					\ss\\
-					\sS\\
 					\sz\\
-					\sZ\\
 					\so\\
-					\sO\\
 					\st\\
-					\sT
+					\si
 				\end{fgls}
 			\end{minipage}
 		\end{center}
+	Each situation constant exists in two forms: normal and bold. The bold version is represented by capitalizing the second letter of the command. Additionally, each situation constant has a secondary mode, which automatically adds a space following the constant. To activate this mode, capitalize the first letter of the command. Both forms can be used simultaneously. It is important to note that the symbol \textit{i} has a special rule: when the first letter is lowercase, the constant is always represented in subscript, while the version with an uppercase first letter is treated as a normal variable with an added space at the end.
 	\end{enumerate}
 	\subsubsection{Commands}
 		Text-Commands:
@@ -3550,6 +3631,12 @@
 	This env. has the same new commands as the \textit{semderivation} env.
 	\section{Changelog}
 	\begin{itemize}
+		\item[1.1.1] 
+				\begin{enumerate}
+					\item[-] Add new logic commands.
+					\item[-] Add new logic constants.
+					\item[-] Extend set command.
+				\end{enumerate}
 		\item[1.0.0] 
 		\begin{enumerate}
 			\item[-] Initial release.
