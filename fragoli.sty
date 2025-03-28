@@ -1,8 +1,9 @@
-% FraGoLi v. 1.0.0 y. 2025
+% FraGoLi v. 1.1.1 y. 2025
 % 
 % Copyright (C) 2025 Paul Eduard Koenig
 % pauleduardkoenig (at) gmail [dot] com
 % Goethe University Frankfurt, Institute of Linguistics
+%
 % --------------------------------
 % 
 % O))))))))                    O))))             O))
@@ -16,7 +17,7 @@
 % --------------------------------
 % 
 % The package is mainly designed for the semantics department and focuses on providing a minimal syntax for fast formula derivation.
-% Formula-Style is losely based on the accompanying material to an introductory course to linguistic semantics by Prof. Dr. Thomas Ede Zimmermann
+% Formula-Style is losely based on the accompanying material to an introductory course to linguistic semantics by Thomas Ede Zimmermann
 % 
 % This file may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either
@@ -26,12 +27,16 @@
 % and version 1.3c or later is part of all distributions of
 % LaTeX version 2008-05-04 or later.
 % 
+% This work has the LPPL maintenance status `maintained'.
+% The Current Maintainer of this work is Paul Eduard Koenig.
+% This work consists of the files fragoli.sty and fragoli_doc.tex
+%
 % ------------------------------------------------------------ 
 % header
 % ------------------------------------------------------------ 
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{fragoli}[2025-03-11 v. 1.0.0 LaTeX package for the institute of linguistics at Goethe University Frankfurt]
-\RequirePackage{xparse, xcolor, enumitem, nicefrac, bm, amsmath, xstring, pdftexcmds, etoolbox, kvoptions, comment}
+\ProvidesPackage{fragoli}[2025-03-11 v. 1.1.1 LaTeX package for the institute of linguistics at Goethe University Frankfurt]
+\RequirePackage{xparse, xcolor, stmaryrd, enumitem, nicefrac, bm, amsmath, amssymb, xstring, expl3, pdftexcmds, etoolbox, kvoptions, comment}
 \RequirePackage[normalem]{ulem}
 % ------------------------------------------------------------ 
 % options
@@ -42,6 +47,7 @@
 }
 \DeclareStringOption[english]{language}
 \DeclareStringOption[normal]{typestyle}
+\DeclareStringOption[normal]{lambdaheadstyle}
 \DeclareStringOption[\sblank]{rulesituation}
 \DeclareStringOption[\sstar]{situation}
 \DeclareBoolOption{usetypes}
@@ -117,8 +123,9 @@
 \newcommand{\@fragolivartreesem}{Tree (semantic)}
 \newcommand{\@fragolivartreesyn}{Tree (syntax)}
 \newcommand{\@fragolivarlanguage}{Language}
-\newcommand{\@fragolivarconversion}{Conv.}
-\newcommand{\@fragolivarnotationconvention}{Not. Conv.}
+\newcommand{\@fragolivarconversion}{conv.}
+\newcommand{\@fragolivarreduction}{red.}
+\newcommand{\@fragolivarnotationconvention}{not. conv.}
 \newcommand{\@fragolivarand}{and}
 \newcommand{\@fragolivaror}{or}
 \newcommand{\@fragolivarno}{no-}
@@ -148,6 +155,7 @@
 \newcommand{\@fragolivarlexattdoxterm}{doxastic}
 \newcommand{\@fragolivarlexattepiterm}{epistemic}
 \newcommand{\@fragolivarlexattbouterm}{bouletic}
+
 % set those labels according to the set language (if different than english)
 \def\@fragoliconstlgerman{german}
 \ifx\FGL@language\@fragoliconstlgerman
@@ -160,6 +168,7 @@
 \renewcommand{\@fragolivartreesyn}{Baum (Syntax)}
 \renewcommand{\@fragolivarlanguage}{Sprache}
 \renewcommand{\@fragolivarconversion}{Konv.}
+\renewcommand{\@fragolivarreduction}{Konv.}
 \renewcommand{\@fragolivarnotationconvention}{Not.}
 \renewcommand{\@fragolivarand}{und}
 \renewcommand{\@fragolivaror}{oder}
@@ -199,11 +208,14 @@
 % ------------------------------
 \newcommand{\@fragolitpnl}{\ensuremath{\langle}}
 \newcommand{\@fragolitpnr}{\ensuremath{\rangle}}
-\let\type\@fglsundefined
 \DeclareDocumentCommand{\type}{m}{\@fragolitpnl\!\ensuremath{#1}\!\@fragolitpnr}
-\def\@fragoliconsttsclassic{classic}
-\ifx\FGL@typestyle\@fragoliconsttsclassic
+\def\@fragoliparatypestyleclassic{classic}
+\ifx\FGL@typestyle\@fragoliparatypestyleclassic
 \DeclareDocumentCommand{\type}{m}{(\ensuremath{#1})}
+\fi
+\def\@fragoliparatypestylealternative{alternative}
+\ifx\FGL@typestyle\@fragoliparatypestylealternative
+\DeclareDocumentCommand{\type}{m}{\ensuremath{<}\ensuremath{#1}\ensuremath{>}}
 \fi
 
 
@@ -466,11 +478,10 @@
 % ------------------------------------------------------------ 
 % internal variables
 % ------------------------------------------------------------ 
-
 \let\setvar\@fglsundefined
-\newcommand{\setvar}{\ensuremath{\StrBefore{\!\romannumeral-`\0\@fglssetvariable}{ }}}
+\newcommand{\setvar}{\ensuremath{\IfSubStr{\!\romannumeral-`\0\@fglssetvariable}{ }{\StrBefore{\romannumeral-`\0\@fglssetvariable}{ }}{\romannumeral-`\0\@fglssetvariable}}}
 \let\Setvar\@fglsundefined
-\newcommand{\Setvar}{\ensuremath{\StrBefore{\!\romannumeral-`\0\@fglssetvariable}{ }}\ }
+\newcommand{\Setvar}{\setvar\ }
 
 % ------------------------------------------------------------
 % Commands
@@ -478,8 +489,10 @@
 % ------------------------------
 % Text
 % ------------------------------
-\DeclareDocumentCommand{\oO}{m}{\setlength{\ULdepth}{-2.5ex}\uuline{#1}}
-\DeclareDocumentCommand{\oo}{m O{-2ex}}{\setlength{\ULdepth}{#2}\uuline{#1}}
+\newlength{\@fglULdepthbackup}
+\setlength{\@fglULdepthbackup}{\ULdepth}
+\DeclareDocumentCommand{\oO}{m}{\setlength{\ULdepth}{-2.5ex}\uuline{#1}\setlength{\ULdepth}{\@fglULdepthbackup}}
+\DeclareDocumentCommand{\oo}{m O{-2ex}}{\setlength{\ULdepth}{#2}\uuline{#1}\setlength{\ULdepth}{\@fglULdepthbackup}}
 
 \DeclareDocumentCommand{\obl}{m}{\textbf{#1}}
 \DeclareDocumentCommand{\obli}{m}{\textit{\textbf{#1}}}
@@ -597,16 +610,44 @@
 \DeclareDocumentCommand{\lambfszyX}{m O{z} O{y} O{x} O{s} O{} O{} O{} O{}}{\lambH{#5}[#9]\lambh{#2}[#6]\lambH{#3}[#7]\lambH{#4}[#8]\booL{#1}}
 
 %% Lambda Heads
-\DeclareDocumentCommand{\lambh}{m O{}}{\ensuremath{\lambda\textit{#1}}\ifempty{#2}\else\textsubscript{#2}\fi\ifempty{#2}\else\!\fi.}
-\DeclareDocumentCommand{\lambH}{m O{}}{\ensuremath{\bm{\lambda #1}}\ifempty{#2}\else\!\textsubscript{#2}\fi\ifempty{#2}\else\!\fi\obl{.}}
-\DeclareDocumentCommand{\lambhe}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\exists}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambhE}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\bm{\exists}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambha}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\forall}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambhA}{ O{x} O{\@typee}}{\obl{(}\ensuremath{\bm{\forall}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambhen}{ O{x} O{\@typee}}{\ensuremath{\neg}\obl{(}\ensuremath{\exists}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambheN}{ O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\obl{(}\ensuremath{\bm{\exists}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambhan}{ O{x} O{\@typee}}{\ensuremath{\neg}\obl{(}\ensuremath{\forall}\ensuremath{#1}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
-\DeclareDocumentCommand{\lambhaN}{ O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\obl{(}\ensuremath{\bm{\forall}}\textbf{\ensuremath{#1}}\ifempty{#2}\else\!\fi\textsubscript{#2}\!\obl{)}}
+
+\DeclareDocumentCommand{\lambh}{m O{}}{\ensuremath{\lambda\textit{#1}}\ifempty{#2}\else\textsubscript{#2}\!\fi.}
+\DeclareDocumentCommand{\lambH}{m O{}}{\ensuremath{\bm{\lambda\textit{#1}}}\ifempty{#2}\else\!\textsubscript{#2}\!\fi\obl{.}}
+
+\DeclareDocumentCommand{\@lambhquantorbuilder}{m m m}{\mel{(}\ensuremath{#1}\ensuremath{#2}\ifempty{#3}\else\!\fi\textsubscript{#3}\!\mel{)}}
+\DeclareDocumentCommand{\@lambhquantorbuildeR}{m m m}{\obl{(}\ensuremath{\bm{#1}}\textbf{\ensuremath{#2}}\ifempty{#3}\else\!\fi\textsubscript{#3}\!\obl{)}}
+
+%% Override lambda heads to domain style if package parameter is set to domain
+\def\@fragoliconsttsdomain{domain}
+\IfStrEq{\FGL@lambdaheadstyle}{\@fragoliconsttsdomain}{
+\DeclareDocumentCommand{\lambh}{m O{}}{\ensuremath{\lambda\textit{#1}}\ifempty{#2}\else\text{ }\ensuremath{\in}\text{ D\textsubscript{#2}}\!\fi.}
+\DeclareDocumentCommand{\lambH}{m O{}}{\ensuremath{\bm{\lambda\textit{#1}}}\ifempty{#2}\else\text{ }\ensuremath{\in}\text{ D\textsubscript{#2}}\!\fi.}
+
+\DeclareDocumentCommand{\@lambhquantorbuilder}{m m m}{\mel{(}\ensuremath{#1}\ensuremath{#2}\ifempty{#3}\else\text{ }\ensuremath{\in}\text{ D\textsubscript{#2}}\!\mel{)}}
+\DeclareDocumentCommand{\@lambhquantorbuildeR}{m m m}{\obl{(}\ensuremath{\bm{#1}}\textbf{\ensuremath{#2}}\ifempty{#3}\else\text{ }\ensuremath{\in}\text{ D\textsubscript{#2}}\!\obl{)}}
+}{}
+
+%% Override lambda heads to upper style if package parameter is set to domain
+\def\@fragoliconsttsupper{upper}
+\IfStrEq{\FGL@lambdaheadstyle}{\@fragoliconsttsupper}{
+\DeclareDocumentCommand{\lambh}{m O{}}{\ensuremath{\lambda\textit{#1}}\ifempty{#2}\else\textsuperscript{#2}\!\fi.}
+\DeclareDocumentCommand{\lambH}{m O{}}{\ensuremath{\bm{\lambda\textit{#1}}}\ifempty{#2}\else\!\textsuperscript{#2}\!\fi\obl{.}}
+\DeclareDocumentCommand{\@lambhquantorbuilder}{m m m}{\mel{(}\ensuremath{#1}\ensuremath{#2}\ifempty{#3}\else\!\fi\textsuperscript{#3}\!\mel{)}}
+\DeclareDocumentCommand{\@lambhquantorbuildeR}{m m m}{\obl{(}\ensuremath{\bm{#1}}\textbf{\ensuremath{#2}}\ifempty{#3}\else\!\fi\textsuperscript{#3}\!\obl{)}}
+}{}
+
+\DeclareDocumentCommand{\lambhe}{O{x} O{\@typee}}{\@lambhquantorbuilder{\exists}{#1}{#2}}
+\DeclareDocumentCommand{\lambhE}{O{x} O{\@typee}}{\@lambhquantorbuildeR{\exists}{#1}{#2}}
+\DeclareDocumentCommand{\lambhu}{O{x} O{\@typee}}{\@lambhquantorbuilder{\exists!}{#1}{#2}}
+\DeclareDocumentCommand{\lambhU}{O{x} O{\@typee}}{\@lambhquantorbuildeR{\exists!}{#1}{#2}}
+\DeclareDocumentCommand{\lambha}{O{x} O{\@typee}}{\@lambhquantorbuilder{\forall}{#1}{#2}}
+\DeclareDocumentCommand{\lambhA}{O{x} O{\@typee}}{\@lambhquantorbuildeR{\forall}{#1}{#2}}
+\DeclareDocumentCommand{\lambhen}{O{x} O{\@typee}}{\ensuremath{\neg}\lambhe[#1][#2]}
+\DeclareDocumentCommand{\lambheN}{O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\lambhE[#1][#2]}
+\DeclareDocumentCommand{\lambhan}{O{x} O{\@typee}}{\ensuremath{\neg}\lambha[#1][#2]}
+\DeclareDocumentCommand{\lambhaN}{O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\lambhA[#1][#2]}
+\DeclareDocumentCommand{\lambhun}{O{x} O{\@typee}}{\ensuremath{\neg}\lambhu[#1][#2]}
+\DeclareDocumentCommand{\lambhuN}{O{x} O{\@typee}}{\ensuremath{\bm{\neg}}\lambhU[#1][#2]}
 
 %% Lambda Heads Basics
 \DeclareDocumentCommand{\lmda}{O{}}{\lambh{a}[#1]}
@@ -713,6 +754,16 @@
 \DeclareDocumentCommand{\lmDz}{O{}}{\lambH{z}[#1]}
 \DeclareDocumentCommand{\lmdZ}{O{}}{\lambh{Z}[#1]}
 \DeclareDocumentCommand{\lmDZ}{O{}}{\lambH{Z}[#1]}
+
+% ------------------------------
+% Functions
+% ------------------------------
+
+
+% Inspired by Andrew McKenzie from ling-macros package
+\DeclareDocumentEnvironment{fglfunc}{O{} O{10} O{n}}{\let\l\@fglsundefined\let\r\@fglsundefined\DeclareDocumentCommand{\d}{O{\vdots} O{} O{}}{{##1} & ##2 & {##3}\\}\newcommand{\l}{\ifmmode\else$\fi\left[\begin{array}{ccr@{\rule{0pt}{#2pt}}}}\newcommand{\r}{\end{array}\right]\ifmmode$\else\fi}\DeclareDocumentCommand{\b}{m O{}}{\ifempty{##2}\else##2 = \fi\l##1\r}\DeclareDocumentCommand{\f}{m m}{{\textrm{\IfEq{#3}{m}{\ensuremath{##1}}{}\IfEq{#3}{b}{\textbf{##1}}{}\IfEq{#3}{n}{##1}{}}} & \to & {\textrm{##2}}\\}\ifempty{#1}\else#1 = \fi\l}{\r}
+
+\DeclareDocumentCommand{\func}{O{} m m O{} O{} O{} O{} O{} O{}}{\begin{fglfunc}[#1]\f{#2}{#3}\ifempty{#4}\else\f{#4}{#5}\fi\ifempty{#6}\else\f{#6}{#7}\fi\ifempty{#8}\else\f{#8}{#9}\fi\end{fglfunc}}
 
 % ------------------------------
 % Semantics
@@ -886,8 +937,8 @@
 	\DeclareDocumentCommand{\CS}{}{\o{#1}\ }
 	
 
-	\newcommand{\sv}{\ensuremath{\StrBefore{\!\romannumeral-`\0\@fglssetvariable}{ }}}
-	\newcommand{\Sv}{\ensuremath{\StrBefore{\!\romannumeral-`\0\@fglssetvariable}{ }}\ }
+	\newcommand{\sv}{\setvar}
+	\newcommand{\Sv}{\Setvar}
 	
 	%% Text shortcuts
 	\DeclareDocumentCommand{\o}{m}{\obl{##1}}
@@ -947,6 +998,7 @@
 	%% Meta Language
 	\DeclareDocumentCommand{\mx}{}{\text{\textit{x}}}
 	\DeclareDocumentCommand{\mX}{}{\text{\textit{X}}}
+	
 	\DeclareDocumentCommand{\my}{}{\text{\textit{y}}}
 	\DeclareDocumentCommand{\mY}{}{\text{\textit{Y}}}
 	\DeclareDocumentCommand{\mz}{}{\text{\textit{z}}}
@@ -963,6 +1015,10 @@
 	\DeclareDocumentCommand{\mQ}{}{\text{\textit{Q}}}
 	\DeclareDocumentCommand{\mr}{}{\text{\textit{r}}}
 	\DeclareDocumentCommand{\mR}{}{\text{\textit{R}}}
+	\DeclareDocumentCommand{\mu}{}{\text{\textit{u}}}
+	\DeclareDocumentCommand{\mU}{}{\text{\textit{U}}}
+	\DeclareDocumentCommand{\mv}{}{\text{\textit{v}}}
+	\DeclareDocumentCommand{\mV}{}{\text{\textit{V}}}
 	
 	\DeclareDocumentCommand{\Mx}{}{\mx\ }
 	\DeclareDocumentCommand{\MX}{}{\mX\ }
@@ -982,14 +1038,41 @@
 	\DeclareDocumentCommand{\MQ}{}{\mQ\ }
 	\DeclareDocumentCommand{\Mr}{}{\mr\ }
 	\DeclareDocumentCommand{\MR}{}{\mR\ }
+	\DeclareDocumentCommand{\Mu}{}{\mu\ }
+	\DeclareDocumentCommand{\MU}{}{\mU\ }
+	\DeclareDocumentCommand{\Mv}{}{\mv\ }
+	\DeclareDocumentCommand{\MV}{}{\mV\ }
 	
 	%% Logic
-	\DeclareDocumentCommand{\qe}{}{\ensuremath{\exists}}
-	\DeclareDocumentCommand{\qE}{}{\ensuremath{\bm{\exists}}}
-	\DeclareDocumentCommand{\qu}{}{\ensuremath{\exists}!}
-	\DeclareDocumentCommand{\qU}{}{\ensuremath{\bm{\exists}!}}
+
+	
 	\DeclareDocumentCommand{\qa}{}{\ensuremath{\forall}}
 	\DeclareDocumentCommand{\qA}{}{\ensuremath{\bm{\forall}}}
+	\DeclareDocumentCommand{\Qa}{}{\qa\ }
+	\DeclareDocumentCommand{\QA}{}{\qA\ }
+	
+	\DeclareDocumentCommand{\qe}{O{} O{}}{\ensuremath{\exists}\ifempty{##1}\else\textsuperscript{{\tiny \ensuremath{##1}}}\fi\ifempty{##2}\else\textsuperscript{{\tiny \ensuremath{##2}}}\fi}
+	\DeclareDocumentCommand{\qE}{O{} O{}}{\ensuremath{\bm{\exists}}\ifempty{##1}\else\textsuperscript{{\tiny \ensuremath{##1}}}\fi\ifempty{##2}\else\textsuperscript{{\tiny \ensuremath{##2}}}\fi}
+	\DeclareDocumentCommand{\Qe}{O{} O{}}{\qe[##1][##2]\ }
+	\DeclareDocumentCommand{\QE}{O{} O{}}{\qE[##1][##2]\ }
+	
+	\DeclareDocumentCommand{\qu}{}{\qe!}
+	\DeclareDocumentCommand{\qU}{}{\qE!}
+	\DeclareDocumentCommand{\Qu}{}{\qu\ }
+	\DeclareDocumentCommand{\QU}{}{\qU\ }
+	
+	\DeclareDocumentCommand{\qeg}{O{2}}{\qe[\geq][##1]}
+	\DeclareDocumentCommand{\qeG}{O{2}}{\qE[\geq][##1]}
+	\DeclareDocumentCommand{\Qeg}{O{2}}{\Qe[\geq][##1]}
+	\DeclareDocumentCommand{\QeG}{O{2}}{\QE[\geq][##1]}
+	\DeclareDocumentCommand{\qes}{O{2}}{\qe[\leq][##1]}
+	\DeclareDocumentCommand{\qeS}{O{2}}{\qE[\leq][##1]}
+	\DeclareDocumentCommand{\Qes}{O{2}}{\Qe[\leq][##1]}
+	\DeclareDocumentCommand{\QeS}{O{2}}{\QE[\leq][##1]}
+	\DeclareDocumentCommand{\qee}{O{2}}{\qe[=][##1]}
+	\DeclareDocumentCommand{\qeE}{O{2}}{\qE[=][##1]}
+	\DeclareDocumentCommand{\Qee}{O{2}}{\Qe[=][##1]}
+	\DeclareDocumentCommand{\QeE}{O{2}}{\QE[=][##1]}
 	
 	\DeclareDocumentCommand{\jn}{}{\ensuremath{\neg}}
 	\DeclareDocumentCommand{\jN}{}{\ensuremath{\bm{\neg}}}
@@ -1050,6 +1133,60 @@
 	\DeclareDocumentCommand{\cD}{}{\ensuremath{\bm{\downarrow}}}
 	\DeclareDocumentCommand{\ce}{}{\ensuremath{\emptyset}}
 	\DeclareDocumentCommand{\cE}{}{\ensuremath{\bm{\emptyset}}}
+	\DeclareDocumentCommand{\cb}{}{\ensuremath{\subset}}
+	\DeclareDocumentCommand{\cB}{}{\ensuremath{\bm{\subset}}}
+	\DeclareDocumentCommand{\cq}{}{\ensuremath{\subseteq}}
+	\DeclareDocumentCommand{\cQ}{}{\ensuremath{\bm{\subseteq}}}
+	\DeclareDocumentCommand{\ca}{}{\ensuremath{\cap}}
+	\DeclareDocumentCommand{\cA}{}{\ensuremath{\bm{\cap}}}
+	\DeclareDocumentCommand{\cu}{}{\ensuremath{\cup}}
+	\DeclareDocumentCommand{\cU}{}{\ensuremath{\bm{\cup}}}
+	
+	\DeclareDocumentCommand{\Ci}{}{\ci\ }
+	\DeclareDocumentCommand{\CI}{}{\cI\ }
+	\DeclareDocumentCommand{\Cd}{}{\cd\ }
+	\DeclareDocumentCommand{\CD}{}{\cD\ }
+	\DeclareDocumentCommand{\Ce}{}{\ce\ }
+	\DeclareDocumentCommand{\CE}{}{\cE\ }
+	\DeclareDocumentCommand{\Cb}{}{\cb\ }
+	\DeclareDocumentCommand{\CB}{}{\cB\ }
+	\DeclareDocumentCommand{\Cq}{}{\cq\ }
+	\DeclareDocumentCommand{\CQ}{}{\cQ\ }
+	\DeclareDocumentCommand{\Ca}{}{\ca\ }
+	\DeclareDocumentCommand{\CA}{}{\cA\ }
+	\DeclareDocumentCommand{\Cu}{}{\cu\ }
+	\DeclareDocumentCommand{\CU}{}{\cU\ }
+	
+	%% Relation Constants
+	\DeclareDocumentCommand{\rn}{}{\ensuremath{\neq}}
+	\DeclareDocumentCommand{\rN}{}{\ensuremath{\bm{\neq}}}
+	\DeclareDocumentCommand{\rg}{}{\ensuremath{\geq}}
+	\DeclareDocumentCommand{\rG}{}{\ensuremath{\bm{\geq}}}
+	\DeclareDocumentCommand{\rl}{}{\ensuremath{\leq}}
+	\DeclareDocumentCommand{\rL}{}{\ensuremath{\bm{\leq}}}
+	\DeclareDocumentCommand{\rp}{}{\ensuremath{\prec}}
+	\DeclareDocumentCommand{\rP}{}{\ensuremath{\bm{\prec}}}
+	\DeclareDocumentCommand{\rpe}{}{\ensuremath{\preceq}}
+	\DeclareDocumentCommand{\rpE}{}{\ensuremath{\bm{\preceq}}}
+	\DeclareDocumentCommand{\rs}{}{\ensuremath{\succ}}
+	\DeclareDocumentCommand{\rS}{}{\ensuremath{\bm{\succ}}}
+	\DeclareDocumentCommand{\rse}{}{\ensuremath{\succeq}}
+	\DeclareDocumentCommand{\rsE}{}{\ensuremath{\bm{\succeq}}}
+	
+	\DeclareDocumentCommand{\Rn}{}{\rn\ }
+	\DeclareDocumentCommand{\RN}{}{\rN\ }
+	\DeclareDocumentCommand{\Rg}{}{\rg\ }
+	\DeclareDocumentCommand{\RG}{}{\rG\ }
+	\DeclareDocumentCommand{\Rl}{}{\rl\ }
+	\DeclareDocumentCommand{\RL}{}{\rL\ }
+	\DeclareDocumentCommand{\Rp}{}{\rp\ }
+	\DeclareDocumentCommand{\RP}{}{\rP\ }
+	\DeclareDocumentCommand{\Rpe}{}{\rpe\ }
+	\DeclareDocumentCommand{\RpE}{}{\rpE\ }
+	\DeclareDocumentCommand{\Rs}{}{\rs\ }
+	\DeclareDocumentCommand{\RS}{}{\rS\ }
+	\DeclareDocumentCommand{\Rse}{}{\rse\ }
+	\DeclareDocumentCommand{\RsE}{}{\rsE\ }
 	
 	%% Arguments Variables
 	\DeclareDocumentCommand{\ax}{}{\a{x}}
@@ -1282,6 +1419,8 @@
 	\let\nc\@fglsundefined
 	\let\lex\@fglsundefined
 	\newcommand{\fa}{App}
+	\newcommand{\bta}{\ensuremath{\beta}-\@fragolivarreduction}
+	\newcommand{\alp}{\ensuremath{\alpha}-\@fragolivarconversion}
 	\newcommand{\abs}{Abs}
 	\newcommand{\mod}{Mod}
 	\newcommand{\var}{Var}
